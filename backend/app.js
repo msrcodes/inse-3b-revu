@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const config = require('./config/config.json');
 
 
 const apiRouter = require('./api.js');
@@ -26,4 +27,5 @@ app.use('/api/v1', apiRouter, e404); // Serve api functions to requests on /api,
 app.get('*', serveApp); // Serve SPA html for all other routes, 404 handling is done on the client side
 
 
-app.listen(3005);  // First free port on the server after 3000
+const port = config.port || 3005;
+app.listen(port);  // First free port on the server after 3000
