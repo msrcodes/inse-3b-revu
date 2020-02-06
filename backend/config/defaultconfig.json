@@ -2,9 +2,9 @@
 	"port": 3005,
 	"database": {
 		"host": "",
-		"username": "",
+		"user": "",
 		"password": "",
 		"database": "",
-		"port": 3306
+		"port": 5432
 	}
 }
