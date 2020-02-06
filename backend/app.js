@@ -29,3 +29,5 @@ app.get('*', serveApp); // Serve SPA html for all other routes, 404 handling is 
 
 const port = config.port || 3005;
 app.listen(port);  // First free port on the server after 3000
+
+console.log(`[BACKEND] Listening on port ${port}.`);
