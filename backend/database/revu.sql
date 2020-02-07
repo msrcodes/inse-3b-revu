@@ -24,8 +24,9 @@ create table uni_degree(
     requirements_ucas integer,
     requirements_grades varchar(255),
 
-
-    primary key (uni_id, degree_id)
+    primary key (uni_id, degree_id),
+    foreign key (uni_id) references uni(uni_id),
+    foreign key (degree_id) references degree(degree_id)
 );
 
 create table review(
@@ -43,7 +44,11 @@ create table review(
     uni_rating integer not null,
     uni_rating_desc varchar(250),
     accommodation_rating integer not null,
-    accommodation_rating_desc varchar(250)
+    accommodation_rating_desc varchar(250),
+
+    foreign key (uni_id) references uni(uni_id),
+    foreign key (degree_id) references degree(degree_id),
+    foreign key (user_id) references users(user_id)
 )
 
 
