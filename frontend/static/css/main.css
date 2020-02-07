@@ -16,13 +16,23 @@
 	--colour-font-heading: #161922;	/* Font colour for all h1, h2, h3... h6 elements */
 	--colour-font-body: #A3A5A8; /* Font colour for all body text elements */
 
+	--colour-border-button-positive: #2ECC71;	/* Colour for all "positive" interaction buttons */
 	--colour-fill-button-positive: #2ECC71;	/* Colour for all "positive" interaction buttons */
+	--colour-border-button-positive-hover: #27AE60;	/* Colour for all "positive" interaction buttons */
+	--colour-fill-button-positive-hover: #27AE60;	/* Colour for all "positive" interaction buttons */
+
+	--colour-font-button-positive: #FFFFFF;
 
 	--colour-border-button-default: #009EFF; /* Border colour for all "default" interaction buttons */
 	--colour-fill-button-default: #FFFFFF; /* Fill colour for all "default" interaction buttons */
 
 	--colour-border-button-negative: #E74C3C; /* Border colour for all "negative" interaction buttons */
 	--colour-fill-button-negative: #FFFFFF; /* Fill colour for all "negative" interaction buttons */
+}
+
+* {
+	margin: 0;
+	padding: 0;
 }
 
 body {
@@ -32,6 +42,13 @@ body {
 
 header {
 	background: var(--colour-fill-header);
+
+	display: flex;
+	justify-content: space-evenly;
+}
+
+header > * {
+	margin: auto 0;
 }
 
 button {
@@ -47,4 +64,74 @@ header h1 {
 	font-family: var(--font-family-logo);
 	font-weight: bold;
 	color: var(--colour-font-logo);
+	padding: 0.5em;
+}
+
+header label {
+	display: flex;
+}
+
+header label img {
+	width: 1.5em;
+	height: 1.5em;
+	margin: auto;
+}
+
+.btn--positive {
+	background: var(--colour-fill-button-positive);
+	border: var(--colour-border-button-positive);
+	color: var(--colour-font-button-positive);
+	font-weight: bolder;
+	font-size: 100%;
+	text-transform: uppercase;
+	border-radius: 13px;
+	cursor: pointer;
+	padding: 1em 3em;
+
+	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+}
+
+.btn--positive:hover {
+	background: var(--colour-fill-button-positive-hover);
+	border: var(--colour-border-button-positive-hover);
+}
+
+#div-profile-status {
+	font-weight: bolder;
+
+	display: flex;
+	padding: 0.5em;
+
+	cursor: pointer;
+}
+
+#img-profile-status-icon {
+	width: 3em;
+	height: 3em;
+	margin: auto 0.25em;
+}
+
+#username-profile-status {
+	margin: auto 0.25em;
+}
+
+#img-profile-status-chevron {
+	width: 1em;
+	height: 1em;
+	margin: auto 0.25em;
+}
+
+#search {
+	font-family: "Noto Sans", sans-serif;
+	padding: 0.5em;
+	width: 30vw;
+
+	border: 0;
+	border-bottom: 1px solid #707070;
+}
+
+#search:focus {
+	outline: 0;
+	border-bottom: 1px solid var(--colour-border-button-default);
+	transition-duration: 0.1s;
 }
