@@ -1,14 +1,12 @@
-const express = require('express');
+const express = require('express'),
+	db = require('./database/db.js');
 
-const db = require('./database/db.js');
-
+// API router initialization
 const router = new express.Router();
-
 router.use(express.json());
 
-
-router.get('/', (req, res) => {
-	res.send({test: "test"})
-});
+// Manager initialization
+const accountManager = require('./manager/account');
+router.use('/account', accountManager.router);
 
 module.exports = router;
