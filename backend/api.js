@@ -6,7 +6,7 @@ const router = new express.Router();
 router.use(express.json());
 
 // Manager initialization
-const accountManager = require('./manager/accountManager');
+const accountManager = require('./manager/account');
 router.use('/account', accountManager.router);
 
 module.exports = router;

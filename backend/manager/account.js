@@ -10,7 +10,7 @@ function myExposedFunction() {
 
 // Routes
 router.get('/', (req, res) => {
-	res.send('accountManager test');
+	res.send('account test');
 });
 
 module.exports = {
