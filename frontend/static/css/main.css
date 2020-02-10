@@ -25,6 +25,7 @@
 
 	--colour-border-button-default: #009EFF; /* Border colour for all "default" interaction buttons */
 	--colour-fill-button-default: #FFFFFF; /* Fill colour for all "default" interaction buttons */
+	--colour-font-button-default: #161922; /* Font colour for all "default" interaction buttons */
 
 	--colour-border-button-negative: #E74C3C; /* Border colour for all "negative" interaction buttons */
 	--colour-fill-button-negative: #FFFFFF; /* Fill colour for all "negative" interaction buttons */
@@ -57,7 +58,8 @@ button {
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: var(--font-family-heading);
-	color: var(--colour-font-heading)
+	color: var(--colour-font-heading);
+	padding-bottom: 1em;
 }
 
 header h1 {
@@ -77,9 +79,13 @@ header label img {
 	margin: auto;
 }
 
+main {
+	margin: 5vh 5vw;
+}
+
 .btn--positive {
 	background: var(--colour-fill-button-positive);
-	border: var(--colour-border-button-positive);
+	border: 3px solid var(--colour-border-button-positive);
 	color: var(--colour-font-button-positive);
 	font-weight: bolder;
 	font-size: 100%;
@@ -93,7 +99,29 @@ header label img {
 
 .btn--positive:hover {
 	background: var(--colour-fill-button-positive-hover);
-	border: var(--colour-border-button-positive-hover);
+	border: 3px solid var(--colour-border-button-positive-hover);
+}
+
+.btn--default {
+	background: var(--colour-fill-button-default);
+	border: 3px solid var(--colour-border-button-default);
+	color: var(--colour-font-button-default);
+	font-weight: bolder;
+	font-size: 100%;
+	text-transform: uppercase;
+	border-radius: 13px;
+	cursor: pointer;
+	padding: 0.5em 2em;
+
+	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+}
+
+.card {
+	width: 100%;
+	padding: 1em;
+	border-radius: 33px;
+	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
+				rgba(158, 158, 158, 0.5) 6px 6px 6px;
 }
 
 #div-profile-status {
@@ -134,6 +162,61 @@ header label img {
 	outline: 0;
 	border-bottom: 1px solid var(--colour-border-button-default);
 	transition-duration: 0.1s;
+}
+
+#profile {
+	display: grid;
+	grid-template-rows: 1fr 4fr;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: "header header"
+						 "reviews searches";
+}
+
+#profile-header {
+	grid-area: header;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr;
+
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+	border-bottom: 1px solid #707070;
+}
+
+#profile-header h2 {
+	padding: 0;
+}
+
+#profile-header-info {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: 1fr;
+}
+
+#profile-header-icon {
+	margin: auto;
+	width: 90%;
+}
+
+#profile-header-info-section {
+	display: flex;
+	flex-direction: column;
+	margin: auto 1em;
+}
+
+#profile-header-buttons {
+	margin: auto;
+}
+
+#profile-reviews {
+	grid-area: reviews;
+	padding: 0 2em;
+}
+
+#profile-searches {
+	grid-area: searches;
+	padding: 0 2em;
 }
 
 @media (max-width: 820px) {

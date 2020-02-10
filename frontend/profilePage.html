@@ -7,21 +7,45 @@
 	<title>REVU</title>
 </head>
 <body>
-<header>
-	<h1>REVU</h1>
-	<label>
-		<img src="static/img/search.png" alt="Search" draggable="false">
-		<input type="text" id="search" placeholder="Search reviews, degrees, universities...">
-	</label>
-	<button class="btn--positive" id="btn-writereview">Write your review</button>
-	<div id="div-profile-status">
-		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
-		<span id="username-profile-status">Log In</span>
-		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
-	</div>
-</header>
-<main>
+	<header>
+		<h1>REVU</h1>
+		<label>
+			<img src="static/img/search.png" alt="Search" draggable="false">
+			<input type="text" id="search" placeholder="Search reviews, degrees, universities...">
+		</label>
+		<button class="btn--positive" id="btn-writereview">Write your review</button>
+		<div id="div-profile-status">
+			<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+			<span id="username-profile-status">Log In</span>
+			<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
+		</div>
+	</header>
+	<main id="profile">
+		<div id="profile-header">
+			<div id="profile-header-info">
+				<img src="static/img/default-user.png" alt="Profile icon" id="profile-header-icon" draggable="false">
+				<div id="profile-header-info-section">
+					<h2 id="profile-header-info-username">Adam User</h2>
+					<p id="profile-header-info-university">University of Example</p>
+				</div>
+			</div>
+			<div id="profile-header-buttons">
+				<button class="btn--default">Edit account</button>
+				<button class="btn--default">Logout</button>
+			</div>
+		</div>
+		<div id="profile-reviews">
+			<h3>Your Reviews</h3>
+			<div class="card">
 
-</main>
+			</div>
+		</div>
+		<div id="profile-searches">
+			<h3>Your Past Searches</h3>
+			<div class="card">
+
+			</div>
+		</div>
+	</main>
 </body>
 </html>
