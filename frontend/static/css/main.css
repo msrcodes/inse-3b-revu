@@ -135,3 +135,49 @@ header label img {
 	border-bottom: 1px solid var(--colour-border-button-default);
 	transition-duration: 0.1s;
 }
+
+@media (max-width: 820px) {
+	#username-profile-status {
+		display: none;
+	}
+}
+
+@media (max-width: 790px) {
+	header {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 4em 1fr 1fr;
+
+		grid-template-areas: "logo profile"
+							 "search search"
+							 "review review";
+	}
+
+	header h1 {
+		grid-area: logo;
+	}
+
+	label {
+		grid-area: search;
+	}
+
+	#search {
+		width: calc(100vw - 6em);
+		margin-right: 1em;
+	}
+
+	#div-profile-status {
+		grid-area: profile;
+		width: fit-content;
+		margin: 0 0 0 30vw;
+	}
+
+	#div-profile-status > * {
+		justify-content: right;
+	}
+
+	#btn-writereview {
+		grid-area: review;
+		margin: 5px;
+	}
+}
