@@ -12,6 +12,23 @@ router.use(cookieParser());
 
 const mailer = require('../mailer.js');
 
+
+function getUser(req) {
+	return new Promise((resolve, reject)=> {
+		const token = req.cookies.session;
+
+		db.query('SELECT * FROM users inner join user_session us on users.email = us.email where token = $1', [token]).then(dbRes => {
+			if (dbRes.rowCount) {
+				resolve(dbRes.rows[0]);
+			} else {
+				reject();
+			}
+		})
+	})
+
+}
+
+
 // Routes
 router.get('/', (req, res) => {
 	res.send('account test');
@@ -73,7 +90,7 @@ router.get('/verify/:verifyToken', (req, res) => {
 	db.query('select email from users where verification_token = $1', [verifyToken]).then(selectRes => {
 		if (selectRes.rowCount) {
 			db.query('update users set verification_token = NULL, verified = TRUE where email = $1', [selectRes.rows[0].email]).then(() => {
-				res.send('');
+				res.status(301).redirect('https://revu.aitken.io')
 			}).catch(err => {
 				res.status(500).send();
 			})
@@ -85,6 +102,56 @@ router.get('/verify/:verifyToken', (req, res) => {
 	});
 
 });
+
+
+router.post('/login', (req, res) => {
+	const {email, password} = req.body;
+
+	getUser(req).then(() => {
+		res.status(400).send('already logged in');
+	}).catch(() => {
+		db.query('SELECT password_hash, verification_token from users where email = $1', [email]).then(dbRes => {
+			if (!dbRes.rowCount) {
+				res.status(400).send('Account does not exist.');
+				return;
+			}
+			const account = dbRes.rows[0];
+
+			if (account.verification_token) { // Must be verified to login
+				res.status(401).send('Account has not been verified.');
+				return;
+			}
+
+			bcrypt.compare(password, account.password_hash).then(result => {
+				if (result) {
+					let uuid = uuidGen();
+					res.cookie('session', uuid, {});
+
+					db.query('insert into user_session values ($1, $2, now())', [email, uuid]).then(dbRes => {
+						res.send();
+					}).catch(() => {
+						res.status(500).send();
+					});
+				} else {
+					res.status(401).send('Incorrect password.');
+					return;
+				}
+			})
+
+		});
+	});
+});
+
+
+router.get('/loggedIn', (req, res) => {
+	getUser(req).then(() => {
+		res.status(200).send({loggedIn: true})
+	}).catch(() => {
+		res.status(200).send({loggedIn: false})
+	})
+});
+
+
 
 
 module.exports = {

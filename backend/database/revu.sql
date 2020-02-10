@@ -6,6 +6,12 @@ create table users(
     verification_token varchar(255)
 );
 
+create table user_session(
+	email varchar(255) not null,
+	token varchar(255) not null,
+	last_login timestamp
+)
+
 create table uni(
     uni_id serial not null primary key,
     uni_name varchar(255) not null,
