@@ -2,7 +2,8 @@ create table users(
     user_id serial not null primary key,
     email varchar(255) not null,
     verified boolean,
-    password_hash varchar(255) not null
+    password_hash varchar(255) not null,
+    verification_token varchar(255)
 );
 
 create table uni(

@@ -4,6 +4,9 @@
 # Alpine reduces image size by 10x
 FROM node:10-alpine
 
+# Python to build bcrypt
+RUN apk --no-cache add --virtual builds-deps build-base python
+
 EXPOSE 3005
 
 COPY . /app

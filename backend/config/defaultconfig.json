@@ -6,5 +6,6 @@
 		"password": "",
 		"database": "",
 		"port": 5432
-	}
+	},
+	"postmarkAPIKey": "..."
 }
