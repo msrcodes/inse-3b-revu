@@ -130,7 +130,7 @@ main {
 	-webkit-appearance: none;
 	width: 90%;
 	height: 15px;
-	border-radius: 5px;
+	border-radius: 20px;
 	background: var(--colour-font-button-positive);
 	outline: none;
 	opacity: 0.7;
@@ -159,7 +159,8 @@ main {
 .textarea {
 	width: 90%;
 	height: 150px;
-	padding: 12px 20px;
+	padding: 20px 10px 20px 10px;
+	margin: auto;
 	box-sizing: border-box;
 	border: 2px solid #ccc;
 	border-radius: 4px;
@@ -264,9 +265,26 @@ main {
 #create-review-form {
 	width: 80%;
 	margin:auto;
+	padding: 10px 10px 10px 10px;
 	border-right: 1px solid #707070;
 	border-left: 1px solid #707070;
+}
 
+#create-review-form div {
+	padding: 10px 0px 10px 0px;
+	border-top: 1px solid #707070;
+}
+
+#create-review-form div label {
+	display: flex;
+	flex-direction: column;
+	font-family: --font-family-logo;
+	padding: 10px 100px 10px 10px;
+	text-align: left;
+}
+
+#university-dropdown {
+	width: 80%;
 }
 
 #sign-up {
