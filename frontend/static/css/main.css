@@ -232,7 +232,7 @@ main {
 	padding: 0;
 }
 
-#profile-header-info {
+.page-header-content {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 	grid-template-rows: 1fr;
@@ -287,7 +287,62 @@ main {
 	width: 80%;
 }
 
+.header-form-aside {
+	display: grid;
+	grid-template-rows: 1fr 4fr;
+	grid-template-columns: 2fr 3fr;
+	grid-template-areas: "header header"
+						"form info";
+}
 
+.page-header {
+	grid-area: header;
+}
+
+.compact-form {
+	grid-area: form;
+
+	display: flex;
+	flex-direction: column;
+
+	padding: 1em;
+	border-right: 1px solid #707070;
+}
+
+#btn-create-account, #btn-log-in {
+	margin: 1em 0;
+}
+
+.compact-form > label {
+	display: flex;
+	flex-direction: column;
+}
+
+.compact-form > label > em {
+	font-style: normal;
+	color: var(--colour-font-heading);
+	font-weight: bold;
+}
+
+.compact-form input {
+	font-family: "Noto Sans", sans-serif;
+	padding: 0.5em;
+	width: 30vw;
+
+	border: 1px solid #707070;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.compact-form aside {
+	font-size: 75%;
+}
+
+.aside-info {
+	grid-area: info;
+	padding: 1em;
+}
 
 @media (max-width: 850px) {
 	#username-profile-status {
@@ -332,5 +387,22 @@ main {
 	#btn-writereview {
 		grid-area: review;
 		margin: 5px;
+	}
+
+	.header-form-aside {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.compact-form {
+		border-right: none;
+	}
+
+	.compact-form input {
+		width: 100%;
+	}
+
+	.compact-form button {
+		margin-left: 1em;
 	}
 }
