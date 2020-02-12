@@ -269,7 +269,62 @@ main {
 
 }
 
+#sign-up {
+	display: grid;
+	grid-template-rows: 1fr 4fr;
+	grid-template-columns: 2fr 3fr;
+	grid-template-areas: "header header"
+						"form info";
+}
 
+#sign-up-header {
+	grid-area: header;
+}
+
+#sign-up-form {
+	grid-area: form;
+
+	display: flex;
+	flex-direction: column;
+
+	padding: 1em;
+	border-right: 1px solid #707070;
+}
+
+#btn-create-account {
+	margin: 1em 0;
+}
+
+#sign-up-form > label {
+	display: flex;
+	flex-direction: column;
+}
+
+#sign-up-form > label > em {
+	font-style: normal;
+	color: var(--colour-font-heading);
+	font-weight: bold;
+}
+
+#sign-up-form input {
+	font-family: "Noto Sans", sans-serif;
+	padding: 0.5em;
+	width: 30vw;
+
+	border: 1px solid #707070;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#sign-up-form aside {
+	font-size: 75%;
+}
+
+#sign-up-info {
+	grid-area: info;
+	padding: 1em;
+}
 
 @media (max-width: 850px) {
 	#username-profile-status {
@@ -314,5 +369,22 @@ main {
 	#btn-writereview {
 		grid-area: review;
 		margin: 5px;
+	}
+
+	#sign-up {
+		display: flex;
+		flex-direction: column;
+	}
+
+	#sign-up-form {
+		border-right: none;
+	}
+
+	#sign-up-form input {
+		width: 100%;
+	}
+
+	#sign-up-form button {
+		margin-left: 1em;
 	}
 }

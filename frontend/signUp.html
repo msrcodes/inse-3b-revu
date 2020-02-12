@@ -20,8 +20,39 @@
 		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
 	</div>
 </header>
-<main>
-
+<main id="sign-up">
+	<div id="sign-up-header">
+		<div id="profile-header-info">
+			<img src="static/img/default-user.png" alt="Profile icon" id="profile-header-icon" draggable="false">
+			<div id="profile-header-info-section">
+				<h2 id="profile-header-info-username">Create an account</h2>
+			</div>
+		</div>
+	</div>
+	<div id="sign-up-form">
+		<label>
+			<em>Username</em>
+			<input type="text" id="sign-up-username">
+		</label>
+		<label>
+			<em>Email Address</em>
+			<input type="text" id="sign-up-email" placeholder=".ac.uk">
+		</label>
+		<label>
+			<em>Password</em>
+			<input type="password" id="sign-up-password" placeholder="••••••••">
+		</label>
+		<label>
+			<em>Confirm Password</em>
+			<input type="password" id="sign-up-confirm-password" placeholder="••••••••">
+		</label>
+		<button class="btn--default" id="btn-create-account">Create Account</button>
+		<aside>Already have an account? <a href="logIn.html">Click here to log in</a></aside>
+	</div>
+	<div id="sign-up-info">
+		<h3>Why do we need your university email?</h3>
+		<p>By signing up using your university email address, it allows us to reduce the risk of false accounts being made. This ensures our reviews are as reliable as possible.</p>
+	</div>
 </main>
 </body>
 </html>
