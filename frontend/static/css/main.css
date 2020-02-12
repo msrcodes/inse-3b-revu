@@ -278,7 +278,9 @@ main {
 #create-review-form div label {
 	display: flex;
 	flex-direction: column;
-	font-family: --font-family-logo;
+	font-style: normal;
+	color: var(--colour-font-heading);
+	font-weight: bold;
 	padding: 10px 100px 10px 10px;
 	text-align: left;
 }
