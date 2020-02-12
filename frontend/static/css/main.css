@@ -232,7 +232,7 @@ main {
 	padding: 0;
 }
 
-#profile-header-info {
+.page-header-content {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 	grid-template-rows: 1fr;
@@ -287,7 +287,7 @@ main {
 	width: 80%;
 }
 
-#sign-up {
+.header-form-aside {
 	display: grid;
 	grid-template-rows: 1fr 4fr;
 	grid-template-columns: 2fr 3fr;
@@ -295,11 +295,11 @@ main {
 						"form info";
 }
 
-#sign-up-header {
+.page-header {
 	grid-area: header;
 }
 
-#sign-up-form {
+.compact-form {
 	grid-area: form;
 
 	display: flex;
@@ -313,18 +313,18 @@ main {
 	margin: 1em 0;
 }
 
-#sign-up-form > label {
+.compact-form > label {
 	display: flex;
 	flex-direction: column;
 }
 
-#sign-up-form > label > em {
+.compact-form > label > em {
 	font-style: normal;
 	color: var(--colour-font-heading);
 	font-weight: bold;
 }
 
-#sign-up-form input {
+.compact-form input {
 	font-family: "Noto Sans", sans-serif;
 	padding: 0.5em;
 	width: 30vw;
@@ -335,11 +335,11 @@ main {
 	border-radius: 5px;
 }
 
-#sign-up-form aside {
+.compact-form aside {
 	font-size: 75%;
 }
 
-#sign-up-info {
+.aside-info {
 	grid-area: info;
 	padding: 1em;
 }
@@ -389,20 +389,20 @@ main {
 		margin: 5px;
 	}
 
-	#sign-up {
+	.header-form-aside {
 		display: flex;
 		flex-direction: column;
 	}
 
-	#sign-up-form {
+	.compact-form {
 		border-right: none;
 	}
 
-	#sign-up-form input {
+	.compact-form input {
 		width: 100%;
 	}
 
-	#sign-up-form button {
+	.compact-form button {
 		margin-left: 1em;
 	}
 }
