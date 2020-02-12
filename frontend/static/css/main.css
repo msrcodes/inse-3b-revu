@@ -275,9 +275,11 @@ main {
 	border-top: 1px solid #707070;
 }
 
-#create-review-form .div .label {
-	font-family: --font-family-button;
-	padding: 10px 10000px 10px 10px;
+#create-review-form div label {
+	display: flex;
+	flex-direction: column;
+	font-family: --font-family-logo;
+	padding: 10px 100px 10px 10px;
 	text-align: left;
 }
 
