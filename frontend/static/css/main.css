@@ -309,7 +309,7 @@ main {
 	border-right: 1px solid #707070;
 }
 
-#btn-create-account {
+#btn-create-account, #btn-log-in {
 	margin: 1em 0;
 }
 
