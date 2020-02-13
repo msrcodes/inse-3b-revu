@@ -168,6 +168,18 @@ main {
 	resize: none;
 }
 
+.card-text-area {
+	width: 100%;
+	padding: 1em;
+	border-radius: 33px;
+}
+
+
+.view-more-buttons {
+	display: flex;
+	justify-content: center;
+}
+
 #div-profile-status {
 	font-weight: bolder;
 
@@ -285,6 +297,56 @@ main {
 	text-align: left;
 }
 
+#degree {
+	display: grid;
+	grid-template-rows: 1fr 4fr;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas:
+		"name overallRating"
+		"entryRequirements rating"
+		"about review";
+}
+
+#course-name {
+	grid-area: name;
+	padding: 0 2em;
+}
+
+#course-overall-rating {
+	grid-area: overallRating;
+	padding: 0 2em;
+}
+
+#course-requirements{
+	grid-area: entryRequirements;
+	padding: 0 2em
+}
+
+#course-rating {
+	grid-area: rating;
+	padding: 0em 2em;
+}
+
+#course-about {
+	grid-area: about;
+	padding: 0 2em;
+}
+
+#course-review {
+	grid-area: review;
+	padding: 0 2em;
+}
+
+#degree-name {
+	padding-bottom: 0em;
+}
+
+#university-name {
+	font-family: var(--font-family-body);
+	opacity: 60%;
+	padding-bottom: 0em;
+}
+
 #university-dropdown {
 	width: 80%;
 }
@@ -292,6 +354,7 @@ main {
 .header-form-aside {
 	display: grid;
 	grid-template-rows: 1fr 4fr;
+	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 2fr 3fr;
 	grid-template-areas: "header header"
 						"form info";
