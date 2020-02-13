@@ -278,13 +278,15 @@ main {
 	width: 80%;
 	margin:auto;
 	padding: 10px 10px 10px 10px;
-	border-right: 1px solid #707070;
-	border-left: 1px solid #707070;
+	border-radius: 33px;
+	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
+	rgba(158, 158, 158, 0.5) 6px 6px 6px;
 }
 
 #create-review-form div {
 	padding: 10px 0px 10px 0px;
-	border-top: 1px solid #707070;
+	border-top: 1px solid #AAAAAA;
+	margin:auto;
 }
 
 #create-review-form div label {

@@ -20,8 +20,61 @@
 		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
 	</div>
 </header>
-<main>
-
+<main id="create-review">
+	<form id="create-review-form">
+		<div id="review-form-header">
+			<label>
+				<em>Choose a University to review:</em>
+			</label>
+			<select id="university-dropdown" name="universities"></select>
+		</div>
+		<div id ="staff-rating-review">
+			<label>
+				<em>Staff rating</em>
+			</label>
+			<input type="range" min="0.0" max="5.0" value="2.5" step="0.5" class="slider" id="staffRating" oninput="staffOutput.value = staffRating.value">
+			<output name="staffRating-value" id="staffOutput">2.5</output>
+			<label>
+				<em>Staff review</em>
+			</label>
+			<textarea class="textarea" name="staff review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
+		</div>
+		<div id="facility-rating-review">
+			<label>
+				<em>Facility Rating</em>
+			</label>
+			<input type="range" min="0.0" max="5.0" value="2.5" step="0.5" class="slider" id="facilityRating" oninput="facilityOutput.value = facilityRating.value">
+			<output name="facilityRating-value" id="facilityOutput">2.5</output>
+			<label>
+				<em>Facility Review</em>
+			</label>
+			<textarea class="textarea" name="facility review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
+		</div>
+		<div id="university-rating-review">
+			<label>
+				<em>University rating</em>
+			</label>
+			<input type="range" min="0.0" max="5.0" value="2.5" step="0.5" class="slider" id="universityRating" oninput="universityOutput.value = universityRating.value">
+			<output name="universityRating-value" id="universityOutput">2.5</output>
+			<label>
+				<em>University Review</em>
+			</label>
+			<textarea class="textarea" name="university review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
+		</div>
+		<div id="accommodation-rating-review">
+			<label>
+				<em>Accommodation rating</em>
+			</label>
+			<input type="range" min="0.0" max="5.0" value="2.5" step="0.5" class="slider" id="accommodationRating" oninput="accommodationOutput.value = accommodationRating.value">
+			<output name="accommodationRating-value" id="accommodationOutput">2.5</output>
+			<label>
+				<em>Accommodation review</em>
+			</label>
+			<textarea class="textarea" name="accommodation review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
+		</div>
+		<input type="submit" value="Confirm changes" class="btn--positive">
+	</form>
+	<script src="js/populateUniversityDropdown.js"></script>
 </main>
 </body>
 </html>
