@@ -301,16 +301,26 @@ main {
 
 #degree {
 	display: grid;
-	grid-template-rows: 1fr 4fr;
+	grid-template-rows: 0fr 2.5fr 1fr;
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas:
-		"name overallRating"
+		"courseName overallRating"
 		"entryRequirements rating"
 		"about review";
 }
 
+#university {
+	display: grid;
+	grid-template-rows: 0fr 2.5fr 1fr;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas:
+		"uni-name overallRating"
+		"info rating"
+		"accommodation review";
+}
+
 #course-name {
-	grid-area: name;
+	grid-area: courseName;
 	padding: 0 2em;
 }
 
@@ -321,7 +331,7 @@ main {
 
 #course-requirements{
 	grid-area: entryRequirements;
-	padding: 0 2em
+	padding: 0 2em;
 }
 
 #course-rating {
@@ -339,14 +349,29 @@ main {
 	padding: 0 2em;
 }
 
+#university-accommodation {
+	grid-area: accommodation;
+	padding: 0 2em;
+}
+
+#university-info {
+	grid-area: info;
+	padding: 0 2em;
+}
+#course-university-name {
+	font-family: var(--font-family-body);
+	opacity: 60%;
+	padding-top: 0em;
+	padding-bottom: 0em;
+}
+
 #degree-name {
 	padding-bottom: 0em;
 }
 
 #university-name {
-	font-family: var(--font-family-body);
-	opacity: 60%;
-	padding-bottom: 0em;
+	grid-area: uni-name;
+	padding: 0 2em;
 }
 
 #university-dropdown {
