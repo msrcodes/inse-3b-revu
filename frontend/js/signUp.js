@@ -14,7 +14,7 @@ function getFormData() {
 async function postSignUpRequest() {
 	const payload = getFormData();
 
-	const response = await fetch('register', {
+	const response = await fetch('api/v1/account/register', {
 		method: 'POST',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify(payload),
