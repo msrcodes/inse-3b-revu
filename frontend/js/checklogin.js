@@ -24,15 +24,15 @@ function updateStatus(loggedin) {
 	}
 }
 
-function getHandles() {
+function getLoginHandles() {
 	loginHandles.status = document.querySelector("#username-profile-status");
 	loginHandles.link = document.querySelector("#profile-a-link");
 }
 
-async function onLoad() {
-	getHandles();
+async function onPageLoad() {
+	getLoginHandles();
 	const loggedin = await checkLoginStatus();
 	updateStatus(loggedin);
 }
 
-window.addEventListener('load', onLoad);
+window.addEventListener('load', onPageLoad);
