@@ -1,6 +1,6 @@
 'use strict';
 
-const handles = {};
+const loginHandles = {};
 
 async function checkLoginStatus() {
 	const response = await fetch('api/v1/account/loggedIn');
@@ -16,17 +16,17 @@ async function checkLoginStatus() {
 
 function updateStatus(loggedin) {
 	if (loggedin) {
-		handles.status.textContent = "USERNAME GOES HERE"; // TODO
-		handles.link.href = "profilePage.html";
+		loginHandles.status.textContent = "USERNAME GOES HERE"; // TODO
+		loginHandles.link.href = "profilePage.html";
 	} else {
-		handles.status.textContent = "Log In";
-		handles.link.href = "login.html";
+		loginHandles.status.textContent = "Log In";
+		loginHandles.link.href = "login.html";
 	}
 }
 
 function getHandles() {
-	handles.status = document.querySelector("#username-profile-status");
-	handles.link = document.querySelector("#profile-a-link");
+	loginHandles.status = document.querySelector("#username-profile-status");
+	loginHandles.link = document.querySelector("#profile-a-link");
 }
 
 async function onLoad() {
