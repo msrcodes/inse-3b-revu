@@ -20,7 +20,7 @@ async function postLoginRequest() {
 
 	if (response.ok) {
 		// redirect to profile page
-		window.location = window.location.toString().substring(0, window.location.toString().length - "login.html".length) + "profilePage.html"; // TODO: this, better.
+		window.location = window.location.toString().substring(0, window.location.toString().length - "login.html".length) + "profile.html"; // TODO: this, better.
 	} else {
 		console.log('failed to log in', response);	// TODO: better error handling
 	}

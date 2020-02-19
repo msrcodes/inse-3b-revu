@@ -17,7 +17,7 @@ async function checkLoginStatus() {
 function updateStatus(loggedin) {
 	if (loggedin) {
 		loginHandles.status.textContent = "USERNAME GOES HERE"; // TODO
-		loginHandles.link.href = "profilePage.html";
+		loginHandles.link.href = "profile.html";
 	} else {
 		loginHandles.status.textContent = "Log In";
 		loginHandles.link.href = "login.html";
