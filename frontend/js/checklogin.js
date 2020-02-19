@@ -7,14 +7,7 @@ async function checkLoginStatus() {
 
 	if (response.ok) {
 		const obj = await response.json();
-		console.log(obj);
-		if (obj.loggedIn) {
-			console.log("user is logged in");
-			return true;
-		} else {
-			console.log("user is not logged in");
-			return false;
-		}
+		return obj.loggedIn;
 	} else {
 		console.log('unable to retrieve login status', response); // TODO: proper error handling
 	}
