@@ -220,6 +220,11 @@ main {
 	transition-duration: 0.1s;
 }
 
+#profile-a-link {
+	text-decoration: none;
+	color: var(--colour-font-heading);
+}
+
 #profile {
 	display: grid;
 	grid-template-rows: 1fr 4fr;
@@ -358,6 +363,7 @@ main {
 	grid-area: info;
 	padding: 0 2em;
 }
+
 #course-university-name {
 	font-family: var(--font-family-body);
 	opacity: 60%;
@@ -381,7 +387,6 @@ main {
 .header-form-aside {
 	display: grid;
 	grid-template-rows: 1fr 4fr;
-	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 2fr 3fr;
 	grid-template-areas: "header header"
 						"form info";
