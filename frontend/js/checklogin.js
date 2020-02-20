@@ -20,7 +20,7 @@ function updateStatus(loggedin) {
 		loginHandles.link.href = "profile.html";
 	} else {
 		loginHandles.status.textContent = "Log In";
-		loginHandles.link.href = "login.html";
+		loginHandles.link.href = "login";
 	}
 }
 

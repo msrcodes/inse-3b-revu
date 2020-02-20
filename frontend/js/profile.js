@@ -12,7 +12,7 @@ async function checkAndRedirect() {
 	if (response.ok) {
 		const obj = await response.json();
 		if (!obj.loggedIn)
-			window.location = window.location.toString().substring(0, window.location.toString().length - "profile.html".length) + "app.html"; // TODO: this, better.
+			window.location = "/";
 	} else {
 		console.log('unable to retrieve login status', response); // TODO: proper error handling
 	}
@@ -23,7 +23,7 @@ async function logout() {
 	if (document.cookie.split(';').filter((item) => item.trim().startsWith('session=')).length) {
 		// If they do, log them out and redirect to home page
 		document.cookie = "session=; undefined";
-		window.location = window.location.toString().substring(0, window.location.toString().length - "profile.html".length) + "app.html"; // TODO: this, better.
+		window.location = "/";
 	} else {
 		console.log('cannot logout user that is not logged in');
 	}

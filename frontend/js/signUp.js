@@ -22,7 +22,7 @@ async function postSignUpRequest() {
 
 	if (response.ok) {
 		// redirect to "check your email" page
-		window.location = window.location.toString().substring(0, window.location.toString().length - "signUp.html".length) + "registerSuccess.html"; // TODO: this, better.
+		window.location = "/registerSuccess";
 	} else {
 		console.log('failed to sign up', response);
 	}
