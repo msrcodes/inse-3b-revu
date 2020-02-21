@@ -13,7 +13,7 @@ function e404(req, res) {
 // Routes
 app.use('/static', express.static(path.join(__dirname, '../frontend/static')), e404); // Serve static files to requests on /static, 404 on not found
 app.use('/api/v1', apiRouter, e404); // Serve api functions to requests on /api, 404 on not found
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../frontend/app.html'))); // Serve SPA html for all other routes, 404 handling is done on the client side
+app.use(express.static(path.join(__dirname, '../frontend'), { extensions: ['html'] }));
 
 // Express server listen
 const port = config.port || 3005;

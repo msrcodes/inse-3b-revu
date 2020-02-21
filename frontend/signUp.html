@@ -14,11 +14,13 @@
 		<input type="text" id="search" placeholder="Search reviews, degrees, universities...">
 	</label>
 	<button class="btn--positive" id="btn-writereview">Write your review</button>
-	<div id="div-profile-status">
-		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
-		<span id="username-profile-status">Log In</span>
-		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
-	</div>
+	<a href="login.html" id="profile-a-link">
+		<div id="div-profile-status">
+			<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+			<span id="username-profile-status">Log In</span>
+			<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
+		</div>
+	</a>
 </header>
 <main id="sign-up" class="header-form-aside">
 	<div class="page-header">
@@ -47,12 +49,14 @@
 			<input type="password" id="sign-up-confirm-password" placeholder="••••••••">
 		</label>
 		<button class="btn--default" id="btn-create-account">Create Account</button>
-		<aside>Already have an account? <a href="logIn.html">Click here to log in</a></aside>
+		<aside>Already have an account? <a href="login.html">Click here to log in</a></aside>
 	</div>
 	<div class="aside-info">
 		<h3>Why do we need your university email?</h3>
 		<p>By signing up using your university email address, it allows us to reduce the risk of false accounts being made. This ensures our reviews are as reliable as possible.</p>
 	</div>
 </main>
+<script src="js/signUp.js"></script>
+<script src="js/checklogin.js"></script>
 </body>
 </html>

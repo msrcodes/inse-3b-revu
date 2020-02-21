@@ -10,7 +10,7 @@ create table user_session(
 	email varchar(255) not null,
 	token varchar(255) not null,
 	last_login timestamp
-)
+);
 
 create table uni(
     uni_id serial not null primary key,
@@ -56,7 +56,7 @@ create table review(
     foreign key (uni_id) references uni(uni_id),
     foreign key (degree_id) references degree(degree_id),
     foreign key (user_id) references users(user_id)
-)
+);
 
 
 

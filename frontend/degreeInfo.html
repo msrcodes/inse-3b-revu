@@ -14,19 +14,21 @@
 		<input type="text" id="search" placeholder="Search reviews, degrees, universities...">
 	</label>
 	<button class="btn--positive" id="btn-writereview">Write your review</button>
-	<div id="div-profile-status">
-		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
-		<span id="username-profile-status">Log In</span>
-		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
-	</div>
+	<a href="login.html" id="profile-a-link">
+		<div id="div-profile-status">
+			<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+			<span id="username-profile-status">Log In</span>
+			<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
+		</div>
+	</a>
 </header>
 
 <main id="degree">
 
 	<div id="course-name">
 		<div class="cardTextArea">
-			<h2 id ="degree-name"> BSc (Hons) Computer Science </h2>
-			<h2 id ="university-name"> University Of Example</h2>
+			<h1 id ="degree-name"> BSc (Hons) Computer Science </h1>
+			<h2 id ="course-university-name"> University Of Example</h2>
 		</div>
 	</div>
 
@@ -39,12 +41,11 @@
 	<div id="course-requirements">
 		<div class="card">
 			<h3> Entry Requirements : A B B or 128 UCAS Points</h3>
-			<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut metus ipsum, accumsan eget neque id, posuere tempus eros. Mauris at eros elit. Aliquam sed magna velit. Proin lacinia, sapien eu tincidunt tincidunt, nisi purus vestibulum lectus, in posuere justo ante nec augue. Proin bibendum ligula metus, non bibendum neque sollicitudin nec. Vivamus scelerisque aliquam nisi at luctus. Aliquam vehicula viverra tortor id maximus. Mauris laoreet commodo est. Nam sed vulputate justo. Suspendisse eleifend sagittis nulla</p>
 		</div>
 	</div>
 	<div id="course-rating">
 		<div class="card">
-			<h4> Course Rating</h4>
+			<h4> Degree Rating</h4>
 			<h4> Staff Rating</h4>
 			<h4> Facility Rating</h4>
 			<h4> University Rating</h4>
@@ -70,5 +71,6 @@
 		</div>
 	</div>
 </main>
+<script src="js/checklogin.js"></script>
 </body>
 </html>

@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
 	if (!email || !password || !repeatPassword)
 		return res.status(400).send({error: "Missing parameters (email, password, repeatPassword)."});
 
-	if (repeatPassword !== password) 
+	if (repeatPassword !== password)
 		return res.status(400).send({error: "Password does not match with repeat password."});
 
 	if (!EMAIL_REGEX.test(email))
@@ -68,7 +68,7 @@ router.get('/verify/:token', async (req, res) => {
 
 	try {
 		let emailDbRes = await db.query('SELECT email FROM users WHERE verification_token = $1', [token]);
-		if (emailRes.rowCount > 0) {
+		if (emailDbRes.rowCount > 0) {
 			await db.query('UPDATE users SET verification_token = NULL, verified = TRUE WHERE email = $1', [emailDbRes.rows[0].email]);
 			return res.status(301).redirect('/');
 		}
