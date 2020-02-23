@@ -289,18 +289,13 @@ main {
 }
 
 #create-review-form div {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
 	padding: 10px 0px 10px 0px;
 	margin:auto;
 }
 
-
-#create-review-form > div > label > em {
-	font-style: normal;
-	color: var(--colour-font-heading);
-	font-weight: bold;
-}
-
-#create-review-form div label {
+#create-review-form div legend {
 	display: flex;
 	flex-direction: column;
 	font-style: normal;
