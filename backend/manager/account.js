@@ -1,6 +1,7 @@
 const express = require('express'),
 	cookieParser = require('cookie-parser'),
 	bcrypt = require('bcrypt'),
+	HTTP = require('http-status-codes'),
 	uuidGen = require('uuid'),
 	db = require('../database/db.js'),
 	mailer = require('../mailer.js');
