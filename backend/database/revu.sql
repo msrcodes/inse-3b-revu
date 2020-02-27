@@ -1,6 +1,7 @@
 create table users(
     user_id serial not null primary key,
     email varchar(255) not null,
+    username varchar(255),
     verified boolean,
     password_hash varchar(255) not null,
     verification_token varchar(255)

@@ -2,7 +2,6 @@ const express = require('express'),
 	cookieParser = require('cookie-parser'),
 	bcrypt = require('bcrypt'),
 	uuidGen = require('uuid'),
-	HTTP = require('http-status-codes'),
 	db = require('../database/db.js'),
 	mailer = require('../mailer.js');
 
@@ -26,10 +25,10 @@ function getUser(req) {
 }
 
 router.post('/register', async (req, res) => {
-	const { email, password, repeatPassword } = req.body;
+	const { username, email, password, repeatPassword } = req.body;
 
 	if (!email || !password || !repeatPassword)
-		return res.status(HTTP.BAD_REQUEST).send({error: "Missing parameters (email, password, repeatPassword)."});
+		return res.status(HTTP.BAD_REQUEST).send({error: "Missing parameters (username, email, password, repeatPassword)."});
 
 	if (repeatPassword !== password)
 		return res.status(HTTP.BAD_REQUEST).send({error: "Password does not match with repeat password."});
@@ -48,7 +47,7 @@ router.post('/register', async (req, res) => {
 		const passwordHash = await bcrypt.hash(password, 10);
 		const uuid = uuidGen();
 
-		const insertDbRes = await db.query('INSERT INTO users (email, password_hash, verification_token) VALUES ($1, $2, $3)', [email, passwordHash, uuid]);
+		const insertDbRes = await db.query('INSERT INTO users (username, email, password_hash, verification_token) VALUES ($1, $2, $3, $4)', [username, email, passwordHash, uuid]);
 		if (insertDbRes.rowCount) {
 			mailer.sendMail(email, "Verify email for REVU",
 				`<a href='https://revu.aitken.io/api/v1/account/verify/${uuid}'>Verify your account</a>`,
