@@ -13,7 +13,7 @@ create table user_session(
 	last_login timestamp
 );
 
-create table uni(
+create table university(
     uni_id serial not null primary key,
     uni_name varchar(255) not null,
     uni_url varchar(255) not null,
