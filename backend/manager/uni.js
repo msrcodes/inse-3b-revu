@@ -19,8 +19,6 @@ router.get('/uniNames', (req, res) => {
 router.get('/:uniId', (req, res) => {
 	const uniId = req.params.uniId;
 
-	console.log(uniId);
-
 	db.query('SELECT uni_name, uni_url, uni_description from university where uni_id = $1',
 		[uniId]).then(dbRes => {
 			if (dbRes.rowCount) {

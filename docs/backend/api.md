@@ -47,3 +47,27 @@ Following standard REST format
 ```json
 {}
 ```
+
+### `GET /uni/uniNames`
+#### out: 200
+```json
+[
+    {
+        "uni_name": "..."
+    },
+    ...
+]
+```
+
+
+### `GET /uni/:uniId`
+#### out: 200
+```json
+{
+    "uni_name": "...",
+    "uni_url": "...",
+    "uni_description": "..."
+}
+```
+
+
