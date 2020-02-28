@@ -31,9 +31,16 @@
 	--colour-fill-button-negative: #FFFFFF; /* Fill colour for all "negative" interaction buttons */
 }
 
+/* Global styling */
+
 * {
 	margin: 0;
 	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font-family-heading);
+	color: var(--colour-font-heading);
 }
 
 body {
@@ -41,48 +48,26 @@ body {
 	font-family: var(--font-family-body);
 }
 
-header {
-	background: var(--colour-fill-header);
-
-	display: flex;
-	justify-content: space-evenly;
-}
-
-header > * {
-	margin: auto 0;
-}
-
 button {
 	font-family: var(--font-family-button);
 }
 
-
-
-h1, h2, h3, h4, h5, h6 {
-	font-family: var(--font-family-heading);
-	color: var(--colour-font-heading);
-	padding-bottom: 1em;
-}
-
-header h1 {
-	font-family: var(--font-family-logo);
-	font-weight: bold;
-	color: var(--colour-font-logo);
-	padding: 0.5em;
-}
-
-header label {
-	display: flex;
-}
-
-header label img {
-	width: 1.5em;
-	height: 1.5em;
-	margin: auto;
-}
-
 main {
 	margin: 5vh 5vw;
+}
+
+.btn--default {
+	background: var(--colour-fill-button-default);
+	border: 3px solid var(--colour-border-button-default);
+	color: var(--colour-font-button-default);
+	font-weight: bolder;
+	font-size: 100%;
+	text-transform: uppercase;
+	border-radius: 13px;
+	cursor: pointer;
+	padding: 0.5em 2em;
+
+	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
 }
 
 .btn--positive {
@@ -104,26 +89,12 @@ main {
 	border: 3px solid var(--colour-border-button-positive-hover);
 }
 
-.btn--default {
-	background: var(--colour-fill-button-default);
-	border: 3px solid var(--colour-border-button-default);
-	color: var(--colour-font-button-default);
-	font-weight: bolder;
-	font-size: 100%;
-	text-transform: uppercase;
-	border-radius: 13px;
-	cursor: pointer;
-	padding: 0.5em 2em;
-
-	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
-}
-
 .card {
 	width: 100%;
 	padding: 1em;
 	border-radius: 33px;
 	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
-				rgba(158, 158, 158, 0.5) 6px 6px 6px;
+	rgba(158, 158, 158, 0.5) 6px 6px 6px;
 }
 
 .slider {
@@ -156,7 +127,7 @@ main {
 	cursor: pointer;
 }
 
-.textarea {
+.textarea {	/* TODO: generify, does this need to be a class? */
 	width: 90%;
 	height: 150px;
 	padding: 20px 10px 20px 10px;
@@ -168,221 +139,23 @@ main {
 	resize: none;
 }
 
-.card-text-area {
+.card-text-area { /* TODO: generify, could this just be .card > .textarea? */
 	width: 100%;
 	padding: 1em;
 	border-radius: 33px;
 }
 
-
-.view-more-buttons {
+.view-more-buttons { /* TODO: could this be achieved in a better way? */
 	display: flex;
 	justify-content: center;
 }
 
-#div-profile-status {
-	font-weight: bolder;
+/* Grid page layouts */
 
-	display: flex;
-	padding: 0.5em;
-
-	cursor: pointer;
-}
-
-#img-profile-status-icon {
-	width: 3em;
-	height: 3em;
-	margin: auto 0.25em;
-}
-
-#username-profile-status {
-	margin: auto 0.25em;
-}
-
-#img-profile-status-chevron {
-	width: 1em;
-	height: 1em;
-	margin: auto 0.25em;
-}
-
-#search {
-	font-family: "Noto Sans", sans-serif;
-	padding: 0.5em;
-	width: 30vw;
-
-	border: 0;
-	border-bottom: 1px solid #707070;
-}
-
-#search:focus {
-	outline: 0;
-	border-bottom: 1px solid var(--colour-border-button-default);
-	transition-duration: 0.1s;
-}
-
-#profile-a-link {
-	text-decoration: none;
-	color: var(--colour-font-heading);
-}
-
-#profile {
-	display: grid;
-	grid-template-rows: 1fr 4fr;
-	grid-template-columns: 1fr 1fr;
-	grid-template-areas: "header header"
-						 "reviews searches";
-}
-
-#profile-header {
-	grid-area: header;
-
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr;
-
-	padding-bottom: 1em;
-	margin-bottom: 1em;
-	border-bottom: 1px solid #707070;
-}
-
-#profile-header h2 {
-	padding: 0;
-}
-
-.page-header-content {
+.page-header-content {	/* TODO: write documentation on grid layouts */
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 	grid-template-rows: 1fr;
-}
-
-#profile-header-icon {
-	margin: auto;
-}
-
-#profile-header-info-section {
-	display: flex;
-	flex-direction: column;
-	margin: auto 1em;
-}
-
-#profile-header-buttons {
-	margin: auto;
-}
-
-#profile-reviews {
-	grid-area: reviews;
-	padding: 0 2em;
-}
-
-#profile-searches {
-	grid-area: searches;
-	padding: 0 2em;
-}
-
-#create-review-form {
-	width: 80%;
-	margin:auto;
-	padding: 10px 10px 10px 10px;
-	border-radius: 33px;
-	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
-	rgba(158, 158, 158, 0.5) 6px 6px 6px;
-}
-
-#create-review-form div {
-	display: grid;
-	grid-template-columns: repeat(1, 1fr);
-	padding: 10px 0px 10px 0px;
-	margin:auto;
-}
-
-#create-review-form div legend {
-	display: flex;
-	flex-direction: column;
-	font-style: normal;
-	color: var(--colour-font-heading);
-	font-weight: bold;
-	padding: 10px 100px 10px 10px;
-	text-align: left;
-}
-
-#degree {
-	display: grid;
-	grid-template-rows: 0fr 2.5fr 1fr;
-	grid-template-columns: 1fr 1fr;
-	grid-template-areas:
-		"courseName overallRating"
-		"entryRequirements rating"
-		"about review";
-}
-
-#university {
-	display: grid;
-	grid-template-rows: 0fr 2.5fr 1fr;
-	grid-template-columns: 1fr 1fr;
-	grid-template-areas:
-		"uni-name overallRating"
-		"info rating"
-		"accommodation review";
-}
-
-#course-name {
-	grid-area: courseName;
-	padding: 0 2em;
-}
-
-#course-overall-rating {
-	grid-area: overallRating;
-	padding: 0 2em;
-}
-
-#course-requirements{
-	grid-area: entryRequirements;
-	padding: 0 2em;
-}
-
-#course-rating {
-	grid-area: rating;
-	padding: 0em 2em;
-}
-
-#course-about {
-	grid-area: about;
-	padding: 0 2em;
-}
-
-#course-review {
-	grid-area: review;
-	padding: 0 2em;
-}
-
-#university-accommodation {
-	grid-area: accommodation;
-	padding: 0 2em;
-}
-
-#university-info {
-	grid-area: info;
-	padding: 0 2em;
-}
-
-#course-university-name {
-	font-family: var(--font-family-body);
-	opacity: 60%;
-	padding-top: 0em;
-	padding-bottom: 0em;
-}
-
-#degree-name {
-	padding-bottom: 0em;
-}
-
-#university-name {
-	grid-area: uni-name;
-	padding: 0 2em;
-}
-
-#university-dropdown {
-	width: 80%;
 }
 
 .header-form-aside {
@@ -390,7 +163,7 @@ main {
 	grid-template-rows: 1fr 4fr;
 	grid-template-columns: 2fr 3fr;
 	grid-template-areas: "header header"
-						"form info";
+	"form info";
 }
 
 .page-header {
@@ -405,10 +178,6 @@ main {
 
 	padding: 1em;
 	border-right: 1px solid #707070;
-}
-
-#btn-create-account, #btn-log-in {
-	margin: 1em 0;
 }
 
 .compact-form > label {
@@ -442,51 +211,283 @@ main {
 	padding: 1em;
 }
 
-@media (max-width: 850px) {
+/* Header styling */
+
+header {
+	display: grid;
+
+	width: 100vw;
+
+	grid-template-columns: auto 1fr auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "logo search button profile";
+
+	background: var(--colour-fill-header);
+}
+
+header > * {
+	align-self: center;
+}
+
+header > h1 {
+	grid-area: logo;
+
+	font-family: var(--font-family-logo);
+	font-weight: 900;
+	color: var(--colour-font-logo);
+
+	padding: 0.5em 1em;
+}
+
+#btn-writereview {
+	grid-area: button;
+}
+
+#profile-a-link {
+	grid-area: profile;
+
+	display: grid;
+	grid-template-columns: 3.5em auto auto;
+	grid-template-rows: auto;
+	padding: 0.5em 1em;
+
+	text-decoration: none;
+	font-weight: bold;
+	color: var(--colour-font-heading);
+}
+
+#profile-a-link > * {
+	align-self: center;
+}
+
+#img-profile-status-icon {
+	width: 3.5em;
+}
+
+#username-profile-status {
+	padding: 0 0.5em;
+}
+
+#container-search {
+	grid-area: search;
+
+	display: grid;
+	grid-template-columns: 1.5em auto;
+	grid-template-rows: auto;
+}
+
+#container-search img {
+	width: 1.5em;
+}
+
+#input-search {
+	font-family: "Noto Sans", sans-serif;
+
+	margin: 0 0.5em;
+
+	border: 0;
+	border-bottom: 1px solid #707070;
+}
+
+#input-search:focus {
+	outline: 0;
+	border-bottom: 1px solid var(--colour-border-button-default);
+	transition-duration: 0.1s;
+}
+
+/* Create review styling */
+
+#create-review-form {
+	width: 80%;
+	margin: auto;
+	padding: 10px 10px 10px 10px;	/* TODO: px should not be used for padding */
+	border-radius: 33px;
+	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
+	rgba(158, 158, 158, 0.5) 6px 6px 6px;
+}
+
+#create-review-form div {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	padding: 10px 0px 10px 0px;	/* TODO: px should not be used for padding */
+	margin: auto;
+}
+
+#create-review-form div legend {
+	display: flex;
+	flex-direction: column;
+	font-style: normal;
+	color: var(--colour-font-heading);
+	font-weight: bold;
+	padding: 10px 100px 10px 10px; /* TODO: px should not be used for padding */
+	text-align: left;
+}
+
+#university-dropdown {
+	width: 80%;
+}
+
+/* Degree info styling */
+
+#degree {	/* TODO: could this layout be a generic grid layout? */
+	display: grid;
+	grid-template-rows: 0fr 2.5fr 1fr;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas:
+		"courseName overallRating"
+		"entryRequirements rating"
+		"about review";
+}
+
+#course-name {
+	grid-area: courseName;
+	padding: 0 2em;
+}
+
+#course-overall-rating {
+	grid-area: overallRating;
+	padding: 0 2em;
+}
+
+#course-requirements{
+	grid-area: entryRequirements;
+	padding: 0 2em;
+}
+
+#course-rating {
+	grid-area: rating;
+	padding: 0em 2em;
+}
+
+#course-about {
+	grid-area: about;
+	padding: 0 2em;
+}
+
+#course-review {
+	grid-area: review;
+	padding: 0 2em;
+}
+
+#course-university-name {
+	font-family: var(--font-family-body);
+	opacity: 60%;
+	padding-top: 0em;
+	padding-bottom: 0em;
+}
+
+#degree-name {
+	padding-bottom: 0em;
+}
+
+/* Profile styling */
+
+#profile {
+	display: grid;
+	grid-template-rows: 1fr 4fr;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: "header header"
+	"reviews searches";
+}
+
+#profile-header {
+	grid-area: header;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr;
+
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+	border-bottom: 1px solid #707070;
+}
+
+#profile-header h2 {
+	padding: 0;
+}
+
+#profile-header-icon {
+	margin: auto;
+}
+
+#profile-header-info-section {
+	display: flex;
+	flex-direction: column;
+	margin: auto 1em;
+}
+
+#profile-header-buttons {
+	margin: auto;
+}
+
+#profile-reviews {
+	grid-area: reviews;
+	padding: 0 2em;
+}
+
+#profile-searches {
+	grid-area: searches;
+	padding: 0 2em;
+}
+
+/* University info styling */
+
+#university { /* TODO: Could this be a generic grid layout? (merge with #degree?) */
+	display: grid;
+	grid-template-rows: 0fr 2.5fr 1fr;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas:
+		"uni-name overallRating"
+		"info rating"
+		"accommodation review";
+}
+
+#university-accommodation {
+	grid-area: accommodation;
+	padding: 0 2em;
+}
+
+#university-info {
+	grid-area: info;
+	padding: 0 2em;
+}
+
+#university-name {
+	grid-area: uni-name;
+	padding: 0 2em;
+}
+
+/* Media queries */
+
+@media screen and (max-width: 900px) {
+	header {
+		display: grid;
+		grid-template-columns: auto auto auto;
+		grid-template-rows: auto auto;
+		grid-template-areas: "logo button profile"
+		"search search search";
+
+		background: var(--colour-fill-header);
+	}
+
+	#container-search {
+		padding: 1em;
+	}
+
 	#username-profile-status {
 		display: none;
+	}
+
+	#img-profile-status-icon {
+		justify-self: end;
+	}
+
+	#profile-a-link {
+		grid-template-columns: auto auto;
 	}
 }
 
 @media (max-width: 790px) {
-	header {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 4em 1fr 1fr;
-
-		grid-template-areas: "logo profile"
-							 "search search"
-							 "review review";
-	}
-
-	header h1 {
-		grid-area: logo;
-	}
-
-	label {
-		grid-area: search;
-	}
-
-	#search {
-		width: calc(100vw - 6em);
-		margin-right: 1em;
-	}
-
-	#div-profile-status {
-		grid-area: profile;
-		width: fit-content;
-		margin: 0 0 0 30vw;
-	}
-
-	#div-profile-status > * {
-		justify-content: right;
-	}
-
-	#btn-writereview {
-		grid-area: review;
-		margin: 5px;
-	}
-
 	.header-form-aside {
 		display: flex;
 		flex-direction: column;
@@ -502,5 +503,22 @@ main {
 
 	.compact-form button {
 		margin-left: 1em;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	header {
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-template-rows: auto auto auto;
+		grid-template-areas: "logo profile"
+		"button button"
+		"search search";
+
+		background: var(--colour-fill-header);
+	}
+
+	#btn-writereview {
+		margin: 0 1em;
 	}
 }
