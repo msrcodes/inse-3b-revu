@@ -99,7 +99,7 @@ main {
 
 .slider {
 	-webkit-appearance: none;
-	width: 90%;
+	width: 100%;
 	height: 15px;
 	border-radius: 20px;
 	background: var(--colour-font-button-positive);
@@ -128,15 +128,16 @@ main {
 }
 
 .textarea {	/* TODO: generify, does this need to be a class? */
-	width: 90%;
+	width: 100%;
 	height: 150px;
 	padding: 20px 10px 20px 10px;
 	margin: auto;
 	box-sizing: border-box;
-	border: 2px solid #ccc;
+	border: none;
 	border-radius: 4px;
 	background-color: #f8f8f8;
 	resize: none;
+	font-family: --font-family-body, sans-serif;
 }
 
 .card-text-area { /* TODO: generify, could this just be .card > .textarea? */
@@ -306,7 +307,7 @@ header > h1 {
 	rgba(158, 158, 158, 0.5) 6px 6px 6px;
 }
 
-#create-review-form div {
+#create-review-form fieldset {
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
 	padding: 10px 0px 10px 0px;	/* TODO: px should not be used for padding */
@@ -319,8 +320,14 @@ header > h1 {
 	font-style: normal;
 	color: var(--colour-font-heading);
 	font-weight: bold;
-	padding: 10px 100px 10px 10px; /* TODO: px should not be used for padding */
 	text-align: left;
+	padding: 10px 10px 10px 10px;/* TODO: px should not be used for padding */
+	margin:auto;
+	border: none;
+}
+
+#submit-review {
+	margin: 10px;
 }
 
 #university-dropdown {

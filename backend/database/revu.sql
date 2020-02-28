@@ -1,6 +1,7 @@
 create table users(
     user_id serial not null primary key,
     email varchar(255) not null,
+    username varchar(255),
     verified boolean,
     password_hash varchar(255) not null,
     verification_token varchar(255)
@@ -12,7 +13,7 @@ create table user_session(
 	last_login timestamp
 );
 
-create table uni(
+create table university(
     uni_id serial not null primary key,
     uni_name varchar(255) not null,
     uni_url varchar(255) not null,
