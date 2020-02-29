@@ -18,6 +18,12 @@ async function fetchUniversities() {
 	return out;
 }
 
+/**
+ * Used to populate a <select> html tag with <option> tags containing text content from an array
+ *
+ * @param dropdown The <select> attribute to fill
+ * @param array An array of strings, each of which will populate one <option> tag
+ */
 function populateDropdown(dropdown, array) {
 	for (const i of array) {
 		const elem = document.createElement("option");
