@@ -4,7 +4,7 @@ const handles = {};
 
 function getFormData() {
 	return {
-		"email": handles.username.value, // TODO: login should be via username, not email
+		"email": handles.email.value,
 		"password": handles.password.value,
 	}
 }
@@ -27,8 +27,8 @@ async function postLoginRequest() {
 }
 
 function getHandles() {
-	handles.username = document.querySelector("#log-in-username");
-	handles.password = document.querySelector("#log-in-password");
+	handles.email = document.querySelector("#email");
+	handles.password = document.querySelector("#password");
 	handles.submit = document.querySelector("#btn-log-in");
 }
 

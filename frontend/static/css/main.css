@@ -153,68 +153,58 @@ main {
 
 /* Grid page layouts */
 
-.page-header-content {	/* TODO: write documentation on grid layouts */
+.header-header-left-right {
 	display: grid;
-	grid-template-columns: 1fr 2fr;
-	grid-template-rows: 1fr;
-}
-
-.header-form-aside {
-	display: grid;
-	grid-template-rows: 1fr 4fr;
-	grid-template-columns: 2fr 3fr;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto 1fr;
 	grid-template-areas: "header header"
-	"form info";
+						 "left right";
 }
 
-.page-header {
+.header-header-left-right > header {
 	grid-area: header;
-}
-
-.compact-form {
-	grid-area: form;
 
 	display: flex;
-	flex-direction: column;
-
-	padding: 1em;
-	border-right: 1px solid #707070;
+	align-items: center;
 }
 
-.compact-form > label {
-	display: flex;
-	flex-direction: column;
+.header-header-left-right > header > * {
+	margin: 0 1em;
 }
 
-.compact-form > label > em {
-	font-style: normal;
-	color: var(--colour-font-heading);
-	font-weight: bold;
+.header-header-left-right > #left {
+	grid-area: left;
 }
 
-.compact-form input {
-	font-family: "Noto Sans", sans-serif;
-	padding: 0.5em;
-	width: 30vw;
-
-	border: 1px solid #707070;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+.header-header-left-right > #right {
+	grid-area: right;
 }
 
-.compact-form aside {
-	font-size: 75%;
+.header-header-left-right > #left, .header-header-left-right > #right {
+	padding: 1em 5em;
 }
 
-.aside-info {
-	grid-area: info;
-	padding: 1em;
+.icon-form {
+	display: grid;
+	grid-template-columns: 2em auto;
+	grid-template-rows: repeat(auto-fill, 2em);
+
+	row-gap: 1em;
+	column-gap: 0.5em;
+}
+
+.icon-form button, .icon-form aside {
+	grid-column: span 2;
+	place-self: center;
+}
+
+.icon-form input {
+	font-family: var(--font-family-body);
 }
 
 /* Header styling */
 
-header {
+body > header {
 	display: grid;
 
 	width: 100vw;
@@ -226,11 +216,11 @@ header {
 	background: var(--colour-fill-header);
 }
 
-header > * {
+body > header > * {
 	align-self: center;
 }
 
-header > h1 {
+body > header > h1 {
 	grid-area: logo;
 
 	font-family: var(--font-family-logo);
@@ -467,7 +457,7 @@ header > h1 {
 /* Media queries */
 
 @media screen and (max-width: 900px) {
-	header {
+	body > header {
 		display: grid;
 		grid-template-columns: auto auto auto;
 		grid-template-rows: auto auto;
@@ -492,29 +482,23 @@ header > h1 {
 	#profile-a-link {
 		grid-template-columns: auto auto;
 	}
-}
 
-@media (max-width: 790px) {
-	.header-form-aside {
-		display: flex;
-		flex-direction: column;
+	.header-header-left-right {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr 1fr;
+		grid-template-areas: "header"
+							 "left"
+							 "right";
 	}
 
-	.compact-form {
-		border-right: none;
-	}
-
-	.compact-form input {
-		width: 100%;
-	}
-
-	.compact-form button {
-		margin-left: 1em;
+	.header-header-left-right > #left, .header-header-left-right > #right {
+		padding: 1em 0;
 	}
 }
 
 @media screen and (max-width: 500px) {
-	header {
+	body > header {
 		display: grid;
 		grid-template-columns: auto auto;
 		grid-template-rows: auto auto auto;
