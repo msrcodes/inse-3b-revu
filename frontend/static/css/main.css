@@ -140,14 +140,8 @@ main {
 	font-family: --font-family-body, sans-serif;
 }
 
-.card-text-area { /* TODO: generify, could this just be .card > .textarea? */
-	width: 100%;
-	padding: 1em;
-	border-radius: 33px;
-}
-
-.view-more-buttons { /* TODO: could this be achieved in a better way? */
-	display: flex;
+.view-more-buttons { /* TODO: could this be achieved in a better way?*/
+	display: flex;  /* Im not sure if these are even needed, I added them as they're in the ui mockups */
 	justify-content: center;
 }
 
@@ -328,53 +322,47 @@ body > header > h1 {
 
 #degree {	/* TODO: could this layout be a generic grid layout? */
 	display: grid;
-	grid-template-rows: 0fr 2.5fr 1fr;
+	grid-template-rows: 0fr 2fr 1fr;
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas:
-		"courseName overallRating"
+		"name overallRating"
 		"entryRequirements rating"
 		"about review";
 }
 
-#course-name {
-	grid-area: courseName;
+#degree-name {
 	padding: 0 2em;
 }
 
-#course-overall-rating {
-	grid-area: overallRating;
-	padding: 0 2em;
+#degree-name {
+	padding-bottom: 0em;
 }
 
-#course-requirements{
-	grid-area: entryRequirements;
-	padding: 0 2em;
-}
-
-#course-rating {
-	grid-area: rating;
-	padding: 0em 2em;
-}
-
-#course-about {
-	grid-area: about;
-	padding: 0 2em;
-}
-
-#course-review {
-	grid-area: review;
-	padding: 0 2em;
-}
-
-#course-university-name {
+#degree-university-name {
 	font-family: var(--font-family-body);
 	opacity: 60%;
 	padding-top: 0em;
 	padding-bottom: 0em;
 }
 
-#degree-name {
-	padding-bottom: 0em;
+#degree-overallRating {
+	padding: 0 2em;
+}
+
+#degree-entryRequirements{
+	padding: 0 2em;
+}
+
+#degree-rating {
+	padding: 0em 2em;
+}
+
+#degree-about {
+	padding: 0 2em;
+}
+
+#degree-review {
+	padding: 0 2em;
 }
 
 /* Profile styling */
@@ -431,27 +419,40 @@ body > header > h1 {
 
 #university { /* TODO: Could this be a generic grid layout? (merge with #degree?) */
 	display: grid;
-	grid-template-rows: 0fr 2.5fr 1fr;
+	grid-template-rows: 0fr 2fr 1fr;
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas:
-		"uni-name overallRating"
+		"name overallRating"
 		"info rating"
 		"accommodation review";
 }
 
+#university-name {
+	padding:0 2em;
+}
+
+#degree-overallRating {
+	padding: 0 2em;
+}
+
+#university-rating {
+	padding:0 2em;
+}
+
 #university-accommodation {
-	grid-area: accommodation;
 	padding: 0 2em;
 }
 
 #university-info {
-	grid-area: info;
 	padding: 0 2em;
 }
 
 #university-name {
-	grid-area: uni-name;
 	padding: 0 2em;
+}
+
+#university-review {
+	padding:0 2em;
 }
 
 /* Media queries */
