@@ -29,11 +29,11 @@ async function postSignUpRequest() {
 }
 
 function getHandles() {
-	handles.username = document.querySelector("#sign-up-username");
-	handles.email = document.querySelector("#sign-up-email");
-	handles.password = document.querySelector("#sign-up-password");
-	handles.confirmpassword = document.querySelector("#sign-up-confirm-password");
-	handles.signupbutton = document.querySelector("#btn-create-account");
+	handles.username = document.querySelector("#username");
+	handles.email = document.querySelector("#email");
+	handles.password = document.querySelector("#password");
+	handles.confirmpassword = document.querySelector("#confirm-password");
+	handles.signupbutton = document.querySelector("#btn-sign-up");
 }
 
 function addEventListeners() {
