@@ -1,3 +1,8 @@
+/**
+ * @namespace manager.account
+ * @description Manager that holds api endpoints and functions working with accounts
+ */
+
 const express = require('express'),
 	cookieParser = require('cookie-parser'),
 	bcrypt = require('bcrypt'),
@@ -11,6 +16,11 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-
 const router = new express.Router();
 router.use(cookieParser());
 
+/**
+ * @memberOf manager.account
+ * @function getUser
+ * @param req {Object} express request object
+ */
 function getUser(req) {
 	return new Promise((resolve, reject) => {
 		const token = req.cookies.session;
@@ -25,6 +35,12 @@ function getUser(req) {
 	})
 }
 
+/**
+ * @memberOf manager.account
+ * @function /register
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
 router.post('/register', async (req, res) => {
 	const { username, email, password, repeatPassword } = req.body;
 
@@ -64,6 +80,12 @@ router.post('/register', async (req, res) => {
 	return res.status(HTTP.NOT_FOUND).send();
 });
 
+/**
+ * @memberOf manager.account
+ * @function /verify/:token
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
 router.get('/verify/:token', async (req, res) => {
 	const { token } = req.params;
 
@@ -81,6 +103,12 @@ router.get('/verify/:token', async (req, res) => {
 	}
 });
 
+/**
+ * @memberOf manager.account
+ * @function /login
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
 router.post('/login', (req, res) => {
 	const { email, password } = req.body;
 
@@ -120,6 +148,12 @@ router.post('/login', (req, res) => {
 	});
 });
 
+/**
+ * @memberOf manager.account
+ * @function /loggedIn
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
 router.get('/loggedIn', (req, res) => {
 	getUser(req)
 		.then(() => res.status(HTTP.OK).send({loggedIn: true}))
