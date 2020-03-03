@@ -1,3 +1,7 @@
+/**
+ * @namespace manager.account
+ */
+
 const express = require('express'),
 	cookieParser = require('cookie-parser'),
 	bcrypt = require('bcrypt'),
@@ -11,6 +15,14 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-
 const router = new express.Router();
 router.use(cookieParser());
 
+
+/**
+ * @memberOf manager.account
+ * @func
+ * @desc Gets the user details based on their session
+ * @param req express request object
+ * @returns {Promise<user>}
+ */
 function getUser(req) {
 	return new Promise((resolve, reject) => {
 		const token = req.cookies.session;
@@ -25,6 +37,18 @@ function getUser(req) {
 	})
 }
 
+
+/**
+ * @memberOf manager.account
+ * @func account/register
+ * @desc Register a user
+ * @param {Object} req express request object
+ * @param {String} req.body.username < 255 chars, unique
+ * @param {String} req.body.email < 255 chars, unique
+ * @param {String} req.body.password
+ * @param {String} req.body.repeatPassword
+ * @param {Object} res express response object
+ */
 router.post('/register', async (req, res) => {
 	const { username, email, password, repeatPassword } = req.body;
 
@@ -64,6 +88,15 @@ router.post('/register', async (req, res) => {
 	return res.status(HTTP.NOT_FOUND).send();
 });
 
+
+/**
+ * @memberOf manager.account
+ * @func account/verify/:token
+ * @desc Verify a users email token
+ * @param {Object} req express request object
+ * @param {String} req.param.token
+ * @param {Object} res express response object
+ */
 router.get('/verify/:token', async (req, res) => {
 	const { token } = req.params;
 
@@ -81,6 +114,16 @@ router.get('/verify/:token', async (req, res) => {
 	}
 });
 
+
+/**
+ * @memberOf manager.account
+ * @func account/login
+ * @desc Login a user
+ * @param {Object} req express request object
+ * @param {String} req.body.email < 255 chars
+ * @param {String} req.body.password
+ * @param {Object} res express response object
+ */
 router.post('/login', (req, res) => {
 	const { email, password } = req.body;
 
@@ -120,6 +163,14 @@ router.post('/login', (req, res) => {
 	});
 });
 
+
+/**
+ * @memberOf manager.account
+ * @func account/loggedIn
+ * @desc Check if the user is logged in
+ * @param {Object} req express request object
+ * @param {Object} res express response object
+ */
 router.get('/loggedIn', (req, res) => {
 	getUser(req)
 		.then(() => res.status(HTTP.OK).send({loggedIn: true}))

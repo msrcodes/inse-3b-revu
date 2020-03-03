@@ -27,8 +27,8 @@ router.get('/uniNames', (req, res) => {
  * @memberOf manager.uni
  * @function /uni/:uniId
  * @param req {Object} express request object
+ * @param req.params.uniId {String} The id of the university to return
  * @param res {Object} express response object
- * @param res.params.uniId {String} The id of the university to return
  */
 router.get('/:uniId', (req, res) => {
 	const uniId = req.params.uniId;
