@@ -1,5 +1,6 @@
 /**
  * @namespace manager.account
+ * @description Manager that holds api endpoints and functions working with accounts
  */
 
 const express = require('express'),
@@ -18,9 +19,9 @@ router.use(cookieParser());
 
 /**
  * @memberOf manager.account
- * @func
+ * @func getUser
  * @desc Gets the user details based on their session
- * @param req express request object
+ * @param req {Object} express request object
  * @returns {Promise<user>}
  */
 function getUser(req) {
@@ -40,7 +41,7 @@ function getUser(req) {
 
 /**
  * @memberOf manager.account
- * @func account/register
+ * @func /register
  * @desc Register a user
  * @param {Object} req express request object
  * @param {String} req.body.username < 255 chars, unique
@@ -91,7 +92,7 @@ router.post('/register', async (req, res) => {
 
 /**
  * @memberOf manager.account
- * @func account/verify/:token
+ * @func /verify/:token
  * @desc Verify a users email token
  * @param {Object} req express request object
  * @param {String} req.param.token
@@ -117,7 +118,7 @@ router.get('/verify/:token', async (req, res) => {
 
 /**
  * @memberOf manager.account
- * @func account/login
+ * @func /login
  * @desc Login a user
  * @param {Object} req express request object
  * @param {String} req.body.email < 255 chars
@@ -166,7 +167,7 @@ router.post('/login', (req, res) => {
 
 /**
  * @memberOf manager.account
- * @func account/loggedIn
+ * @func /loggedIn
  * @desc Check if the user is logged in
  * @param {Object} req express request object
  * @param {Object} res express response object

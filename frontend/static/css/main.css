@@ -196,6 +196,13 @@ main {
 	font-family: var(--font-family-body);
 }
 
+.card-stack {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(auto-fill, 1fr);
+	row-gap: 2em;
+}
+
 /* Header styling */
 
 body > header {
@@ -312,10 +319,6 @@ body > header > h1 {
 
 #submit-review {
 	margin: 10px;
-}
-
-#university-dropdown {
-	width: 80%;
 }
 
 /* Degree info styling */
