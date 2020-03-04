@@ -140,7 +140,7 @@ router.post('/login', (req, res) => {
 
 			// Must be verified to login
 			if (account.verification_token) {
-				res.status(HTTP.INTERNAL_SERVER_ERROR).send({error: 'Account has not been verified.'});
+				res.status(HTTP.UNAUTHORIZED).send({error: 'Account has not been verified.'});
 				return;
 			}
 
@@ -175,7 +175,7 @@ router.post('/login', (req, res) => {
 router.get('/loggedIn', (req, res) => {
 	getUser(req)
 		.then(() => res.status(HTTP.OK).send({loggedIn: true}))
-		.catch(() => res.status(HTTP.UNAUTHORIZED).send());
+		.catch(() => res.status(HTTP.OK).send({loggedIn: false}));
 });
 
 module.exports = {
