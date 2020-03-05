@@ -8,11 +8,12 @@
 		"http-status-codes": "^1.4.0",
 		"pg": "^7.18.1",
 		"postmark": "^2.3.5",
-		"uuid": "^3.4.0"
+		"uuid": "^3.4.0",
+		"cross-env": "^7.0.1"
 	},
 	"scripts": {
-		"start": "node backend/app.js",
-		"dev": "nodemon npm start"
+		"start": "cross-env NODE_ENV=production node backend/app.js",
+		"dev": "cross-env NODE_ENV=development nodemon node backend/app.js"
 	},
 	"private": true,
 	"devDependencies": {
