@@ -173,9 +173,10 @@ router.post('/login', (req, res) => {
  */
 router.get('/loggedIn', (req, res) => {
 	getUser(req)
-		.then(() => res.status(HTTP.OK).send({loggedIn: true}))
+		.then((user) => res.status(HTTP.OK).send({loggedIn: true, username: user.username}))
 		.catch(() => res.status(HTTP.OK).send({loggedIn: false}));
 });
+
 
 module.exports = {
 	router
