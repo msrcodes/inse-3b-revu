@@ -5,9 +5,12 @@
 
 const express = require('express'),
   HTTP = require('http-status-codes'),
-  db = require('../database/db.js');
+  cookieParser = require('cookie-parser'),
+  db = require('../database/db.js'),
+  AuthValidation = require('../middleware/auth.validation');
   
 const router = new express.Router();
+router.use(cookieParser());
 
 /**
  * @memberOf manager.review
@@ -127,19 +130,18 @@ router.get('/university/:ID', async (req, res) => {
  * @param req {Object} express request object
  * @param res {Object} express response object
  */
-router.post('/create', async (req, res) => {
-  const { universityID, degreeID, userID, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview } = req.body;
-
-  //--- TODO: Some sort of user auth
+const routerPostCreate = async (req, res) => {
+  const { universityID, degreeID, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview } = req.body;
 
   //--- Validate & create
   if (validateReview(degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview)) {
-    await createReview(universityID, degreeID, userID, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview);
+    await createReview(universityID, degreeID, req.account.user_id, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview);
     return res.status(HTTP.OK).send();
   }
 
   return res.status(HTTP.BAD_REQUEST).send();
-});
+};
+router.post('/create', [AuthValidation.validSessionNeeded, routerPostCreate]);
 
 module.exports = {
 	router
