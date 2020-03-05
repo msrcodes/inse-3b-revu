@@ -203,6 +203,11 @@ main {
 	row-gap: 2em;
 }
 
+.grid-layout {
+	display: grid;
+	grid-template-rows: 0fr 2fr 1fr;
+	grid-template-columns: 1fr 1fr;
+}
 /* Header styling */
 
 body > header {
@@ -322,11 +327,7 @@ body > header > h1 {
 }
 
 /* Degree info styling */
-
-#degree {	/* TODO: could this layout be a generic grid layout? */
-	display: grid;
-	grid-template-rows: 0fr 2fr 1fr;
-	grid-template-columns: 1fr 1fr;
+#degree {
 	grid-template-areas:
 		"name overallRating"
 		"entryRequirements rating"
@@ -420,10 +421,7 @@ body > header > h1 {
 
 /* University info styling */
 
-#university { /* TODO: Could this be a generic grid layout? (merge with #degree?) */
-	display: grid;
-	grid-template-rows: 0fr 2fr 1fr;
-	grid-template-columns: 1fr 1fr;
+#university {
 	grid-template-areas:
 		"name overallRating"
 		"info rating"
