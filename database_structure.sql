@@ -1,6 +1,7 @@
 create table users(
     user_id serial not null primary key,
     email varchar(255) not null,
+    username varchar(255),
     verified boolean,
     password_hash varchar(255) not null,
     verification_token varchar(255)
@@ -12,7 +13,7 @@ create table user_session(
 	last_login timestamp
 );
 
-create table uni(
+create table university(
     uni_id serial not null primary key,
     uni_name varchar(255) not null,
     uni_url varchar(255) not null,
@@ -32,7 +33,7 @@ create table uni_degree(
     requirements_grades varchar(255),
 
     primary key (uni_id, degree_id),
-    foreign key (uni_id) references uni(uni_id),
+    foreign key (uni_id) references university(uni_id),
     foreign key (degree_id) references degree(degree_id)
 );
 
@@ -43,17 +44,17 @@ create table review(
     user_id int not null,
 
     degree_rating integer not null,
-    degree_rating_desc varchar(250),
+    degree_rating_desc varchar(1000),
     staff_rating integer not null,
-    staff_rating_desc varchar(250),
+    staff_rating_desc varchar(1000),
     facility_rating integer not null,
-    facility_rating_desc varchar(250),
+    facility_rating_desc varchar(1000),
     uni_rating integer not null,
-    uni_rating_desc varchar(250),
+    uni_rating_desc varchar(1000),
     accommodation_rating integer not null,
-    accommodation_rating_desc varchar(250),
+    accommodation_rating_desc varchar(1000),
 
-    foreign key (uni_id) references uni(uni_id),
+    foreign key (uni_id) references university(uni_id),
     foreign key (degree_id) references degree(degree_id),
     foreign key (user_id) references users(user_id)
 );

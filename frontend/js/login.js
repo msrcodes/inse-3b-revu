@@ -4,7 +4,7 @@ const handles = {};
 
 function getFormData() {
 	return {
-		"email": handles.username.value, // TODO: login should be via username, not email
+		"email": handles.email.value,
 		"password": handles.password.value,
 	}
 }
@@ -20,15 +20,15 @@ async function postLoginRequest() {
 
 	if (response.ok) {
 		// redirect to profile page
-		window.location = window.location.toString().substring(0, window.location.toString().length - "login.html".length) + "profile.html"; // TODO: this, better.
+		window.location = "/profile";
 	} else {
 		console.log('failed to log in', response);	// TODO: better error handling
 	}
 }
 
 function getHandles() {
-	handles.username = document.querySelector("#log-in-username");
-	handles.password = document.querySelector("#log-in-password");
+	handles.email = document.querySelector("#email");
+	handles.password = document.querySelector("#password");
 	handles.submit = document.querySelector("#btn-log-in");
 }
 

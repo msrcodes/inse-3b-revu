@@ -9,72 +9,52 @@
 <body>
 <header>
 	<h1>REVU</h1>
-	<label>
+	<label id="container-search">
 		<img src="static/img/search.png" alt="Search" draggable="false">
-		<input type="text" id="search" placeholder="Search reviews, degrees, universities...">
+		<input type="text" id="input-search" placeholder="Search reviews, degrees, universities...">
 	</label>
 	<button class="btn--positive" id="btn-writereview">Write your review</button>
 	<a href="login.html" id="profile-a-link">
-		<div id="div-profile-status">
-			<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
-			<span id="username-profile-status">Log In</span>
-			<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
-		</div>
+		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+		<span id="username-profile-status">Log In</span>
+		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
 	</a>
 </header>
 <main id="create-review">
 	<form id="create-review-form">
-		<div id="review-form-header">
-			<label>
-				<em>Choose a University to review:</em>
-			</label>
+		<fieldset id="review-form-header">
+			<legend>Choose a University to review:</legend>
 			<select id="university-dropdown" name="universities"></select>
-		</div>
-		<div id ="staff-rating-review">
-			<label>
-				<em>Staff rating</em>
-			</label>
-			<input type="range" min="0.0" max="5.0" value="2.5" step="0.5" class="slider" id="staffRating" oninput="staffOutput.value = staffRating.value">
+		</fieldset>
+		<fieldset id ="staff-rating-review">
+			<legend>Staff rating:</legend>
+			<input type="range" min="0.0" max="5.0" value="2.5" step="0.1" class="slider" id="staffRating" oninput="staffOutput.value = staffRating.value">
 			<output name="staffRating-value" id="staffOutput">2.5</output>
-			<label>
-				<em>Staff review</em>
-			</label>
+			<legend>Staff review:</legend>
 			<textarea class="textarea" name="staff review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
-		</div>
-		<div id="facility-rating-review">
-			<label>
-				<em>Facility Rating</em>
-			</label>
-			<input type="range" min="0.0" max="5.0" value="2.5" step="0.5" class="slider" id="facilityRating" oninput="facilityOutput.value = facilityRating.value">
+		</fieldset>
+		<fieldset id="facility-rating-review">
+			<legend>Facility rating:</legend>
+			<input type="range" min="0.0" max="5.0" value="2.5" step="0.1" class="slider" id="facilityRating" oninput="facilityOutput.value = facilityRating.value">
 			<output name="facilityRating-value" id="facilityOutput">2.5</output>
-			<label>
-				<em>Facility Review</em>
-			</label>
+			<legend>Facility review:</legend>
 			<textarea class="textarea" name="facility review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
-		</div>
-		<div id="university-rating-review">
-			<label>
-				<em>University rating</em>
-			</label>
-			<input type="range" min="0.0" max="5.0" value="2.5" step="0.5" class="slider" id="universityRating" oninput="universityOutput.value = universityRating.value">
+		</fieldset>
+		<fieldset id="university-rating-review">
+			<legend>University rating:</legend>
+			<input type="range" min="0.0" max="5.0" value="2.5" step="0.1" class="slider" id="universityRating" oninput="universityOutput.value = universityRating.value">
 			<output name="universityRating-value" id="universityOutput">2.5</output>
-			<label>
-				<em>University Review</em>
-			</label>
+			<legend>University review:</legend>
 			<textarea class="textarea" name="university review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
-		</div>
-		<div id="accommodation-rating-review">
-			<label>
-				<em>Accommodation rating</em>
-			</label>
-			<input type="range" min="0.0" max="5.0" value="2.5" step="0.5" class="slider" id="accommodationRating" oninput="accommodationOutput.value = accommodationRating.value">
+		</fieldset>
+		<fieldset id="accommodation-rating-review">
+			<legend>Accommodation rating:</legend>
+			<input type="range" min="0.0" max="5.0" value="2.5" step="0.1" class="slider" id="accommodationRating" oninput="accommodationOutput.value = accommodationRating.value">
 			<output name="accommodationRating-value" id="accommodationOutput">2.5</output>
-			<label>
-				<em>Accommodation review</em>
-			</label>
+			<legend>Accommodation review:</legend>
 			<textarea class="textarea" name="accommodation review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
-		</div>
-		<input type="submit" value="Confirm changes" class="btn--positive">
+		</fieldset>
+		<input type="submit" id="submit-review" value="Submit review" class="btn--positive">
 	</form>
 	<script src="js/populateUniversityDropdown.js"></script>
 </main>

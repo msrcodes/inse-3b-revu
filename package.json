@@ -6,12 +6,19 @@
 		"cookie-parser": "^1.1.0",
 		"express": "^4.17.1",
 		"jsdoc": "^3.6.3",
+		"http-status-codes": "^1.4.0",
 		"pg": "^7.18.1",
 		"postmark": "^2.3.5",
-		"uuid": "^3.4.0"
+		"uuid": "^3.4.0",
+		"cross-env": "^7.0.1"
 	},
 	"scripts": {
-		"start": "node backend/app.js"
+		"start": "cross-env NODE_ENV=production node backend/app.js",
+		"dev": "cross-env NODE_ENV=development nodemon node backend/app.js",
+		"setup": "createdb revu; psql < database_structure.sql; cp backend/config/defaultconfig.json backend/config/config.json; echo 'You must put a valid postmark api key in config'"
 	},
-	"private": true
+	"private": true,
+	"devDependencies": {
+		"nodemon": "^2.0.2"
+	}
 }

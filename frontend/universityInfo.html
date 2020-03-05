@@ -9,62 +9,57 @@
 <body>
 <header>
 	<h1>REVU</h1>
-	<label>
+	<label id="container-search">
 		<img src="static/img/search.png" alt="Search" draggable="false">
-		<input type="text" id="search" placeholder="Search reviews, degrees, universities...">
+		<input type="text" id="input-search" placeholder="Search reviews, degrees, universities...">
 	</label>
 	<button class="btn--positive" id="btn-writereview">Write your review</button>
 	<a href="login.html" id="profile-a-link">
-		<div id="div-profile-status">
-			<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
-			<span id="username-profile-status">Log In</span>
-			<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
-		</div>
+		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+		<span id="username-profile-status">Log In</span>
+		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
 	</a>
 </header>
 <main id="university">
-
-	<div id="university-name">
-		<div class="cardTextArea">
-			<h1> University Of Example</h1>
+	<div class="grid-layout">
+		<div id="university-name">
+					<h1> University Of Example</h1>
 		</div>
-	</div>
 
-	<div id="course-overall-rating">
-		<div class="card-text-area">
-			<h2> Overall Rating</h2>
+		<div id="degree-overallRating">
+					<h2> Overall Rating</h2>
 		</div>
-	</div>
 
-	<div id="university-info">
-		<div class="card">
-			<h3>About The University</h3>
-		</div>
-	</div>
-	<div id="course-rating">
-		<div class="card">
-			<h4> Average Degree Rating</h4>
-			<h4> Staff Rating</h4>
-			<h4> Facility Rating</h4>
-			<h4> University Rating</h4>
-			<h4> Accommodation Rating</h4>
-		</div>
-	</div>
-
-	<div id="university-accommodation">
-		<div class="card">
-			<h3>University Of Example Accommodation</h3>
-			<div class="view-more-buttons">
-				<button class="btn--default"> View More Information</button>
+		<div id="university-info">
+			<div class="card">
+				<h3>About The University</h3>
 			</div>
 		</div>
-	</div>
 
-	<div id="course-review">
-		<div class="card">
-			<h3></h3>
-			<div class="view-more-buttons">
-				<button class="btn--default"> View More Reviews</button>
+		<div id="university-rating">
+			<div class="card">
+				<h4> Average Degree Rating</h4>
+				<h4> Staff Rating</h4>
+				<h4> Facility Rating</h4>
+				<h4> University Rating</h4>
+				<h4> Accommodation Rating</h4>
+			</div>
+		</div>
+
+		<div id="university-accommodation">
+			<div class="card">
+				<h3>University Of Example Accommodation</h3>
+				<div class="view-more-buttons">
+					<button class="btn--default"> View More Information</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="university-review">
+			<div class="card">
+				<div class="view-more-buttons">
+					<button class="btn--default"> View More Reviews</button>
+				</div>
 			</div>
 		</div>
 	</div>

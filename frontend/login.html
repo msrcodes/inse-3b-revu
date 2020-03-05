@@ -9,46 +9,38 @@
 <body>
 <header>
 	<h1>REVU</h1>
-	<label>
+	<label id="container-search">
 		<img src="static/img/search.png" alt="Search" draggable="false">
-		<input type="text" id="search" placeholder="Search reviews, degrees, universities...">
+		<input type="text" id="input-search" placeholder="Search reviews, degrees, universities...">
 	</label>
 	<button class="btn--positive" id="btn-writereview">Write your review</button>
 	<a href="login.html" id="profile-a-link">
-		<div id="div-profile-status">
-			<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
-			<span id="username-profile-status">Log In</span>
-			<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
-		</div>
+		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+		<span id="username-profile-status">Log In</span>
+		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
 	</a>
 </header>
-<main id="log-in" class="header-form-aside">
-	<div class="page-header">
-		<div class="page-header-content">
-			<img src="static/img/default-user.png" alt="Profile icon" id="profile-header-icon" draggable="false">
-			<div id="profile-header-info-section">
-				<h2 id="profile-header-title">Log In</h2>
-			</div>
+<main class="header-header-left-right">
+	<header>
+		<img src="static/img/default-user.png" alt="Profile icon" draggable="false">
+		<h2>Log In</h2>
+	</header>
+	<section id="left">
+		<div class="icon-form">
+			<label for="email"><img src="static/img/mail.svg" alt="Email"></label>
+			<input type="text" id="email" placeholder=" University Email (*.ac.uk)">
+			<label for="password"><img src="static/img/lock.svg" alt="Password"></label>
+			<input type="password" id="password" placeholder=" Password">
+			<button class="btn--default" id="btn-log-in">Login</button>
+			<aside>Don't have an account? <a href="signUp">Click here to sign up!</a></aside>
 		</div>
-	</div>
-	<div class="compact-form">
-		<label>
-			<em>Username</em>
-			<input type="text" id="log-in-username">
-		</label>
-		<label>
-			<em>Password</em>
-			<input type="password" id="log-in-password" placeholder="••••••••">
-		</label>
-		<button class="btn--default" id="btn-log-in">Login</button>
-		<aside>Don't have an account? <a href="signUp.html">Click here to sign up!</a></aside>
-	</div>
-	<div class="aside-info">
+	</section>
+	<section id="right">
 		<h3>Welcome to RevU</h3>
 		<p>We aim to be transparent about our systems, ensuring that you know that reviews are made by students, for students.</p>
 		<p>How do we rank universities? Our rankings are generated entirely from your rankings - we do not interfere with any metrics.</p>
 		<p>In short, this website is for U, by U.</p>
-	</div>
+	</section>
 </main>
 <script src="js/login.js"></script>
 <script src="js/checklogin.js"></script>

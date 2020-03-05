@@ -31,9 +31,16 @@
 	--colour-fill-button-negative: #FFFFFF; /* Fill colour for all "negative" interaction buttons */
 }
 
+/* Global styling */
+
 * {
 	margin: 0;
 	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font-family-heading);
+	color: var(--colour-font-heading);
 }
 
 body {
@@ -41,48 +48,26 @@ body {
 	font-family: var(--font-family-body);
 }
 
-header {
-	background: var(--colour-fill-header);
-
-	display: flex;
-	justify-content: space-evenly;
-}
-
-header > * {
-	margin: auto 0;
-}
-
 button {
 	font-family: var(--font-family-button);
 }
 
-
-
-h1, h2, h3, h4, h5, h6 {
-	font-family: var(--font-family-heading);
-	color: var(--colour-font-heading);
-	padding-bottom: 1em;
-}
-
-header h1 {
-	font-family: var(--font-family-logo);
-	font-weight: bold;
-	color: var(--colour-font-logo);
-	padding: 0.5em;
-}
-
-header label {
-	display: flex;
-}
-
-header label img {
-	width: 1.5em;
-	height: 1.5em;
-	margin: auto;
-}
-
 main {
 	margin: 5vh 5vw;
+}
+
+.btn--default {
+	background: var(--colour-fill-button-default);
+	border: 3px solid var(--colour-border-button-default);
+	color: var(--colour-font-button-default);
+	font-weight: bolder;
+	font-size: 100%;
+	text-transform: uppercase;
+	border-radius: 13px;
+	cursor: pointer;
+	padding: 0.5em 2em;
+
+	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
 }
 
 .btn--positive {
@@ -104,31 +89,17 @@ main {
 	border: 3px solid var(--colour-border-button-positive-hover);
 }
 
-.btn--default {
-	background: var(--colour-fill-button-default);
-	border: 3px solid var(--colour-border-button-default);
-	color: var(--colour-font-button-default);
-	font-weight: bolder;
-	font-size: 100%;
-	text-transform: uppercase;
-	border-radius: 13px;
-	cursor: pointer;
-	padding: 0.5em 2em;
-
-	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
-}
-
 .card {
 	width: 100%;
 	padding: 1em;
 	border-radius: 33px;
 	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
-				rgba(158, 158, 158, 0.5) 6px 6px 6px;
+	rgba(158, 158, 158, 0.5) 6px 6px 6px;
 }
 
 .slider {
 	-webkit-appearance: none;
-	width: 90%;
+	width: 100%;
 	height: 15px;
 	border-radius: 20px;
 	background: var(--colour-font-button-positive);
@@ -156,81 +127,256 @@ main {
 	cursor: pointer;
 }
 
-.textarea {
-	width: 90%;
+.textarea {	/* TODO: generify, does this need to be a class? */
+	width: 100%;
 	height: 150px;
 	padding: 20px 10px 20px 10px;
 	margin: auto;
 	box-sizing: border-box;
-	border: 2px solid #ccc;
+	border: none;
 	border-radius: 4px;
 	background-color: #f8f8f8;
 	resize: none;
+	font-family: --font-family-body, sans-serif;
 }
 
-.card-text-area {
-	width: 100%;
-	padding: 1em;
-	border-radius: 33px;
-}
-
-
-.view-more-buttons {
-	display: flex;
+.view-more-buttons { /* TODO: could this be achieved in a better way?*/
+	display: flex;  /* Im not sure if these are even needed, I added them as they're in the ui mockups */
 	justify-content: center;
 }
 
-#div-profile-status {
-	font-weight: bolder;
+/* Grid page layouts */
+
+.header-header-left-right {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto 1fr;
+	grid-template-areas: "header header"
+						 "left right";
+}
+
+.header-header-left-right > header {
+	grid-area: header;
 
 	display: flex;
-	padding: 0.5em;
+	align-items: center;
+}
 
-	cursor: pointer;
+.header-header-left-right > header > * {
+	margin: 0 1em;
+}
+
+.header-header-left-right > #left {
+	grid-area: left;
+}
+
+.header-header-left-right > #right {
+	grid-area: right;
+}
+
+.header-header-left-right > #left, .header-header-left-right > #right {
+	padding: 1em 5em;
+}
+
+.icon-form {
+	display: grid;
+	grid-template-columns: 2em auto;
+	grid-template-rows: repeat(auto-fill, 2em);
+
+	row-gap: 1em;
+	column-gap: 0.5em;
+}
+
+.icon-form button, .icon-form aside {
+	grid-column: span 2;
+	place-self: center;
+}
+
+.icon-form input {
+	font-family: var(--font-family-body);
+}
+
+.card-stack {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(auto-fill, 1fr);
+	row-gap: 2em;
+}
+
+.grid-layout {
+	display: grid;
+	grid-template-rows: 0fr 2fr 1fr;
+	grid-template-columns: 1fr 1fr;
+}
+/* Header styling */
+
+body > header {
+	display: grid;
+
+	width: 100vw;
+
+	grid-template-columns: auto 1fr auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: "logo search button profile";
+
+	background: var(--colour-fill-header);
+}
+
+body > header > * {
+	align-self: center;
+}
+
+body > header > h1 {
+	grid-area: logo;
+
+	font-family: var(--font-family-logo);
+	font-weight: 900;
+	color: var(--colour-font-logo);
+
+	padding: 0.5em 1em;
+}
+
+#btn-writereview {
+	grid-area: button;
+}
+
+#profile-a-link {
+	grid-area: profile;
+
+	display: grid;
+	grid-template-columns: 3.5em auto auto;
+	grid-template-rows: auto;
+	padding: 0.5em 1em;
+
+	text-decoration: none;
+	font-weight: bold;
+	color: var(--colour-font-heading);
+}
+
+#profile-a-link > * {
+	align-self: center;
 }
 
 #img-profile-status-icon {
-	width: 3em;
-	height: 3em;
-	margin: auto 0.25em;
+	width: 3.5em;
 }
 
 #username-profile-status {
-	margin: auto 0.25em;
+	padding: 0 0.5em;
 }
 
-#img-profile-status-chevron {
-	width: 1em;
-	height: 1em;
-	margin: auto 0.25em;
+#container-search {
+	grid-area: search;
+
+	display: grid;
+	grid-template-columns: 1.5em auto;
+	grid-template-rows: auto;
 }
 
-#search {
+#container-search img {
+	width: 1.5em;
+}
+
+#input-search {
 	font-family: "Noto Sans", sans-serif;
-	padding: 0.5em;
-	width: 30vw;
+
+	margin: 0 0.5em;
 
 	border: 0;
 	border-bottom: 1px solid #707070;
 }
 
-#search:focus {
+#input-search:focus {
 	outline: 0;
 	border-bottom: 1px solid var(--colour-border-button-default);
 	transition-duration: 0.1s;
 }
 
-#profile-a-link {
-	text-decoration: none;
-	color: var(--colour-font-heading);
+/* Create review styling */
+
+#create-review-form {
+	width: 80%;
+	margin: auto;
+	padding: 10px 10px 10px 10px;	/* TODO: px should not be used for padding */
+	border-radius: 33px;
+	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
+	rgba(158, 158, 158, 0.5) 6px 6px 6px;
 }
+
+#create-review-form fieldset {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	padding: 10px 0px 10px 0px;	/* TODO: px should not be used for padding */
+	margin: auto;
+}
+
+#create-review-form div legend {
+	display: flex;
+	flex-direction: column;
+	font-style: normal;
+	color: var(--colour-font-heading);
+	font-weight: bold;
+	text-align: left;
+	padding: 10px 10px 10px 10px;/* TODO: px should not be used for padding */
+	margin:auto;
+	border: none;
+}
+
+#submit-review {
+	margin: 10px;
+}
+
+/* Degree info styling */
+#degree {
+	grid-template-areas:
+		"name overallRating"
+		"entryRequirements rating"
+		"about review";
+}
+
+#degree-name {
+	padding: 0 2em;
+}
+
+#degree-name {
+	padding-bottom: 0em;
+}
+
+#degree-university-name {
+	font-family: var(--font-family-body);
+	opacity: 60%;
+	padding-top: 0em;
+	padding-bottom: 0em;
+}
+
+#degree-overallRating {
+	padding: 0 2em;
+}
+
+#degree-entryRequirements{
+	padding: 0 2em;
+}
+
+#degree-rating {
+	padding: 0em 2em;
+}
+
+#degree-about {
+	padding: 0 2em;
+}
+
+#degree-review {
+	padding: 0 2em;
+}
+
+/* Profile styling */
 
 #profile {
 	display: grid;
 	grid-template-rows: 1fr 4fr;
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas: "header header"
-						 "reviews searches";
+	"reviews searches";
 }
 
 #profile-header {
@@ -247,12 +393,6 @@ main {
 
 #profile-header h2 {
 	padding: 0;
-}
-
-.page-header-content {
-	display: grid;
-	grid-template-columns: 1fr 2fr;
-	grid-template-rows: 1fr;
 }
 
 #profile-header-icon {
@@ -279,227 +419,99 @@ main {
 	padding: 0 2em;
 }
 
-#create-review-form {
-	width: 80%;
-	margin:auto;
-	padding: 10px 10px 10px 10px;
-	border-radius: 33px;
-	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
-	rgba(158, 158, 158, 0.5) 6px 6px 6px;
-}
-
-#create-review-form div {
-	padding: 10px 0px 10px 0px;
-	border-top: 1px solid #AAAAAA;
-	margin:auto;
-}
-
-#create-review-form div label {
-	display: flex;
-	flex-direction: column;
-	font-style: normal;
-	color: var(--colour-font-heading);
-	font-weight: bold;
-	padding: 10px 100px 10px 10px;
-	text-align: left;
-}
-
-#degree {
-	display: grid;
-	grid-template-rows: 0fr 2.5fr 1fr;
-	grid-template-columns: 1fr 1fr;
-	grid-template-areas:
-		"courseName overallRating"
-		"entryRequirements rating"
-		"about review";
-}
+/* University info styling */
 
 #university {
-	display: grid;
-	grid-template-rows: 0fr 2.5fr 1fr;
-	grid-template-columns: 1fr 1fr;
 	grid-template-areas:
-		"uni-name overallRating"
+		"name overallRating"
 		"info rating"
 		"accommodation review";
 }
 
-#course-name {
-	grid-area: courseName;
+#university-name {
+	padding:0 2em;
+}
+
+#degree-overallRating {
 	padding: 0 2em;
 }
 
-#course-overall-rating {
-	grid-area: overallRating;
-	padding: 0 2em;
-}
-
-#course-requirements{
-	grid-area: entryRequirements;
-	padding: 0 2em;
-}
-
-#course-rating {
-	grid-area: rating;
-	padding: 0em 2em;
-}
-
-#course-about {
-	grid-area: about;
-	padding: 0 2em;
-}
-
-#course-review {
-	grid-area: review;
-	padding: 0 2em;
+#university-rating {
+	padding:0 2em;
 }
 
 #university-accommodation {
-	grid-area: accommodation;
 	padding: 0 2em;
 }
 
 #university-info {
-	grid-area: info;
 	padding: 0 2em;
-}
-
-#course-university-name {
-	font-family: var(--font-family-body);
-	opacity: 60%;
-	padding-top: 0em;
-	padding-bottom: 0em;
-}
-
-#degree-name {
-	padding-bottom: 0em;
 }
 
 #university-name {
-	grid-area: uni-name;
 	padding: 0 2em;
 }
 
-#university-dropdown {
-	width: 80%;
+#university-review {
+	padding:0 2em;
 }
 
-.header-form-aside {
-	display: grid;
-	grid-template-rows: 1fr 4fr;
-	grid-template-columns: 2fr 3fr;
-	grid-template-areas: "header header"
-						"form info";
-}
+/* Media queries */
 
-.page-header {
-	grid-area: header;
-}
+@media screen and (max-width: 900px) {
+	body > header {
+		display: grid;
+		grid-template-columns: auto auto auto;
+		grid-template-rows: auto auto;
+		grid-template-areas: "logo button profile"
+		"search search search";
 
-.compact-form {
-	grid-area: form;
+		background: var(--colour-fill-header);
+	}
 
-	display: flex;
-	flex-direction: column;
+	#container-search {
+		padding: 1em;
+	}
 
-	padding: 1em;
-	border-right: 1px solid #707070;
-}
-
-#btn-create-account, #btn-log-in {
-	margin: 1em 0;
-}
-
-.compact-form > label {
-	display: flex;
-	flex-direction: column;
-}
-
-.compact-form > label > em {
-	font-style: normal;
-	color: var(--colour-font-heading);
-	font-weight: bold;
-}
-
-.compact-form input {
-	font-family: "Noto Sans", sans-serif;
-	padding: 0.5em;
-	width: 30vw;
-
-	border: 1px solid #707070;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-}
-
-.compact-form aside {
-	font-size: 75%;
-}
-
-.aside-info {
-	grid-area: info;
-	padding: 1em;
-}
-
-@media (max-width: 850px) {
 	#username-profile-status {
 		display: none;
 	}
+
+	#img-profile-status-icon {
+		justify-self: end;
+	}
+
+	#profile-a-link {
+		grid-template-columns: auto auto;
+	}
+
+	.header-header-left-right {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr 1fr;
+		grid-template-areas: "header"
+							 "left"
+							 "right";
+	}
+
+	.header-header-left-right > #left, .header-header-left-right > #right {
+		padding: 1em 0;
+	}
 }
 
-@media (max-width: 790px) {
-	header {
+@media screen and (max-width: 500px) {
+	body > header {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 4em 1fr 1fr;
-
+		grid-template-columns: auto auto;
+		grid-template-rows: auto auto auto;
 		grid-template-areas: "logo profile"
-							 "search search"
-							 "review review";
-	}
+		"button button"
+		"search search";
 
-	header h1 {
-		grid-area: logo;
-	}
-
-	label {
-		grid-area: search;
-	}
-
-	#search {
-		width: calc(100vw - 6em);
-		margin-right: 1em;
-	}
-
-	#div-profile-status {
-		grid-area: profile;
-		width: fit-content;
-		margin: 0 0 0 30vw;
-	}
-
-	#div-profile-status > * {
-		justify-content: right;
+		background: var(--colour-fill-header);
 	}
 
 	#btn-writereview {
-		grid-area: review;
-		margin: 5px;
-	}
-
-	.header-form-aside {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.compact-form {
-		border-right: none;
-	}
-
-	.compact-form input {
-		width: 100%;
-	}
-
-	.compact-form button {
-		margin-left: 1em;
+		margin: 0 1em;
 	}
 }
