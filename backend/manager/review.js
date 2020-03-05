@@ -12,41 +12,75 @@ const router = new express.Router();
 /**
  * @memberOf manager.review
  * @function createReview
- * @param universityName {String}
- * @param staffRating {String}
+ * @param universityID {Integer}
+ * @param degreeID {Integer}
+ * @param userID {Integer}
+ * @param degreeRating {Integer}
+ * @param degreeReview {String}
+ * @param staffRating {Integer}
  * @param staffReview {String}
- * @param facilityRating {String}
+ * @param facilityRating {Integer}
  * @param facilityReview {String}
- * @param universityRating {String}
+ * @param universityRating {Integer}
  * @param universityReview {String}
- * @param accommodationRating {String}
+ * @param accommodationRating {Integer}
  * @param accommodationReview {String}
  */
-const createReview = (universityName, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview) => {
-  //--- TODO
-  return false;
+const createReview = async (universityID, degreeID, userID, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview) => {
+  await db.query(
+    'INSERT INTO review (`uni_id`, `degree_id`, `user_id`, `degree_rating`, `degree_rating_desc`, `staff_rating`, `staff_rating_desc`, `facility_rating`, `facility_rating_desc`, `uni_rating`, `uni_rating_desc`, `accommodation_rating`, `accommodation_rating_desc`) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)', 
+    [
+      universityID,
+      degreeID,
+      userID,
+      degreeRating,
+      degreeReview,
+      staffRating,
+      staffReview,
+      facilityRating,
+      facilityReview,
+      universityRating,
+      universityReview,
+      accommodationRating,
+      accommodationReview
+    ]
+  );
 };
 
 /**
  * @memberOf manager.review
  * @function validateReview
- * @param universityName {String}
- * @param staffRating {String}
+ * @param degreeRating {Integer}
+ * @param degreeReview {String}
+ * @param staffRating {Integer}
  * @param staffReview {String}
- * @param facilityRating {String}
+ * @param facilityRating {Integer}
  * @param facilityReview {String}
- * @param universityRating {String}
+ * @param universityRating {Integer}
  * @param universityReview {String}
- * @param accommodationRating {String}
+ * @param accommodationRating {Integer}
  * @param accommodationReview {String}
  */
-const validateReview = (universityName, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview) => {
-  //--- TODO
-  return false;
-};
+const validateReview = (degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview) => {
+  //--- Ratings
+  if (
+    !Number.isInteger(degreeRating) 
+    || !Number.isInteger(staffRating) 
+    || !Number.isInteger(facilityRating) 
+    || !Number.isInteger(universityRating) 
+    || !Number.isInteger(accommodationRating)
+  ) return false;
 
-const updateReview = (username) => {
-  //--- TODO
+  //--- Desc
+  if (
+    typeof degreeReview !== typeof ""
+    || (typeof staffReview !== typeof "")
+    || (typeof facilityReview !== typeof "")
+    || (typeof universityReview !== typeof "")
+    || (typeof accommodationReview !== typeof "")
+  ) return false;
+  
+  return true;
 };
 
 /**
@@ -94,11 +128,13 @@ router.get('/university/:ID', async (req, res) => {
  * @param res {Object} express response object
  */
 router.post('/create', async (req, res) => {
-  const { universityName, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview } = req.body;
+  const { universityID, degreeID, userID, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview } = req.body;
+
+  //--- TODO: Some sort of user auth
 
   //--- Validate & create
-  if (validateReview(universityName, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview)) {
-    await createReview(universityName, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview);
+  if (validateReview(degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview)) {
+    await createReview(universityID, degreeID, userID, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview);
     return res.status(HTTP.OK).send();
   }
 
