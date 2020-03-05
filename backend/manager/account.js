@@ -9,13 +9,12 @@ const express = require('express'),
 	HTTP = require('http-status-codes'),
 	uuidGen = require('uuid'),
 	db = require('../database/db.js'),
-	mailer = require('../mailer.js');
+	mailer = require('../service/mailer.js');
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 const router = new express.Router();
 router.use(cookieParser());
-
 
 /**
  * @memberOf manager.account
