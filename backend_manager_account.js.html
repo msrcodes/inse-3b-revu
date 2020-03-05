@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Global - Documentation</title>
+    <title>backend/manager/account.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,352 +29,202 @@
 
 <div id="main">
     
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">backend/manager/account.js</h1>
     
 
     
 
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="checkAndRedirect"><span class="type-signature">(async) </span>checkAndRedirect<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Used to check if the user is currently logged in, and redirects the user to the homepage if they're not</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frontend_js_profile.js.html">frontend/js/profile.js</a>, <a href="frontend_js_profile.js.html#line9">line 9</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>Promise.&lt;void></code></span>
-
-
-    </dd>
-</dl>
-
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="populateDropdown"><span class="type-signature"></span>populateDropdown<span class="signature">(dropdown, array)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Used to populate a <select> html tag with <option> tags containing text content from an array</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frontend_js_populateUniversityDropdown.js.html">frontend/js/populateUniversityDropdown.js</a>, <a href="frontend_js_populateUniversityDropdown.js.html#line27">line 27</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>dropdown</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>The <select> attribute to fill</p>
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>array</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>An array of strings, each of which will populate one <option> tag</p>
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @namespace manager.account
+ * @description Manager that holds api endpoints and functions working with accounts
+ */
+
+const express = require('express'),
+	cookieParser = require('cookie-parser'),
+	bcrypt = require('bcrypt'),
+	HTTP = require('http-status-codes'),
+	uuidGen = require('uuid'),
+	db = require('../database/db.js'),
+	mailer = require('../service/mailer.js');
+
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+const router = new express.Router();
+router.use(cookieParser());
+
+/**
+ * @memberOf manager.account
+ * @func getUser
+ * @desc Gets the user details based on their session
+ * @param req {Object} express request object
+ * @returns {Promise&lt;user>}
+ */
+function getUser(req) {
+	return new Promise((resolve, reject) => {
+		const token = req.cookies.session;
+
+		db.query('SELECT * FROM users INNER JOIN user_session us ON users.email = us.email WHERE token = $1', [token]).then(dbRes => {
+			if (dbRes.rowCount) {
+				resolve(dbRes.rows[0]);
+			}
+
+			reject();
+		})
+	})
+}
+
+
+/**
+ * @memberOf manager.account
+ * @func /register
+ * @desc Register a user
+ * @param {Object} req express request object
+ * @param {String} req.body.username &lt; 255 chars, unique
+ * @param {String} req.body.email &lt; 255 chars, unique
+ * @param {String} req.body.password
+ * @param {String} req.body.repeatPassword
+ * @param {Object} res express response object
+ */
+router.post('/register', async (req, res) => {
+	const { username, email, password, repeatPassword } = req.body;
+
+	if (!email || !password || !repeatPassword)
+		return res.status(HTTP.BAD_REQUEST).send({error: "Missing parameters (username, email, password, repeatPassword)."});
+
+	if (repeatPassword !== password)
+		return res.status(HTTP.BAD_REQUEST).send({error: "Password does not match with repeat password."});
+
+	if (!EMAIL_REGEX.test(email))
+		return res.status(HTTP.BAD_REQUEST).send({error: "Invalid email address."});
+
+	if (!email.endsWith('.ac.uk'))
+		return res.status(HTTP.BAD_REQUEST).send({error: "Email must be a valid ac.uk address."});
+
+	try {
+		const emailDbRes = await db.query('SELECT email FROM users WHERE email = $1', [email]);
+		if (emailDbRes.rowCount > 0)
+			return res.status(HTTP.BAD_REQUEST).send({error: "Email already in use."});
+
+		const passwordHash = await bcrypt.hash(password, 10);
+		const uuid = uuidGen();
+
+		const insertDbRes = await db.query('INSERT INTO users (username, email, password_hash, verification_token) VALUES ($1, $2, $3, $4)', [username, email, passwordHash, uuid]);
+		if (insertDbRes.rowCount) {
+			mailer.sendMail(email, "Verify email for REVU",
+				`&lt;a href='https://revu.aitken.io/api/v1/account/verify/${uuid}'>Verify your account&lt;/a>`,
+				`https://revu.aitken.io/api/v1/account/verify/${uuid}`);
+
+			return res.status(HTTP.OK).send();
+		}
+	} catch (error) {
+		console.error(error);
+		return res.status(HTTP.INTERNAL_SERVER_ERROR).send();
+	}
+
+	return res.status(HTTP.NOT_FOUND).send();
+});
+
+
+/**
+ * @memberOf manager.account
+ * @func /verify/:token
+ * @desc Verify a users email token
+ * @param {Object} req express request object
+ * @param {String} req.param.token
+ * @param {Object} res express response object
+ */
+router.get('/verify/:token', async (req, res) => {
+	const { token } = req.params;
+
+	try {
+		let emailDbRes = await db.query('SELECT email FROM users WHERE verification_token = $1', [token]);
+		if (emailDbRes.rowCount > 0) {
+			await db.query('UPDATE users SET verification_token = NULL, verified = TRUE WHERE email = $1', [emailDbRes.rows[0].email]);
+			return res.status(HTTP.MOVED_PERMANENTLY).redirect('/');
+		}
+
+		return res.status(HTTP.NOT_FOUND).send({error: "Token not found"});
+	} catch (error) {
+		console.error(error);
+		return res.status(HTTP.INTERNAL_SERVER_ERROR).send();
+	}
+});
+
+
+/**
+ * @memberOf manager.account
+ * @func /login
+ * @desc Login a user
+ * @param {Object} req express request object
+ * @param {String} req.body.email &lt; 255 chars
+ * @param {String} req.body.password
+ * @param {Object} res express response object
+ */
+router.post('/login', (req, res) => {
+	const { email, password } = req.body;
+
+	getUser(req).then(() => {
+		res.status(HTTP.BAD_REQUEST).send('already logged in');
+	}).catch(() => {
+		db.query('SELECT password_hash, verification_token FROM users WHERE email = $1', [email]).then(dbRes => {
+			if (!dbRes.rowCount) {
+				res.status(HTTP.BAD_REQUEST).send({error: 'No account exists with that email.'});
+				return;
+			}
+			const account = dbRes.rows[0];
+
+			// Must be verified to login
+			if (account.verification_token) {
+				res.status(HTTP.UNAUTHORIZED).send({error: 'Account has not been verified.'});
+				return;
+			}
+
+			bcrypt.compare(password, account.password_hash).then(result => {
+				if (result) {
+					let uuid = uuidGen();
+					res.cookie('session', uuid, {});
+
+					db.query('INSERT INTO user_session VALUES ($1, $2, now())', [email, uuid]).then(dbRes => {
+						res.send();
+					}).catch(() => {
+						res.status(HTTP.INTERNAL_SERVER_ERROR).send();
+					});
+				} else {
+					res.status(HTTP.UNAUTHORIZED).send({error: 'Incorrect email or password.'});
+					return;
+				}
+			})
+
+		});
+	});
+});
+
+
+/**
+ * @memberOf manager.account
+ * @func /loggedIn
+ * @desc Check if the user is logged in
+ * @param {Object} req express request object
+ * @param {Object} res express response object
+ */
+router.get('/loggedIn', (req, res) => {
+	getUser(req)
+		.then((user) => res.status(HTTP.OK).send({loggedIn: true, username: user.username}))
+		.catch(() => res.status(HTTP.OK).send({loggedIn: false}));
+});
+
+
+module.exports = {
+	router
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

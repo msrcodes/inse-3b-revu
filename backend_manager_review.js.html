@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Global - Documentation</title>
+    <title>backend/manager/review.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,352 +29,166 @@
 
 <div id="main">
     
-    <h1 class="page-title">Global</h1>
-    
-
-    
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="checkAndRedirect"><span class="type-signature">(async) </span>checkAndRedirect<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Used to check if the user is currently logged in, and redirects the user to the homepage if they're not</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frontend_js_profile.js.html">frontend/js/profile.js</a>, <a href="frontend_js_profile.js.html#line9">line 9</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>Promise.&lt;void></code></span>
-
-
-    </dd>
-</dl>
-
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="populateDropdown"><span class="type-signature"></span>populateDropdown<span class="signature">(dropdown, array)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Used to populate a <select> html tag with <option> tags containing text content from an array</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frontend_js_populateUniversityDropdown.js.html">frontend/js/populateUniversityDropdown.js</a>, <a href="frontend_js_populateUniversityDropdown.js.html#line27">line 27</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>dropdown</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>The <select> attribute to fill</p>
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>array</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>An array of strings, each of which will populate one <option> tag</p>
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+    <h1 class="page-title">backend/manager/review.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @namespace manager.review
+ * @description Manager that holds api endpoints and functions working with reviews
+ */
+
+const express = require('express'),
+  HTTP = require('http-status-codes'),
+  cookieParser = require('cookie-parser'),
+  db = require('../database/db.js'),
+  AuthValidation = require('../middleware/auth.validation');
+  
+const router = new express.Router();
+router.use(cookieParser());
+
+/**
+ * @memberOf manager.review
+ * @function createReview
+ * @param universityID {Integer}
+ * @param degreeID {Integer}
+ * @param userID {Integer}
+ * @param degreeRating {Integer}
+ * @param degreeReview {String}
+ * @param staffRating {Integer}
+ * @param staffReview {String}
+ * @param facilityRating {Integer}
+ * @param facilityReview {String}
+ * @param universityRating {Integer}
+ * @param universityReview {String}
+ * @param accommodationRating {Integer}
+ * @param accommodationReview {String}
+ */
+const createReview = async (universityID, degreeID, userID, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview) => {
+  await db.query(
+    'INSERT INTO review (`uni_id`, `degree_id`, `user_id`, `degree_rating`, `degree_rating_desc`, `staff_rating`, `staff_rating_desc`, `facility_rating`, `facility_rating_desc`, `uni_rating`, `uni_rating_desc`, `accommodation_rating`, `accommodation_rating_desc`) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)', 
+    [
+      universityID,
+      degreeID,
+      userID,
+      degreeRating,
+      degreeReview,
+      staffRating,
+      staffReview,
+      facilityRating,
+      facilityReview,
+      universityRating,
+      universityReview,
+      accommodationRating,
+      accommodationReview
+    ]
+  );
+};
+
+/**
+ * @memberOf manager.review
+ * @function validateReview
+ * @param degreeRating {Integer}
+ * @param degreeReview {String}
+ * @param staffRating {Integer}
+ * @param staffReview {String}
+ * @param facilityRating {Integer}
+ * @param facilityReview {String}
+ * @param universityRating {Integer}
+ * @param universityReview {String}
+ * @param accommodationRating {Integer}
+ * @param accommodationReview {String}
+ */
+const validateReview = (degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview) => {
+  //--- Ratings
+  if (
+    !Number.isInteger(degreeRating) 
+    || !Number.isInteger(staffRating) 
+    || !Number.isInteger(facilityRating) 
+    || !Number.isInteger(universityRating) 
+    || !Number.isInteger(accommodationRating)
+  ) return false;
+
+  //--- Desc
+  if (
+    typeof degreeReview !== typeof ""
+    || (typeof staffReview !== typeof "")
+    || (typeof facilityReview !== typeof "")
+    || (typeof universityReview !== typeof "")
+    || (typeof accommodationReview !== typeof "")
+  ) return false;
+  
+  return true;
+};
+
+/**
+ * @memberOf manager.review
+ * @function getDegreeReviews
+ * @param degreeID {Integer} Degree ID to get all reviews for
+ */
+const getDegreeReviews = (degreeID) => db.query('SELECT * FROM review WHERE degree_id = $1', [degreeID]);
+
+/**
+ * @memberOf manager.review
+ * @function getUniversityReviews
+ * @param universityID {Integer} University ID to get all reviews for
+ */
+const getUniversityReviews = (universityID) => db.query('SELECT * FROM review WHERE uni_id = $1', [universityID]);
+
+/**
+ * @memberOf manager.review
+ * @function /degree/:ID
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
+router.get('/degree/:ID', async (req, res) => {
+  req.params.ID = Number(req.params.ID);
+  const reviews = await getDegreeReviews(req.params.ID);
+  return res.status(HTTP.OK).send(reviews.rows);
+});
+
+/**
+ * @memberOf manager.review
+ * @function /university/:ID
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
+router.get('/university/:ID', async (req, res) => {
+  req.params.ID = Number(req.params.ID);
+  const reviews = await getUniversityReviews(req.params.ID);
+  return res.status(HTTP.OK).send(reviews.rows);
+});
+
+/**
+ * @memberOf manager.review
+ * @function /create
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
+const routerPostCreate = async (req, res) => {
+  const { universityID, degreeID, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview } = req.body;
+
+  //--- Validate &amp; create
+  if (validateReview(degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview)) {
+    await createReview(universityID, degreeID, req.account.user_id, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview);
+    return res.status(HTTP.OK).send();
+  }
+
+  return res.status(HTTP.BAD_REQUEST).send();
+};
+router.post('/create', [AuthValidation.validSessionNeeded, routerPostCreate]);
+
+module.exports = {
+	router
+};</code></pre>
+        </article>
+    </section>
 
 
 

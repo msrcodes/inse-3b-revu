@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Global - Documentation</title>
+    <title>frontend/js/populateUniversityDropdown.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,352 +29,55 @@
 
 <div id="main">
     
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">frontend/js/populateUniversityDropdown.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="checkAndRedirect"><span class="type-signature">(async) </span>checkAndRedirect<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Used to check if the user is currently logged in, and redirects the user to the homepage if they're not</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frontend_js_profile.js.html">frontend/js/profile.js</a>, <a href="frontend_js_profile.js.html#line9">line 9</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>Promise.&lt;void></code></span>
-
-
-    </dd>
-</dl>
-
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="populateDropdown"><span class="type-signature"></span>populateDropdown<span class="signature">(dropdown, array)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Used to populate a <select> html tag with <option> tags containing text content from an array</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frontend_js_populateUniversityDropdown.js.html">frontend/js/populateUniversityDropdown.js</a>, <a href="frontend_js_populateUniversityDropdown.js.html#line27">line 27</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>dropdown</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>The <select> attribute to fill</p>
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>array</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>An array of strings, each of which will populate one <option> tag</p>
-                
-            </td>
-        </tr>
-
     
-    </tbody>
-</table>
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>async function fetchUniversities() {
+	let out = [];
 
+	/** CORS is blocked on the API (why?) so if we want to do this on the client side we need to use a router */
+	const url = "https://cors-anywhere.herokuapp.com/http://universities.hipolabs.com/search?country=United%20Kingdom";
+	const response = await fetch(url);
+	const json = await response.json();
 
+	for (const obj of json) {
+		/** Checking for duplicate entries is necessary as API can return 2 instances of the same university */
+		if (!out.includes(obj.name))
+			out.push(obj.name);
+	}
 
+	/** Sort for visual clarity in dropdowns */
+	out.sort();
 
+	return out;
+}
 
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-    
-
-    
-
-    
-</article>
+/**
+ * Used to populate a &lt;select> html tag with &lt;option> tags containing text content from an array
+ *
+ * @param dropdown The &lt;select> attribute to fill
+ * @param array An array of strings, each of which will populate one &lt;option> tag
+ */
+function populateDropdown(dropdown, array) {
+	for (const i of array) {
+		const elem = document.createElement("option");
+		elem.appendChild(document.createTextNode(i));
+		dropdown.appendChild(elem);
+	}
+}
 
-</section>
+const dropdown = document.querySelector("#university-dropdown");
+window.addEventListener('load', () => fetchUniversities().then(result => populateDropdown(dropdown, result)));
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Global - Documentation</title>
+    <title>backend/manager/degree.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,352 +29,71 @@
 
 <div id="main">
     
-    <h1 class="page-title">Global</h1>
-    
-
-    
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="checkAndRedirect"><span class="type-signature">(async) </span>checkAndRedirect<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Used to check if the user is currently logged in, and redirects the user to the homepage if they're not</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frontend_js_profile.js.html">frontend/js/profile.js</a>, <a href="frontend_js_profile.js.html#line9">line 9</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>Promise.&lt;void></code></span>
-
-
-    </dd>
-</dl>
-
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="populateDropdown"><span class="type-signature"></span>populateDropdown<span class="signature">(dropdown, array)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Used to populate a <select> html tag with <option> tags containing text content from an array</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frontend_js_populateUniversityDropdown.js.html">frontend/js/populateUniversityDropdown.js</a>, <a href="frontend_js_populateUniversityDropdown.js.html#line27">line 27</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>dropdown</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>The <select> attribute to fill</p>
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>array</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <p>An array of strings, each of which will populate one <option> tag</p>
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+    <h1 class="page-title">backend/manager/degree.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @namespace manager.degree
+ * @description Manager that holds api endpoints and functions working with degrees
+ */
+
+const express = require('express'),
+	HTTP = require('http-status-codes'),
+	db = require('../database/db.js');
+
+const router = new express.Router();
+
+
+/**
+ * @memberOf manager.degree
+ * @function /degree/degreeNames
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
+router.get('/degreeNames', (req, res) => {
+	db.query('SELECT degree_name from degree').then(dbRes => {
+		res.send(dbRes.rows)
+	}).catch(() => {
+		res.status(HTTP.INTERNAL_SERVER_ERROR).send();
+	})
+});
+
+
+/**
+ * @memberOf manager.degree
+ * @function /degree/:degreeId
+ * @param req {Object} express request object
+ * @param req.params.degreeId {String} The id of the degree to return
+ * @param res {Object} express response object
+ */
+router.get('/:degreeId', (req, res) => {
+	const degreeId = req.params.degreeId;
+
+	db.query('SELECT * FROM degree INNER JOIN uni_degree ud ON degree.degree_id = ud.degree_id WHERE degree.degree_id = $1', [degreeId]).then(dbRes => {
+		if (dbRes.rowCount) {
+			res.send(dbRes.rows[0]);
+		} else {
+			res.status(HTTP.NOT_FOUND).send();
+		}
+	}).catch(() => {
+		res.status(HTTP.INTERNAL_SERVER_ERROR).send();
+	})
+});
+
+
+module.exports = {
+	router
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

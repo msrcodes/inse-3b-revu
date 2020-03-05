@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Global - Documentation</title>
+    <title>degree - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">degree</h1>
     
 
     
@@ -42,7 +42,7 @@
 <header>
     
         <h2>
-        
+        degree
         </h2>
         
     
@@ -51,6 +51,8 @@
 <article>
     <div class="container-overview">
     
+        
+            <div class="description"><p>Manager that holds api endpoints and functions working with degrees</p></div>
         
 
         
@@ -82,6 +84,11 @@
 
     
 
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_manager_degree.js.html">backend/manager/degree.js</a>, <a href="backend_manager_degree.js.html#line1">line 1</a>
+    </li></ul></dd>
     
 
     
@@ -117,15 +124,11 @@
 
     
 
-    <h4 class="name" id="checkAndRedirect"><span class="type-signature">(async) </span>checkAndRedirect<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+    <h4 class="name" id="./degree/:degreeId"><span class="type-signature">(static) </span>/degree/:degreeId<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
 
     
 
 
-
-<div class="description">
-    <p>Used to check if the user is currently logged in, and redirects the user to the homepage if they're not</p>
-</div>
 
 
 
@@ -160,111 +163,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frontend_js_profile.js.html">frontend/js/profile.js</a>, <a href="frontend_js_profile.js.html#line9">line 9</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>Promise.&lt;void></code></span>
-
-
-    </dd>
-</dl>
-
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="populateDropdown"><span class="type-signature"></span>populateDropdown<span class="signature">(dropdown, array)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Used to populate a <select> html tag with <option> tags containing text content from an array</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="frontend_js_populateUniversityDropdown.js.html">frontend/js/populateUniversityDropdown.js</a>, <a href="frontend_js_populateUniversityDropdown.js.html#line27">line 27</a>
+        <a href="backend_manager_degree.js.html">backend/manager/degree.js</a>, <a href="backend_manager_degree.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -308,10 +207,15 @@
 
         <tr>
             
-                <td class="name"><code>dropdown</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type"><code>Object</code></span>
+
+
             
             </td>
 
@@ -320,7 +224,58 @@
             
 
             <td class="description last">
-                <p>The <select> attribute to fill</p>
+                <p>express request object</p>
+                
+                    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>params.degreeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>String</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>The id of the degree to return</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
                 
             </td>
         </tr>
@@ -329,10 +284,15 @@
 
         <tr>
             
-                <td class="name"><code>array</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type"><code>Object</code></span>
+
+
             
             </td>
 
@@ -341,7 +301,164 @@
             
 
             <td class="description last">
-                <p>An array of strings, each of which will populate one <option> tag</p>
+                <p>express response object</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="./degree/degreeNames"><span class="type-signature">(static) </span>/degree/degreeNames<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_manager_degree.js.html">backend/manager/degree.js</a>, <a href="backend_manager_degree.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Object</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>express request object</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Object</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>express response object</p>
                 
             </td>
         </tr>
