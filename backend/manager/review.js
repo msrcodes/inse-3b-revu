@@ -8,30 +8,30 @@ const express = require('express'),
   cookieParser = require('cookie-parser'),
   db = require('../database/db.js'),
   AuthValidation = require('../middleware/auth.validation');
-  
+
 const router = new express.Router();
 router.use(cookieParser());
 
 /**
  * @memberOf manager.review
  * @function createReview
- * @param universityID {Integer}
- * @param degreeID {Integer}
- * @param userID {Integer}
- * @param degreeRating {Integer}
+ * @param universityID {Number}
+ * @param degreeID {Number}
+ * @param userID {Number}
+ * @param degreeRating {Number}
  * @param degreeReview {String}
- * @param staffRating {Integer}
+ * @param staffRating {Number}
  * @param staffReview {String}
- * @param facilityRating {Integer}
+ * @param facilityRating {Number}
  * @param facilityReview {String}
- * @param universityRating {Integer}
+ * @param universityRating {Number}
  * @param universityReview {String}
- * @param accommodationRating {Integer}
+ * @param accommodationRating {Number}
  * @param accommodationReview {String}
  */
 const createReview = async (universityID, degreeID, userID, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview) => {
   await db.query(
-    'INSERT INTO review (`uni_id`, `degree_id`, `user_id`, `degree_rating`, `degree_rating_desc`, `staff_rating`, `staff_rating_desc`, `facility_rating`, `facility_rating_desc`, `uni_rating`, `uni_rating_desc`, `accommodation_rating`, `accommodation_rating_desc`) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)', 
+    'INSERT INTO review (`uni_id`, `degree_id`, `user_id`, `degree_rating`, `degree_rating_desc`, `staff_rating`, `staff_rating_desc`, `facility_rating`, `facility_rating_desc`, `uni_rating`, `uni_rating_desc`, `accommodation_rating`, `accommodation_rating_desc`) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
     [
       universityID,
       degreeID,
@@ -53,24 +53,24 @@ const createReview = async (universityID, degreeID, userID, degreeRating, degree
 /**
  * @memberOf manager.review
  * @function validateReview
- * @param degreeRating {Integer}
+ * @param degreeRating {Number}
  * @param degreeReview {String}
- * @param staffRating {Integer}
+ * @param staffRating {Number}
  * @param staffReview {String}
- * @param facilityRating {Integer}
+ * @param facilityRating {Number}
  * @param facilityReview {String}
- * @param universityRating {Integer}
+ * @param universityRating {Number}
  * @param universityReview {String}
- * @param accommodationRating {Integer}
+ * @param accommodationRating {Number}
  * @param accommodationReview {String}
  */
 const validateReview = (degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview) => {
   //--- Ratings
   if (
-    !Number.isInteger(degreeRating) 
-    || !Number.isInteger(staffRating) 
-    || !Number.isInteger(facilityRating) 
-    || !Number.isInteger(universityRating) 
+    !Number.isInteger(degreeRating)
+    || !Number.isInteger(staffRating)
+    || !Number.isInteger(facilityRating)
+    || !Number.isInteger(universityRating)
     || !Number.isInteger(accommodationRating)
   ) return false;
 
@@ -82,21 +82,21 @@ const validateReview = (degreeRating, degreeReview, staffRating, staffReview, fa
     || (typeof universityReview !== typeof "")
     || (typeof accommodationReview !== typeof "")
   ) return false;
-  
+
   return true;
 };
 
 /**
  * @memberOf manager.review
  * @function getDegreeReviews
- * @param degreeID {Integer} Degree ID to get all reviews for
+ * @param degreeID {Number} Degree ID to get all reviews for
  */
 const getDegreeReviews = (degreeID) => db.query('SELECT * FROM review WHERE degree_id = $1', [degreeID]);
 
 /**
  * @memberOf manager.review
  * @function getUniversityReviews
- * @param universityID {Integer} University ID to get all reviews for
+ * @param universityID {Number} University ID to get all reviews for
  */
 const getUniversityReviews = (universityID) => db.query('SELECT * FROM review WHERE uni_id = $1', [universityID]);
 
