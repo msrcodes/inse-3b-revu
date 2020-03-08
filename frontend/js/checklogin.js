@@ -6,17 +6,16 @@ async function checkLoginStatus() {
 	const response = await fetch('api/v1/account/loggedIn');
 
 	if (response.ok) {
-		const obj = await response.json();
-		return obj.loggedIn;
+		return await response.json();
 	} else {
 		console.log('unable to retrieve login status', response); // TODO: proper error handling
 	}
 	return false;
 }
 
-function updateStatus(loggedin) {
-	if (loggedin) {
-		loginHandles.status.textContent = "USERNAME GOES HERE"; // TODO
+function updateStatus(obj) {
+	if (obj.loggedIn) {
+		loginHandles.status.textContent = obj.username; // TODO
 		loginHandles.link.href = "profile.html";
 	} else {
 		loginHandles.status.textContent = "Log In";
@@ -31,8 +30,8 @@ function getLoginHandles() {
 
 async function onPageLoad() {
 	getLoginHandles();
-	const loggedin = await checkLoginStatus();
-	updateStatus(loggedin);
+	const obj = await checkLoginStatus();
+	updateStatus(obj);
 }
 
 window.addEventListener('load', onPageLoad);

@@ -22,6 +22,8 @@ async function postLoginRequest() {
 		// redirect to profile page
 		window.location = "/profile";
 	} else {
+		const json = await response.json();
+		handles.error.textContent = json.error;
 		console.log('failed to log in', response);	// TODO: better error handling
 	}
 }
@@ -30,6 +32,7 @@ function getHandles() {
 	handles.email = document.querySelector("#email");
 	handles.password = document.querySelector("#password");
 	handles.submit = document.querySelector("#btn-log-in");
+	handles.error = document.querySelector(".error");
 }
 
 function addEventListeners() {

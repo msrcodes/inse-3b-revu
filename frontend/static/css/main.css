@@ -196,6 +196,11 @@ main {
 	font-family: var(--font-family-body);
 }
 
+.icon-form > .error {
+	grid-column: span 2;
+	color: #E74C3C;
+}
+
 .card-stack {
 	display: grid;
 	grid-template-columns: 1fr;
