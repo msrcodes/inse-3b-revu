@@ -65,25 +65,12 @@ const createReview = async (universityID, degreeID, userID, degreeRating, degree
  * @param accommodationReview {String}
  */
 const validateReview = (degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview) => {
-  //--- Ratings
-  if (
-    !Number.isInteger(degreeRating)
-    || !Number.isInteger(staffRating)
-    || !Number.isInteger(facilityRating)
-    || !Number.isInteger(universityRating)
-    || !Number.isInteger(accommodationRating)
-  ) return false;
-
   //--- Desc
-  if (
-    typeof degreeReview !== typeof ""
-    || (typeof staffReview !== typeof "")
-    || (typeof facilityReview !== typeof "")
-    || (typeof universityReview !== typeof "")
-    || (typeof accommodationReview !== typeof "")
-  ) return false;
-
-  return true;
+  return !(typeof degreeReview !== typeof ""
+	  || (typeof staffReview !== typeof "")
+	  || (typeof facilityReview !== typeof "")
+	  || (typeof universityReview !== typeof "")
+	  || (typeof accommodationReview !== typeof ""));
 };
 
 /**
