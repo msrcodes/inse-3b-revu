@@ -396,6 +396,21 @@ body > header > h1 {
 	border-bottom: 1px solid #707070;
 }
 
+#page-header-content > * {
+	justify-self: left;
+}
+
+#profile-header-buttons {
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 1fr;
+}
+
+#profile-header-buttons > * {
+	margin: auto;
+	justify-self: right;
+}
+
 #profile-header h2 {
 	padding: 0;
 }
@@ -408,10 +423,6 @@ body > header > h1 {
 	display: flex;
 	flex-direction: column;
 	margin: auto 1em;
-}
-
-#profile-header-buttons {
-	margin: auto;
 }
 
 #profile-reviews {

@@ -10,9 +10,13 @@ async function checkAndRedirect() {
 	const response = await fetch('api/v1/account/loggedIn');
 
 	if (response.ok) {
-		const obj = await response.json();
-		if (!obj.loggedIn)
-			window.location = "/";
+		const status = await response.json();
+
+		if (status.loggedIn) {
+			handles.username.textContent = status.username;
+		} else {
+			window.location = "/login";
+		}
 	} else {
 		console.log('unable to retrieve login status', response); // TODO: proper error handling
 	}
@@ -31,6 +35,7 @@ async function logout() {
 
 function getHandles() {
 	handles.btnLogout = document.querySelector("#btn-logout");
+	handles.username = document.querySelector("#profile-header-info-username");
 }
 
 function addEventListeners() {
@@ -38,8 +43,8 @@ function addEventListeners() {
 }
 
 function onLoad() {
+	getHandles();
 	checkAndRedirect().then(() => {
-		getHandles();
 		addEventListeners();
 	});
 }
