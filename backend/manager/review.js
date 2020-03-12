@@ -131,5 +131,6 @@ const routerPostCreate = async (req, res) => {
 router.post('/create', [AuthValidation.validSessionNeeded, routerPostCreate]);
 
 module.exports = {
-	router
+  router,
+  validateReview
 };
