@@ -200,27 +200,34 @@ router.post('/setEmail', async (req, res) => {
 	if (!email.endsWith('.ac.uk'))
 		return res.status(HTTP.BAD_REQUEST).send({error: "Email must be a valid ac.uk address."});
 
-	db.query('SELECT password_hash FROM users WHERE user_id = $1', [user_id]).then(dbRes => {
-		if (!dbRes.rowCount) {
-			res.status(HTTP.BAD_REQUEST).send({error: 'No account exists with that user_id.'});
-			return;
-		}
-		const account = dbRes.rows[0];
+	try {
+		const emailDbRes = await db.query('SELECT email FROM users WHERE email = $1', [email]);
+		if (emailDbRes.rowCount > 0)
+			return res.status(HTTP.BAD_REQUEST).send({error: "Email already in use."});
 
-		bcrypt.compare(password, account.password_hash).then(result => {
-			if (result) {
-
-				db.query('UPDATE users SET email = $1 WHERE user_id = $2', [email, user_id]).then(dbRes => {
-					res.send();
-				}).catch(() => {
-					res.status(HTTP.INTERNAL_SERVER_ERROR).send();
-				});
-			} else {
-				res.status(HTTP.UNAUTHORIZED).send({error: 'Incorrect password.'});
+		db.query('SELECT password_hash FROM users WHERE user_id = $1', [user_id]).then(dbRes => {
+			if (!dbRes.rowCount) {
+				res.status(HTTP.BAD_REQUEST).send({error: 'No account exists with that user_id.'});
 				return;
 			}
-		})
-	});
+			const account = dbRes.rows[0];
+
+			bcrypt.compare(password, account.password_hash).then(result => {
+				if (result) {
+
+					db.query('UPDATE users SET email = $1 WHERE user_id = $2', [email, user_id]).then(dbRes => {
+						res.send();
+					});
+				} else {
+					res.status(HTTP.UNAUTHORIZED).send({error: 'Incorrect password.'});
+					return;
+				}
+			})
+		});
+	} catch (error) {
+		console.error(error);
+		return res.status(HTTP.INTERNAL_SERVER_ERROR).send();
+	}
 });
 
 
