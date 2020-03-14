@@ -52,7 +52,7 @@ function getUser(req) {
 router.post('/register', async (req, res) => {
 	const { username, email, password, repeatPassword } = req.body;
 
-	if (!email || !password || !repeatPassword)
+	if (!username || !email || !password || !repeatPassword)
 		return res.status(HTTP.BAD_REQUEST).send({error: "Missing parameters (username, email, password, repeatPassword)."});
 
 	if (repeatPassword !== password)
@@ -175,6 +175,52 @@ router.get('/loggedIn', (req, res) => {
 	getUser(req)
 		.then((user) => res.status(HTTP.OK).send({loggedIn: true, username: user.username}))
 		.catch(() => res.status(HTTP.OK).send({loggedIn: false}));
+});
+
+
+/**
+ * @memberOf manager.account
+ * @func /setEmail
+ * @desc Change a users email address
+ * @param {Object} req express request object
+ * @param {String} req.body.user_id
+ * @param {String} req.body.email
+ * @param {String} req.body.password
+ * @param {Object} res express response object
+ */
+router.post('/setEmail', async (req, res) => {
+	const { user_id, email, password } = req.body;
+
+	if (!user_id || !email || !password)
+		return res.status(HTTP.BAD_REQUEST).send({error: "Missing parameters (user_id, email, password)."});
+
+	if (!EMAIL_REGEX.test(email))
+		return res.status(HTTP.BAD_REQUEST).send({error: "Invalid email address."});
+
+	if (!email.endsWith('.ac.uk'))
+		return res.status(HTTP.BAD_REQUEST).send({error: "Email must be a valid ac.uk address."});
+
+	db.query('SELECT password_hash FROM users WHERE user_id = $1', [user_id]).then(dbRes => {
+		if (!dbRes.rowCount) {
+			res.status(HTTP.BAD_REQUEST).send({error: 'No account exists with that user_id.'});
+			return;
+		}
+		const account = dbRes.rows[0];
+
+		bcrypt.compare(password, account.password_hash).then(result => {
+			if (result) {
+
+				db.query('UPDATE users SET email = $1 WHERE user_id = $2', [email, user_id]).then(dbRes => {
+					res.send();
+				}).catch(() => {
+					res.status(HTTP.INTERNAL_SERVER_ERROR).send();
+				});
+			} else {
+				res.status(HTTP.UNAUTHORIZED).send({error: 'Incorrect password.'});
+				return;
+			}
+		})
+	});
 });
 
 
