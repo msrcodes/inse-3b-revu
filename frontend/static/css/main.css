@@ -472,6 +472,72 @@ body > header > h1 {
 	padding:0 2em;
 }
 
+/* Search result page styling */
+.filters-search {
+	display: grid;
+	grid-template-columns: 2fr 9fr;
+	grid-template-rows: auto;
+
+	grid-column-gap: 4em;
+}
+
+#results {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-auto-rows: auto auto;
+
+	grid-template-areas: "info label select"
+						 "results results results";
+
+	align-items: center;
+}
+
+#results h2 {
+	grid-area: info;
+}
+
+#results label {
+	grid-area: label;
+	color: var(--colour-font-heading);
+	font-weight: bold;
+	justify-self: end;
+	margin-right: 1em;
+}
+
+#results select {
+	grid-area: select;
+}
+
+#results-container {
+	grid-area: results;
+	height: 73vh;
+
+	list-style: none;
+
+	margin-top: 1em;
+
+	display: grid;
+	grid-auto-columns: 100%;
+	grid-auto-rows: 2em;
+
+	row-gap: 2em;
+
+	overflow-y: scroll;
+}
+
+#results-container li {
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	grid-template-rows: auto;
+
+	align-items: center; /* vertical center */
+}
+
+.result-main {
+	color: var(--colour-font-heading);
+	font-weight: bold;
+}
+
 /* Media queries */
 
 @media screen and (max-width: 900px) {

@@ -20,10 +20,33 @@
 		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
 	</a>
 </header>
-<main>
-
+<main class="filters-search">
+	<nav class="card">
+		<h2>Filters</h2>
+	</nav>
+	<section class="card" id="results">
+		<h2 id="info">No results found</h2>
+		<label for="sort">Sort By</label>
+		<select name="sort" id="sort">
+			<option value="Alphabetical (A -> Z)">Alphabetical (A -> Z)</option>
+			<option value="Alphabetical (Z -> A)">Alphabetical (Z -> A)</option>
+			<option value="Entry Requirements (Low to High)">Entry Requirements (Low to High)</option>
+			<option value="Entry Requirements (High to Low)">Entry Requirements (High to Low)</option>
+		</select>
+		<ol id="results-container">
+			<template id="li-template">
+				<li>
+					<span class="result-main"></span>
+					<span class="result-sub"></span>
+					<span class="result-rating"></span>
+					<button class="btn--default">View</button>
+				</li>
+			</template>
+		</ol>
+	</section>
 </main>
 <script src="js/checklogin.js"></script>
 <script src="js/searchHandler.js"></script>
+<script src="js/searchResults.js"></script>
 </body>
 </html>
