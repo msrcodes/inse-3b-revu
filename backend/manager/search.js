@@ -32,7 +32,7 @@ function getCacheId(query) {
 	return query.text + query.type +
 		query.ucas + query.category +
 		query.level + query.studyType +
-		query.sandwich; // TODO this better
+		query.sandwich;
 }
 
 
@@ -118,7 +118,7 @@ async function getSearchResults(query) {
 
 		let degreeDbRes = await db.query(dbQuery, params);
 
-		results = results.concat(degreeDbRes.rows);
+		results = degreeDbRes.rows
 
 	}
 
@@ -133,10 +133,9 @@ async function getSearchResults(query) {
 			`inner join university as u on ud.uni_id = u.uni_id ` +
 			`inner join degree as d on ud.degree_id = d.degree_id `;
 
-		if (text) {
-			dbQuery += `where d.degree_name ILIKE $${paramNumber++} `;
-			params.push(`%${text}%`);
-		}
+
+		dbQuery += `where d.degree_name ILIKE $${paramNumber++} `;
+		params.push(`%${text}%`);
 
 		if (ucas !== 0) {
 			dbQuery += `AND ud.requirements_ucas <= $${paramNumber++} `;
@@ -160,7 +159,7 @@ async function getSearchResults(query) {
 
 		if (sandwich !== 'all') {
 			dbQuery += `AND ud.degree_sandwich = $${paramNumber++} `;
-			params.push(sandwich);
+			params.push(sandwich === 'yes');
 		}
 
 		dbQuery += `limit 20`;
@@ -203,7 +202,7 @@ router.get('/', async (req, res) => {
 	checkCacheForSearchTerm(query).then(results => {
 		res.send(results);
 	}).catch(async () => {
-		const results = await getSearchResults(query); // TODO actually get results
+		const results = await getSearchResults(query);
 
 		res.send(results);
 		cacheSearchTerm(query, results);
