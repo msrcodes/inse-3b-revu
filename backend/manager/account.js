@@ -149,9 +149,9 @@ router.post('/login', (req, res) => {
 					res.cookie('session', uuid, {});
 
 					db.query('INSERT INTO user_session VALUES ($1, $2, now())', [email, uuid]).then(dbRes => {
-						res.send();
+						res.send({});
 					}).catch(() => {
-						res.status(HTTP.INTERNAL_SERVER_ERROR).send();
+						res.status(HTTP.INTERNAL_SERVER_ERROR).send({});
 					});
 				} else {
 					res.status(HTTP.UNAUTHORIZED).send({error: 'Incorrect email or password.'});
