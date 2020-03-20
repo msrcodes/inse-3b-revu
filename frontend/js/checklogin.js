@@ -16,16 +16,22 @@ async function checkLoginStatus() {
 function updateStatus(obj) {
 	if (obj.loggedIn) {
 		loginHandles.status.textContent = obj.username; // TODO
-		loginHandles.link.href = "profile.html";
+		loginHandles.link.href = "profile";
+
+		loginHandles.reviewBtn.href = "createReview";
 	} else {
 		loginHandles.status.textContent = "Log In";
 		loginHandles.link.href = "login";
+
+		loginHandles.reviewBtn.href = "login";
 	}
 }
 
 function getLoginHandles() {
 	loginHandles.status = document.querySelector("#username-profile-status");
 	loginHandles.link = document.querySelector("#profile-a-link");
+
+	loginHandles.reviewBtn = document.querySelector("#a-writereview");
 }
 
 async function onPageLoad() {
