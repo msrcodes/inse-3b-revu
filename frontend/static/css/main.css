@@ -231,7 +231,7 @@ body > header > * {
 	align-self: center;
 }
 
-body > header > h1 {
+body > header h1 {
 	grid-area: logo;
 
 	font-family: var(--font-family-logo);
@@ -239,6 +239,10 @@ body > header > h1 {
 	color: var(--colour-font-logo);
 
 	padding: 0.5em 1em;
+}
+
+body > header a {
+	text-decoration: none;
 }
 
 #btn-writereview {
