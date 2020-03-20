@@ -4,6 +4,30 @@ function get() {
 	return sessionStorage.getItem('results');
 }
 
+function compareByName(a, b) {
+	if (a.uni_name < b.uni_name) {
+		return -1;
+	}
+
+	if (a.uni_name > b.uni_name) {
+		return 1;
+	}
+
+	return 0;
+}
+
+function sort(results) {
+	const val = elems.sort.value;
+
+	if (val === "alpha_desc") {
+		return results.sort(compareByName);
+	} else if (val === "alpha_asc") {
+		return results.sort(compareByName).reverse();
+	}
+
+	return results;
+}
+
 function populate() {
 	let results = get();
 
@@ -13,6 +37,9 @@ function populate() {
 
 	// get JS object
 	results = JSON.parse(results);
+
+	// sort
+	results = sort(results);
 
 	// populate info
 	if (results.length === 1) {
@@ -36,12 +63,24 @@ function populate() {
 	}
 }
 
+function addEventListeners() {
+	elems.sort.addEventListener('change', () => {
+		const container = document.querySelector("#results-container");
+
+		container.innerHTML = "";
+
+		populate();
+	});
+}
+
 function getElems() {
 	elems.info = document.querySelector("#info");
+	elems.sort = document.querySelector("#sort");
 }
 
 function onLoad() {
 	getElems();
+	addEventListeners();
 	populate();
 }
 
