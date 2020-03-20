@@ -531,10 +531,18 @@ body > header a {
 
 #results-container li {
 	display: grid;
-	grid-template-columns: auto auto auto auto;
+	grid-template-columns: auto auto auto 5em;
 	grid-template-rows: auto;
 
 	align-items: center; /* vertical center */
+
+	padding: 0.5em 0;
+
+	margin-right: 0.5em;
+}
+
+#results-container li button {
+	padding: 0.5em 0;
 }
 
 .result-main {
