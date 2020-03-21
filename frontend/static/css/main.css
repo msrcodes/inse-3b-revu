@@ -231,7 +231,7 @@ body > header > * {
 	align-self: center;
 }
 
-body > header > h1 {
+body > header h1 {
 	grid-area: logo;
 
 	font-family: var(--font-family-logo);
@@ -239,6 +239,10 @@ body > header > h1 {
 	color: var(--colour-font-logo);
 
 	padding: 0.5em 1em;
+}
+
+body > header a {
+	text-decoration: none;
 }
 
 #btn-writereview {
@@ -527,10 +531,29 @@ body > header > h1 {
 
 #results-container li {
 	display: grid;
-	grid-template-columns: auto auto auto auto;
+	grid-template-columns: auto auto auto 5em;
 	grid-template-rows: auto;
 
 	align-items: center; /* vertical center */
+
+	padding: 0.7em 0;
+
+	margin-right: 0.5em;
+	height: 100%;
+
+	border-bottom: 1px solid darkgrey;
+	border-collapse: collapse;
+
+	transition: background 0.2s linear;
+}
+
+#results-container li:hover {
+	background: rgba(0, 0, 0, 0.3);
+	transition: background 0.05s linear;
+}
+
+#results-container li button {
+	padding: 0.5em 0;
 }
 
 .result-main {
