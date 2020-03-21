@@ -25,6 +25,7 @@ const cache = {}; // Const as the pointer to the object will never change
  * @param query.level {String} The level of study; “All”, “foundation”, “undergraduate”, “postgraduate”
  * @param query.studyType {String} The type of study time; “all”, “part”, “full”
  * @param query.sandwich {String} Whether the course is a sandwich; yes, no, any
+ * @param query.pageNo {Number} Page number
  *
  * @return Promise<String>
  */
@@ -32,7 +33,7 @@ function getCacheId(query) {
 	return query.text + query.type +
 		query.ucas + query.category +
 		query.level + query.studyType +
-		query.sandwich;
+		query.sandwich + query.pageNo;
 }
 
 
@@ -48,6 +49,7 @@ function getCacheId(query) {
  * @param query.level {String} The level of study; “all”, “foundation”, “undergraduate”, “postgraduate”
  * @param query.studyType {String} The type of study time; “all”, “part”, “full”
  * @param query.sandwich {String} Whether the course is a sandwich; yes, no, all
+ * @param query.pageNo {Number} Page number
  * @param results {Array} Array of results
  */
 function cacheSearchTerm(query, results) {
@@ -68,6 +70,7 @@ function cacheSearchTerm(query, results) {
  * @param query.level {String} The level of study; “all”, “foundation”, “undergraduate”, “postgraduate”
  * @param query.studyType {String} The type of study time; “all”, “part”, “full”
  * @param query.sandwich {String} Whether the course is a sandwich; yes, no, all
+ * @param query.pageNo {Number} Page number
  * @return {Object} searchResults object
  */
 async function checkCacheForSearchTerm(query) {
@@ -96,43 +99,35 @@ async function checkCacheForSearchTerm(query) {
  * @param query.level {String} The level of study; “all”, “foundation”, “undergraduate”, “postgraduate”
  * @param query.studyType {String} The type of study time; “all”, “part”, “full”
  * @param query.sandwich {String} Whether the course is a sandwich; yes, no, all
+ * @param query.pageNo {Number} Page number
  * @return {Object} searchResults object
  */
 async function getSearchResults(query) {
-	const {text, type, ucas, category, level, studyType, sandwich} = query;
+	const {text, type, ucas, category, level, studyType, sandwich, pageNo} = query;
 
-	let dbQuery = ``;
-	let params = [];
-	let paramNumber = 1;
+	let result = {totalCount: 0, count: 0, rows: []};
+
 	let results = [];
+
 
 	if (type !== 'degree') {
 
-		dbQuery += `select * from university `;
-		if (text) {
-			dbQuery += `where uni_name ILIKE $1 `;
-			params.push(`%${text}%`);
-		}
+		let uniRes = await db.query(`select * from university where uni_name ILIKE $1 order by university.uni_name`, [`%${text}%`]);
 
-		dbQuery += `limit 20`;
-
-		let degreeDbRes = await db.query(dbQuery, params);
-
-		results = degreeDbRes.rows
-
+		results = uniRes.rows;
 	}
 
-	dbQuery = ``;
-	params = [];
-	paramNumber = 1;
 
 	if (type !== 'uni') {
+		let dbQuery = ``;
+		let params = [];
+		let paramNumber = 1;=
+
 		dbQuery += `select u.uni_name, u.uni_id, d.degree_id, d.degree_name, ud.requirements_ucas, ud.requirements_grades, ` +
 			`ud.degree_category, ud.degree_level, ud.degree_type, ud.degree_sandwich ` +
 			`from uni_degree as ud ` +
 			`inner join university as u on ud.uni_id = u.uni_id ` +
 			`inner join degree as d on ud.degree_id = d.degree_id `;
-
 
 		dbQuery += `where d.degree_name ILIKE $${paramNumber++} `;
 		params.push(`%${text}%`);
@@ -162,13 +157,30 @@ async function getSearchResults(query) {
 			params.push(sandwich === 'yes');
 		}
 
-		dbQuery += `limit 20`;
+
+		dbQuery += `order by d.degree_name`;
 
 		let uniDbRes = await db.query(dbQuery, params);
 
 		results = results.concat(uniDbRes.rows);
 	}
-	return results
+
+	result.totalCount = results.length;
+
+	let numberPerPage = 20;
+
+	if (parseInt(pageNo) <= Math.ceil(result.totalCount/numberPerPage)) {
+
+		result.rows = results.slice(numberPerPage*(pageNo-1), numberPerPage*(pageNo));
+
+	} else {
+		result.rows = results.slice(0, numberPerPage);
+	}
+
+	result.count = result.rows.length;
+
+
+	return result
 }
 
 
@@ -185,14 +197,19 @@ async function getSearchResults(query) {
  * @param req.query.level {String} The level of study; “all”, “foundation”, “undergraduate”, “postgraduate”
  * @param req.query.studyType {String} The type of study time; “all”, “part”, “full”
  * @param req.query.sandwich {String} Whether the course is a sandwich; yes, no, all
+ * @param query.pageNo {Number} Page number
  * @param {Object} res express response object
  */
 router.get('/', async (req, res) => {
 	const query = req.query;
-	const {text, type, ucas, category, level, studyType, sandwich} = query;
+	const {text, type, ucas, category, level, studyType, sandwich, pageNo} = query;
 
-	if (text === undefined || !(type && ucas && category && level && studyType && sandwich)) {
+	if (text === undefined || !(type && ucas && category && level && studyType && sandwich && pageNo)) {
 		return res.status(HTTP.BAD_REQUEST).send('Must have all required query fields');
+	}
+
+	if (text === "") {
+		return res.send([]);
 	}
 
 	if (ucas > 200 || ucas < 0) {
