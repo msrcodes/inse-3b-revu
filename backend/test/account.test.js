@@ -101,4 +101,4 @@ describe('validate /loggedIn', () => {
 			})
 		})
 	})
-})
+});

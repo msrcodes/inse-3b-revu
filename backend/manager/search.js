@@ -128,7 +128,7 @@ async function getSearchResults(query) {
 		dbQuery += `where d.degree_name ILIKE $${paramNumber++} `;
 		params.push(`%${text}%`);
 
-		if (ucas !== 0) {
+		if (ucas !== 0 && ucas !== "0") {
 			dbQuery += `AND ud.requirements_ucas <= $${paramNumber++} `;
 			params.push(ucas);
 		}
