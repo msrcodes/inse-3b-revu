@@ -99,6 +99,12 @@ router.get('/degree/:ID', async (req, res) => {
   return res.status(HTTP.OK).send(reviews.rows);
 });
 
+router.get('/degree/:ID/average', async (req, res) => {
+  req.params.ID = Number(req.params.ID);
+  const data = await db.query('SELECT AVG(degree_rating) AS avg_degree_rating, AVG(staff_rating) AS avg_staff_rating, AVG(facility_rating) AS avg_facility_rating, AVG(uni_rating) AS avg_uni_rating, AVG(accommodation_rating) AS avg_accommodation_rating FROM review WHERE degree_id = $1', [req.params.ID]);
+  return res.status(HTTP.OK).send(data.rows[0]);
+});
+
 /**
  * @memberOf manager.review
  * @function /university/:ID
@@ -109,6 +115,12 @@ router.get('/university/:ID', async (req, res) => {
   req.params.ID = Number(req.params.ID);
   const reviews = await getUniversityReviews(req.params.ID);
   return res.status(HTTP.OK).send(reviews.rows);
+});
+
+router.get('/university/:ID/average', async (req, res) => {
+  req.params.ID = Number(req.params.ID);
+  const data = await db.query('SELECT AVG(degree_rating) AS avg_degree_rating, AVG(staff_rating) AS avg_staff_rating, AVG(facility_rating) AS avg_facility_rating, AVG(uni_rating) AS avg_uni_rating, AVG(accommodation_rating) AS avg_accommodation_rating FROM review WHERE uni_id = $1', [req.params.ID]);
+  return res.status(HTTP.OK).send(data.rows[0]);
 });
 
 /**
