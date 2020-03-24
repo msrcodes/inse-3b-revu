@@ -89,7 +89,7 @@ main {
 	border: 3px solid var(--colour-border-button-positive-hover);
 }
 
-.card {
+.card, .review-card {
 	width: 100%;
 	padding: 1em;
 	border-radius: 33px;
@@ -141,7 +141,7 @@ main {
 }
 
 .view-more-buttons { /* TODO: could this be achieved in a better way?*/
-	display: flex;  /* Im not sure if these are even needed, I added them as they're in the ui mockups */
+	display: flex;
 	justify-content: center;
 }
 
@@ -212,6 +212,10 @@ main {
 	display: grid;
 	grid-template-rows: 0fr 2fr 1fr;
 	grid-template-columns: 1fr 1fr;
+}
+
+#university > .grid-layout {
+	grid-template-rows: 0fr 2fr 0.25fr;
 }
 /* Header styling */
 
@@ -441,11 +445,35 @@ body > header a {
 
 /* University info styling */
 
+#reviews {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.review-template {
+	width: 90%;
+	padding: 0 2em;
+}
+
+#review-box {
+	display: inline-grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+}
+
+.review-card {
+ width: 90%;
+}
+
+#no-reviews-found {
+	text-align: center;
+}
 #university {
+
 	grid-template-areas:
 		"name overallRating"
-		"info rating"
-		"accommodation review";
+		"info rating";
+
 }
 
 #university-name {
@@ -456,26 +484,20 @@ body > header a {
 	padding: 0 2em;
 }
 
-#university-rating {
-	padding:0 2em;
-}
-
-#university-accommodation {
-	padding: 0 2em;
-}
-
 #university-info {
 	padding: 0 2em;
 }
 
-#university-name {
-	padding: 0 2em;
-}
-
-#university-review {
+#university-average-rating {
 	padding:0 2em;
 }
 
+.divider {
+	border-bottom: 1px solid #707070;
+	padding: 0 2em;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
 /* Search result page styling */
 .filters-search {
 	display: grid;
