@@ -217,8 +217,6 @@ main {
 body > header {
 	display: grid;
 
-	width: 100vw;
-
 	grid-template-columns: auto 1fr auto auto;
 	grid-template-rows: auto;
 	grid-template-areas: "logo search button profile";
