@@ -24,7 +24,9 @@ async function postSignUpRequest() {
 		// redirect to "check your email" page
 		window.location = "/registerSuccess";
 	} else {
-		console.log('failed to sign up', response);
+		const json = await response.json();
+		handles.error.textContent = json.error;
+		console.error('failed to sign up', response);
 	}
 }
 
@@ -34,6 +36,7 @@ function getHandles() {
 	handles.password = document.querySelector("#password");
 	handles.confirmpassword = document.querySelector("#confirm-password");
 	handles.signupbutton = document.querySelector("#btn-sign-up");
+	handles.error = document.querySelector(".error");
 }
 
 function addEventListeners() {
