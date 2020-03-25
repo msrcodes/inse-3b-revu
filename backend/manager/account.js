@@ -231,6 +231,23 @@ router.post('/setEmail', async (req, res) => {
 });
 
 
+/**
+ * memberOf manager.account
+ * @func /searches
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
+router.get('/searches', (req, res) => {
+	getUser(req).then(account => {
+		db.query('select * from user_searches where user_id = $1 order by time DESC limit 10', [account.user_id]).then(dbRes => {
+			res.send(dbRes.rows);
+		})
+	}).catch(() => {
+		res.status(HTTP.UNAUTHORIZED).send({});
+	})
+});
+
+
 module.exports = {
 	router
 };

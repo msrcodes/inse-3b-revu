@@ -6,9 +6,12 @@
 
 const express = require('express'),
 	HTTP = require('http-status-codes'),
-	db = require('../database/db.js');
+	db = require('../database/db.js'),
+	cookieParser = require('cookie-parser'),
+	AuthValidation = require('../middleware/auth.validation');
 
 const router = new express.Router();
+router.use(cookieParser());
 
 const cache = {}; // Const as the pointer to the object will never change
 
@@ -181,7 +184,7 @@ async function getSearchResults(query) {
  * @param req.query.sandwich {String} Whether the course is a sandwich; yes, no, all
  * @param {Object} res express response object
  */
-router.get('/', async (req, res) => {
+router.get('/', [AuthValidation.validSessionOptional, async (req, res) => {
 	const query = req.query;
 	const {text, type, ucas, category, level, studyType, sandwich,} = query;
 
@@ -204,8 +207,11 @@ router.get('/', async (req, res) => {
 
 		res.send(results);
 		cacheSearchTerm(query, results);
+		if (req.account.user_id) {
+			db.query('INSERT INTO user_searches (user_id, text, time) VALUES ($1, $2, now())', [req.account.user_id, query.text]);
+		}
 	});
-});
+}]);
 
 
 module.exports = {
