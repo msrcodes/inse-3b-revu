@@ -2,32 +2,32 @@
 
 const elems= {};
 
-function getUniID() {
+function getDegreeID() {
 	const url = window.location.search; //get url contents
 	const urlParams = new URLSearchParams(url);
-	const uniId = urlParams.get('uniId'); //get uniId from url
-	return uniId;
+	const degreeId = urlParams.get('degreeId'); //get uniId from url
+	return degreeId;
 }
 
 async function getInfo() {
-	const response = await fetch('/api/v1/uni/' + getUniID());
+	const response = await fetch('/api/v1/degree/' + getDegreeID());
 
 	if (response.ok) {
 		const data = await response.json();
-		elems.uniName.textContent = data.uni_name;
+		elems.degreeName.textContent = data.degree_name;
+
 	} else {
 		console.error(response.statusText);
-		//Uni not found error
+		//Degree not found error
 	}
 }
 
 async function getAverageReviews() {
 
 
-	const response = await fetch('/api/v1/review/university/'+getUniID()+'/average');
+	const response = await fetch('/api/v1/review/degree/'+getDegreeID()+'/average');
 	if (response.ok) {
 		const data = await response.json();
-		elems.avgDegreeRating.textContent = "Average degree rating : " + data.avg_degree_rating;
 		elems.staffRating.textContent = "Staff rating : " + data.avg_staff_rating;
 		elems.facilityRating.textContent = "Facilities rating : " + data.avg_facility_rating;
 		elems.universityRating.textContent = "University rating : " + data.avg_uni_rating;
@@ -40,16 +40,16 @@ async function getAverageReviews() {
 }
 
 async function getReviews() {
-	const response = await fetch('/api/v1/review/university/' + getUniID());
+	const response = await fetch('/api/v1/review/degree/' + getDegreeID());
 	if (!response.ok) {
 		console.error("No reviews found");
 		//Uni not found error
 	}
 	const data = await response.json();
 
-	console.log(data.uni_id);
+	console.log(data.degree_id);
 	if (!data.ok) {
-		console.error(response.statusText);
+		console.error("No reviews found");
 		const clone = elems.templateFail.content.cloneNode(true);
 		elems.container.append(clone);
 		return;
@@ -58,8 +58,8 @@ async function getReviews() {
 	for (const reviews of data) {
 		const clone = elem.template.content.cloneNode(true);
 
-		elems.reviewUniId.textContent = data.uni_id;
-		elems.reviewDegreeId.textContent = data.degree_id
+		elems.reviewUniId.textContent = data.degree_id;
+		elems.reviewDegreeId.textContent = data.uni_id;
 		elems.reviewAvgDegreeRating.textContent = "Degree rating: " + data.degree_rating;
 		elems.reviewDegreeReview.textContent = data.degree_rating_desc;
 		elems.reviewSatffRating.textContent = "Staff rating: " + data.staff_rating;
@@ -70,12 +70,11 @@ async function getReviews() {
 		elems.reviewUniversityReview.textContent = data.university_rating_desc;
 		elems.reviewAccommodationRating.textContent = "Accommodation rating: " + data.accommodation_rating;
 		elems.reviewAccommodationReview.textContent = data.accommodation_rating_desc;
-}
+	}
 }
 
 function getElems() {
-	elems.uniName = document.querySelector("#uni-name");
-	elems.avgDegreeRating = document.querySelector("#avg-degree-rating");
+	elems.degreeName = document.querySelector("#degree-name-text");
 	elems.staffRating = document.querySelector("#staff-rating");
 	elems.facilityRating = document.querySelector("#facility-rating");
 	elems.universityRating = document.querySelector("#university-rating");

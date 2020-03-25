@@ -138,12 +138,6 @@ main {
 	resize: none;
 	font-family: --font-family-body, sans-serif;
 }
-
-.view-more-buttons { /* TODO: could this be achieved in a better way?*/
-	display: flex;
-	justify-content: center;
-}
-
 /* Grid page layouts */
 
 .header-header-left-right {
@@ -214,6 +208,10 @@ main {
 }
 
 #university > .grid-layout {
+	grid-template-rows: 0fr 2fr 0.25fr;
+}
+
+#degree > .grid-layout {
 	grid-template-rows: 0fr 2fr 0.25fr;
 }
 /* Header styling */
@@ -342,30 +340,18 @@ body > header a {
 #degree {
 	grid-template-areas:
 		"name overallRating"
-		"entryRequirements rating"
-		"about review";
+		"entryRequirements rating";
 }
 
 #degree-name {
 	padding: 0 2em;
-}
-
-#degree-name {
-	padding-bottom: 0em;
-}
-
-#degree-university-name {
-	font-family: var(--font-family-body);
-	opacity: 60%;
-	padding-top: 0em;
-	padding-bottom: 0em;
 }
 
 #degree-overallRating {
 	padding: 0 2em;
 }
 
-#degree-entryRequirements{
+#degree-info {
 	padding: 0 2em;
 }
 
@@ -453,9 +439,6 @@ body > header a {
  width: 90%;
 }
 
-#no-reviews-found {
-	text-align: center;
-}
 #university {
 
 	grid-template-areas:

@@ -24,45 +24,84 @@
 <main id="degree">
 	<div class="grid-layout">
 		<div id="degree-name">
-				<h1 id ="degree-name-text"> BSc (Hons) Computer Science </h1>
-				<h2 id ="degree-university-name"> University Of Example</h2>
+				<h1 id ="degree-name-text"></h1>
 		</div>
 		<div id="degree-overallRating">
 				<h2> Overall Rating</h2>
 		</div>
 
-		<div id="degree-entryRequirements">
+		<div id="degree-info">
 			<div class="card">
-				<h3> Entry Requirements : A B B or 128 UCAS Points</h3>
-			</div>
+				<h3>About The Degree</h3> <!-- placeholder for degree info -->
+				<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+					sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+					ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+					in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+					occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+					id est laborum.</p>
+		</div>
 		</div>
 		<div id="degree-rating">
 			<div class="card">
-				<h4> Degree Rating</h4>
-				<h4> Staff Rating</h4>
-				<h4> Facility Rating</h4>
-				<h4> University Rating</h4>
-				<h4> Accommodation Rating</h4>
+				<h4 id="university-rating"></h4>
+				<h4 id="staff-rating"></h4>
+				<h4 id="facility-rating"></h4>
+				<h4 id="accommodation-rating"></h4>
 			</div>
-		</div>
-		<div id="degree-about">
-			<div class="card">
-				<h3>About The Course</h3>
-				<div class="view-more-buttons">
-					<button class="btn--default"> View More Information</button>
-				</div>
-			</div>
-		</div>
-
-		<div id="degree-review">
-			<div class="card">
-				<div class="view-more-buttons">
-					<button class="btn--default"> View Reviews</button>
-				</div>
 		</div>
 	</div>
+
+	<div class="divider"> </div>
+
+	<section id="reviews">
+		<template class="review-template" id="review-template">
+		<div class="card" id="review-box">
+			<div class="review-card">
+				<div id="review-info">
+					<h4 id="uni-id"></h4>
+					<h4 id="degree-id"></h4>
+				</div>
+			</div>
+			<div class="review-card">
+				<div id="degree-review">
+					<h4 id="degree-review-rating"></h4>
+					<p id="degree-review-review"></p>
+				</div>
+			</div>
+			<div class="review-card">
+				<div id="staff-review">
+					<h4 id="staff-review-rating"></h4>
+					<p id="staff-review-review"></p>
+				</div>
+			</div>
+			<div class="review-card">
+				<div id="facility-review">
+					<h4 id="facility-review-rating"></h4>
+					<p id="facility-review-review"></p>
+				</div>
+			</div>
+			<div class="review-card">
+				<div id="university-review">
+					<h4 id="university-review-rating"></h4>
+					<p id="university-review-review"></p>
+				</div>
+			</div>
+			<div class="review-card">
+				<div id="accommodation-review">
+					<h4 id="accommodation-review-rating"></h4>
+					<p id="accommodation-review-review"></p>
+				</div>
+			</div>
+		</div>
+		</template>
+		<template id="no-reviews-found">
+			<h2>No reviews found</h2>
+		</template>
+	</section>
 </main>
 <script src="js/checklogin.js"></script>
 <script src="js/searchHandler.js"></script>
+<script src="js/degreeInfo.js"></script>
 </body>
 </html>
