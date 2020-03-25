@@ -93,7 +93,7 @@ describe('validate /loggedIn', () => {
 			}).then(res => {
 				if (res.ok) {
 					return res.json().then(json => {
-						expect(json.loggedIn).toBe(true)
+						expect(json.loggedIn && json.username === 'testuser').toBe(true)
 					})
 				} else {
 					expect(res.ok).toBe(true);
