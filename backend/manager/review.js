@@ -112,6 +112,13 @@ const getUniversityReviews = (universityID) => db.query('SELECT * FROM review WH
 
 /**
  * @memberOf manager.review
+ * @function getUserReviews
+ * @param userID {Number} User ID to get all reviews for
+ */
+const getUserReviews = (userID) => db.query('SELECT * FROM review WHERE user_id = $1', [userID]);
+
+/**
+ * @memberOf manager.review
  * @function /degree/:ID
  * @param req {Object} express request object
  * @param res {Object} express response object
@@ -144,6 +151,18 @@ router.get('/university/:ID/average', async (req, res) => {
   req.params.ID = Number(req.params.ID);
   const data = await db.query('SELECT AVG(degree_rating) AS avg_degree_rating, AVG(staff_rating) AS avg_staff_rating, AVG(facility_rating) AS avg_facility_rating, AVG(uni_rating) AS avg_uni_rating, AVG(accommodation_rating) AS avg_accommodation_rating FROM review WHERE uni_id = $1', [req.params.ID]);
   return res.status(HTTP.OK).send(data.rows[0]);
+});
+
+/**
+ * @memberOf manager.review
+ * @function /user/:ID
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
+router.get('/user/:ID', async (req, res) => {
+  req.params.ID = Number(req.params.ID);
+  const reviews = await getUserReviews(req.params.ID);
+  return res.status(HTTP.OK).send(reviews.rows);
 });
 
 /**
