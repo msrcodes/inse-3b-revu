@@ -57,7 +57,7 @@ function populate() {
 		clone.querySelector(".result-main").textContent = result.uni_name;
 		clone.querySelector(".result-sub").textContent = "";
 		clone.querySelector(".result-rating").textContent = ""; // TODO
-		// TODO: link button to view info page
+		clone.querySelector(".btn--default").addEventListener('click', () => window.location = `/universityInfo?uniId=${result.uni_id}`);
 
 		container.append(clone);
 	}
