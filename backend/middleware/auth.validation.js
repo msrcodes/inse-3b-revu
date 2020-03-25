@@ -9,8 +9,7 @@ exports.validSessionNeeded = async (req, res, next) => {
 
     if (response.rowCount) {
       req.account = response.rows[0];
-      next();
-      return;
+      return next();
     }
   }
 
