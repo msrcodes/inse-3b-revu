@@ -2,7 +2,8 @@
  * Database fill script, run using npm run setup.
  */
 
-const db = require('./db.js');
+const db = require('./db.js'),
+      fastLoremIpsum = require('fast-lorem-ipsum');
 
 const fillReviews = async () => {
   //--- Get degree IDs
@@ -17,7 +18,10 @@ const fillReviews = async () => {
   for (const uni of universities.rows)
     uniIDs.push(uni.uni_id);
 
-  
+  //--- Create reviews 
+  for (const degree of degreeIDs) {
+
+  }
 };
 
 fillReviews();
