@@ -4,16 +4,55 @@ const handles = {};
 
 function getFormData() {
 	return {
-		universityName: handles.universityDropdown.value,
-		staffRating: handles.staffRating.value,
+		universityID: Number(handles.universityDropdown.value),
+		degreeID: Number(handles.degreeDropdown.value),
+		degreeRating: Number(handles.degreeRating.value),
+		degreeReview: handles.degreeReview.value,
+		staffRating: Number(handles.staffRating.value),
 		staffReview: handles.staffReview.value,
-		facilityRating: handles.facilityRating.value,
+		facilityRating: Number(handles.facilityRating.value),
 		facilityReview: handles.facilityReview.value,
-		universityRating: handles.universityRating.value,
+		universityRating: Number(handles.universityRating.value),
 		universityReview: handles.universityReview.value,
-		accommodationRating: handles.accommodationRating.value,
+		accommodationRating: Number(handles.accommodationRating.value),
 		accommodationReview: handles.accommodationReview.value
 	};
+}
+
+async function getUniversities() {
+	const response = await fetch(`api/v1/uni/uniNames`);
+
+	let array;
+	if (response.ok) {
+		array = await response.json();
+
+		for (const i of array) {
+			const elem = document.createElement("option");
+			elem.appendChild(document.createTextNode(i.uni_name));
+			elem.value = i.uni_id;
+			handles.universityDropdown.appendChild(elem);
+		}
+	} else {
+		window.location.reload(); // refresh on fail
+	}
+}
+
+async function getDegrees() {
+	const response = await fetch(`api/v1/degree/degreeNames`);
+
+	let array;
+	if (response.ok) {
+		array = await response.json();
+
+		for (const i of array) {
+			const elem = document.createElement("option");
+			elem.appendChild(document.createTextNode(i.degree_name));
+			elem.value = i.degree_id;
+			handles.degreeDropdown.appendChild(elem);
+		}
+	} else {
+		window.location.reload(); // refresh on fail
+	}
 }
 
 async function postCreateRequest() {
@@ -29,12 +68,16 @@ async function postCreateRequest() {
 		// redirect to profile page
 		window.location = "/profile";
 	} else {
-		console.log('failed to create review', response);
+		const json = await response.json();
+		handles.error.textContent = json.error;
+		console.error('failed to create review', response);
 	}
 }
 
 function getHandles() {
 	handles.universityDropdown = document.querySelector("#university-dropdown");
+	handles.degreeRating = document.querySelector("#degreeRating");
+	handles.degreeReview = document.querySelector("#degreeReview");
 	handles.staffRating = document.querySelector("#staffRating");
 	handles.staffReview = document.querySelector("#staffReview");
 	handles.facilityRating = document.querySelector("#facilityRating");
@@ -44,15 +87,20 @@ function getHandles() {
 	handles.accommodationRating = document.querySelector("#accommodationRating");
 	handles.accommodationReview = document.querySelector("#accommodationReview");
 	handles.submit = document.querySelector("#submit-review");
+	handles.error = document.querySelector(".error");
+	handles.universityDropdown = document.querySelector("#university-dropdown");
+	handles.degreeDropdown = document.querySelector("#degree-dropdown");
 }
 
 function addEventListeners() {
 	handles.submit.addEventListener('click', postCreateRequest);
 }
 
-function onLoad() {
+async function onLoad() {
 	getHandles();
 	addEventListeners();
+	await getUniversities();
+	await getDegrees();
 }
 
 window.addEventListener('load', onLoad);
