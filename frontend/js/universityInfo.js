@@ -47,12 +47,16 @@ async function getReviews() {
 
 		for (const review of data) {
 			const clone = template.content.cloneNode(true);
+
+			const responseUni = await fetch('/api/v1/uni/' + review.uni_id); //get degree name
+			const dataUni = await responseUni.json();
+
 			clone.querySelector("#uni-id").textContent = elems.uniName.textContent; // gets uni name from page
 
-			const response = await fetch('/api/v1/degree/' + review.degree_id); //get degree name
-			const data = await response.json();
+			const responseDegree = await fetch('/api/v1/degree/' + review.degree_id); //get degree name
+			const dataDegree = await responseDegree.json();
 
-			clone.querySelector("#degree-id").textContent = data.degree_name;
+			clone.querySelector("#degree-id").textContent = dataDegree.degree_name;
 			clone.querySelector("#degree-review-rating").textContent = "Average Degree Rating: " + review.degree_rating;
 			clone.querySelector("#degree-review-review").textContent = review.degree_rating_desc;
 			clone.querySelector("#staff-review-rating").textContent = "Staff Rating: " + review.staff_rating;
