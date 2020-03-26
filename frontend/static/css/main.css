@@ -53,7 +53,7 @@ button {
 }
 
 main {
-	margin: 5vh 5vw;
+	margin: 5vmin 5vmin;
 }
 
 .btn--default {
@@ -89,8 +89,7 @@ main {
 	border: 3px solid var(--colour-border-button-positive-hover);
 }
 
-.card {
-	width: 100%;
+.card, .review-card {
 	padding: 1em;
 	border-radius: 33px;
 	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
@@ -139,12 +138,6 @@ main {
 	resize: none;
 	font-family: --font-family-body, sans-serif;
 }
-
-.view-more-buttons { /* TODO: could this be achieved in a better way?*/
-	display: flex;  /* Im not sure if these are even needed, I added them as they're in the ui mockups */
-	justify-content: center;
-}
-
 /* Grid page layouts */
 
 .header-header-left-right {
@@ -213,12 +206,18 @@ main {
 	grid-template-rows: 0fr 2fr 1fr;
 	grid-template-columns: 1fr 1fr;
 }
+
+#university > .grid-layout {
+	grid-template-rows: 0fr 2fr 0.25fr;
+}
+
+#degree > .grid-layout {
+	grid-template-rows: 0fr 2fr 0.25fr;
+}
 /* Header styling */
 
 body > header {
 	display: grid;
-
-	width: 100vw;
 
 	grid-template-columns: auto 1fr auto auto;
 	grid-template-rows: auto;
@@ -231,7 +230,7 @@ body > header > * {
 	align-self: center;
 }
 
-body > header > h1 {
+body > header h1 {
 	grid-area: logo;
 
 	font-family: var(--font-family-logo);
@@ -241,8 +240,14 @@ body > header > h1 {
 	padding: 0.5em 1em;
 }
 
-#btn-writereview {
+body > header a {
+	text-decoration: none;
+}
+
+#a-writereview {
 	grid-area: button;
+
+	justify-self: center;
 }
 
 #profile-a-link {
@@ -335,30 +340,18 @@ body > header > h1 {
 #degree {
 	grid-template-areas:
 		"name overallRating"
-		"entryRequirements rating"
-		"about review";
+		"entryRequirements rating";
 }
 
 #degree-name {
 	padding: 0 2em;
-}
-
-#degree-name {
-	padding-bottom: 0em;
-}
-
-#degree-university-name {
-	font-family: var(--font-family-body);
-	opacity: 60%;
-	padding-top: 0em;
-	padding-bottom: 0em;
 }
 
 #degree-overallRating {
 	padding: 0 2em;
 }
 
-#degree-entryRequirements{
+#degree-info {
 	padding: 0 2em;
 }
 
@@ -375,73 +368,83 @@ body > header > h1 {
 }
 
 /* Profile styling */
-
 #profile {
 	display: grid;
-	grid-template-rows: 1fr 4fr;
 	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto auto;
 	grid-template-areas: "header header"
 	"reviews searches";
+
+	grid-column-gap: 3em;
+	grid-row-gap: 1em;
 }
 
 #profile-header {
 	grid-area: header;
 
 	display: grid;
+	grid-template-rows: auto;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr;
 
-	padding-bottom: 1em;
-	margin-bottom: 1em;
-	border-bottom: 1px solid #707070;
+	align-items: center;
 }
 
-#page-header-content > * {
+#profile-header-content {
 	justify-self: left;
+
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: auto auto;
+
+	column-gap: 1em;
+
+	align-items: center;
 }
 
 #profile-header-buttons {
-	display: grid;
-	grid-template-rows: 1fr;
-	grid-template-columns: 1fr 1fr;
-}
-
-#profile-header-buttons > * {
-	margin: auto;
 	justify-self: right;
-}
-
-#profile-header h2 {
-	padding: 0;
-}
-
-#profile-header-icon {
-	margin: auto;
-}
-
-#profile-header-info-section {
-	display: flex;
-	flex-direction: column;
-	margin: auto 1em;
 }
 
 #profile-reviews {
 	grid-area: reviews;
-	padding: 0 2em;
 }
 
 #profile-searches {
 	grid-area: searches;
-	padding: 0 2em;
+}
+
+#profile-reviews h3, #profile-searches h3 {
+	padding-bottom: 1em;
 }
 
 /* University info styling */
 
+#reviews {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.review-template {
+	width: 90%;
+	padding: 0 2em;
+}
+
+#review-box {
+	display: inline-grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+}
+
+.review-card {
+ width: 90%;
+}
+
 #university {
+
 	grid-template-areas:
 		"name overallRating"
-		"info rating"
-		"accommodation review";
+		"info rating";
+
 }
 
 #university-name {
@@ -452,24 +455,103 @@ body > header > h1 {
 	padding: 0 2em;
 }
 
-#university-rating {
-	padding:0 2em;
-}
-
-#university-accommodation {
-	padding: 0 2em;
-}
-
 #university-info {
 	padding: 0 2em;
 }
 
-#university-name {
-	padding: 0 2em;
+#university-average-rating {
+	padding:0 2em;
 }
 
-#university-review {
-	padding:0 2em;
+.divider {
+	border-bottom: 1px solid #707070;
+	padding: 0 2em;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+/* Search result page styling */
+.filters-search {
+	display: grid;
+	grid-template-columns: 2fr 9fr;
+	grid-template-rows: auto;
+
+	grid-column-gap: 4em;
+}
+
+#results {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-auto-rows: auto auto;
+
+	grid-template-areas: "info label select"
+						 "results results results";
+
+	align-items: center;
+}
+
+#results h2 {
+	grid-area: info;
+}
+
+#results label {
+	grid-area: label;
+	color: var(--colour-font-heading);
+	font-weight: bold;
+	justify-self: end;
+	margin-right: 1em;
+}
+
+#results select {
+	grid-area: select;
+}
+
+#results-container {
+	grid-area: results;
+	height: 73vh;
+
+	list-style: none;
+
+	margin-top: 1em;
+
+	display: grid;
+	grid-auto-columns: 100%;
+	grid-auto-rows: 2em;
+
+	row-gap: 2em;
+
+	overflow-y: scroll;
+}
+
+#results-container li {
+	display: grid;
+	grid-template-columns: auto auto auto 5em;
+	grid-template-rows: auto;
+
+	align-items: center; /* vertical center */
+
+	padding: 0.7em 0;
+
+	margin-right: 0.5em;
+	height: 100%;
+
+	border-bottom: 1px solid darkgrey;
+	border-collapse: collapse;
+
+	transition: background 0.2s linear;
+}
+
+#results-container li:hover {
+	background: rgba(0, 0, 0, 0.3);
+	transition: background 0.05s linear;
+}
+
+#results-container li button {
+	padding: 0.5em 0;
+}
+
+.result-main {
+	color: var(--colour-font-heading);
+	font-weight: bold;
 }
 
 /* Media queries */
@@ -513,6 +595,31 @@ body > header > h1 {
 	.header-header-left-right > #left, .header-header-left-right > #right {
 		padding: 1em 0;
 	}
+
+	#profile {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr 1fr;
+		grid-template-areas: "header"
+		"reviews"
+		"searches";
+		grid-row-gap: 1em;
+	}
+
+	#profile-header {
+		display: grid;
+		grid-template-rows: auto auto;
+		grid-template-columns: 1fr;
+
+		row-gap: 1em;
+	}
+
+	#profile-header-icon {
+		width: 5em;
+	}
+
+	#profile-header-content, #profile-header-buttons {
+		justify-self: center;
+	}
 }
 
 @media screen and (max-width: 500px) {
@@ -527,7 +634,17 @@ body > header > h1 {
 		background: var(--colour-fill-header);
 	}
 
-	#btn-writereview {
+	#a-writereview {
 		margin: 0 1em;
+	}
+}
+
+@media screen and (max-width: 355px) {
+	#profile-header-buttons {
+		display: grid;
+		grid-template-rows: auto;
+		grid-template-columns: 1fr 1fr;
+
+		column-gap: 1em;
 	}
 }

@@ -17,7 +17,7 @@ const router = new express.Router();
  * @param res {Object} express response object
  */
 router.get('/degreeNames', (req, res) => {
-	db.query('SELECT degree_name from degree').then(dbRes => {
+	db.query('SELECT degree_name, degree_id from degree').then(dbRes => {
 		res.send(dbRes.rows)
 	}).catch(() => {
 		res.status(HTTP.INTERNAL_SERVER_ERROR).send();

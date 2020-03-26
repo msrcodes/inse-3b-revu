@@ -13,6 +13,13 @@ create table user_session(
 	last_login timestamp
 );
 
+create table user_searches(
+    search_id serial not null primary key,
+    user_id int not null,
+    text text not null,
+    time timestamp not null
+);
+
 create table university(
     uni_id serial not null primary key,
     uni_name varchar(255) not null,

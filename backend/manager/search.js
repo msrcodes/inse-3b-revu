@@ -6,9 +6,12 @@
 
 const express = require('express'),
 	HTTP = require('http-status-codes'),
-	db = require('../database/db.js');
+	db = require('../database/db.js'),
+	cookieParser = require('cookie-parser'),
+	AuthValidation = require('../middleware/auth.validation');
 
 const router = new express.Router();
+router.use(cookieParser());
 
 const cache = {}; // Const as the pointer to the object will never change
 
@@ -32,7 +35,7 @@ function getCacheId(query) {
 	return query.text + query.type +
 		query.ucas + query.category +
 		query.level + query.studyType +
-		query.sandwich; // TODO this better
+		query.sandwich + query.pageNo;
 }
 
 
@@ -101,44 +104,34 @@ async function checkCacheForSearchTerm(query) {
 async function getSearchResults(query) {
 	const {text, type, ucas, category, level, studyType, sandwich} = query;
 
-	let dbQuery = ``;
-	let params = [];
-	let paramNumber = 1;
+	let result = {totalCount: 0, count: 0, rows: []};
+
 	let results = [];
+
 
 	if (type !== 'degree') {
 
-		dbQuery += `select * from university `;
-		if (text) {
-			dbQuery += `where uni_name ILIKE $1 `;
-			params.push(`%${text}%`);
-		}
+		let uniRes = await db.query(`select * from university where uni_name ILIKE $1 order by university.uni_name`, [`%${text}%`]);
 
-		dbQuery += `limit 20`;
-
-		let degreeDbRes = await db.query(dbQuery, params);
-
-		results = results.concat(degreeDbRes.rows);
-
+		results = uniRes.rows;
 	}
 
-	dbQuery = ``;
-	params = [];
-	paramNumber = 1;
 
 	if (type !== 'uni') {
+		let dbQuery = ``;
+		let params = [];
+		let paramNumber = 1;
+
 		dbQuery += `select u.uni_name, u.uni_id, d.degree_id, d.degree_name, ud.requirements_ucas, ud.requirements_grades, ` +
 			`ud.degree_category, ud.degree_level, ud.degree_type, ud.degree_sandwich ` +
 			`from uni_degree as ud ` +
 			`inner join university as u on ud.uni_id = u.uni_id ` +
 			`inner join degree as d on ud.degree_id = d.degree_id `;
 
-		if (text) {
-			dbQuery += `where d.degree_name ILIKE $${paramNumber++} `;
-			params.push(`%${text}%`);
-		}
+		dbQuery += `where d.degree_name ILIKE $${paramNumber++} `;
+		params.push(`%${text}%`);
 
-		if (ucas !== 0) {
+		if (ucas !== 0 && ucas !== "0") {
 			dbQuery += `AND ud.requirements_ucas <= $${paramNumber++} `;
 			params.push(ucas);
 		}
@@ -160,16 +153,19 @@ async function getSearchResults(query) {
 
 		if (sandwich !== 'all') {
 			dbQuery += `AND ud.degree_sandwich = $${paramNumber++} `;
-			params.push(sandwich);
+			params.push(sandwich === 'yes');
 		}
 
-		dbQuery += `limit 20`;
+
+		dbQuery += `order by d.degree_name`;
 
 		let uniDbRes = await db.query(dbQuery, params);
 
 		results = results.concat(uniDbRes.rows);
 	}
-	return results
+
+
+	return results;
 }
 
 
@@ -188,12 +184,16 @@ async function getSearchResults(query) {
  * @param req.query.sandwich {String} Whether the course is a sandwich; yes, no, all
  * @param {Object} res express response object
  */
-router.get('/', async (req, res) => {
+router.get('/', [AuthValidation.validSessionOptional, async (req, res) => {
 	const query = req.query;
-	const {text, type, ucas, category, level, studyType, sandwich} = query;
+	const {text, type, ucas, category, level, studyType, sandwich,} = query;
 
 	if (text === undefined || !(type && ucas && category && level && studyType && sandwich)) {
 		return res.status(HTTP.BAD_REQUEST).send('Must have all required query fields');
+	}
+
+	if (text === "") {
+		return res.send([]);
 	}
 
 	if (ucas > 200 || ucas < 0) {
@@ -203,12 +203,15 @@ router.get('/', async (req, res) => {
 	checkCacheForSearchTerm(query).then(results => {
 		res.send(results);
 	}).catch(async () => {
-		const results = await getSearchResults(query); // TODO actually get results
+		const results = await getSearchResults(query);
 
 		res.send(results);
 		cacheSearchTerm(query, results);
+		if (req.account.user_id) {
+			db.query('INSERT INTO user_searches (user_id, text, time) VALUES ($1, $2, now())', [req.account.user_id, query.text]);
+		}
 	});
-});
+}]);
 
 
 module.exports = {

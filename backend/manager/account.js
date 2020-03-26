@@ -27,7 +27,7 @@ function getUser(req) {
 	return new Promise((resolve, reject) => {
 		const token = req.cookies.session;
 
-		db.query('SELECT * FROM users INNER JOIN user_session us ON users.email = us.email WHERE token = $1', [token]).then(dbRes => {
+		db.query('SELECT user_id, u.email, username FROM users as u INNER JOIN user_session us ON u.email = us.email WHERE token = $1', [token]).then(dbRes => {
 			if (dbRes.rowCount) {
 				resolve(dbRes.rows[0]);
 			}
@@ -52,7 +52,7 @@ function getUser(req) {
 router.post('/register', async (req, res) => {
 	const { username, email, password, repeatPassword } = req.body;
 
-	if (!email || !password || !repeatPassword)
+	if (!username || !email || !password || !repeatPassword)
 		return res.status(HTTP.BAD_REQUEST).send({error: "Missing parameters (username, email, password, repeatPassword)."});
 
 	if (repeatPassword !== password)
@@ -149,9 +149,9 @@ router.post('/login', (req, res) => {
 					res.cookie('session', uuid, {});
 
 					db.query('INSERT INTO user_session VALUES ($1, $2, now())', [email, uuid]).then(dbRes => {
-						res.send();
+						res.send({});
 					}).catch(() => {
-						res.status(HTTP.INTERNAL_SERVER_ERROR).send();
+						res.status(HTTP.INTERNAL_SERVER_ERROR).send({});
 					});
 				} else {
 					res.status(HTTP.UNAUTHORIZED).send({error: 'Incorrect email or password.'});
@@ -175,6 +175,90 @@ router.get('/loggedIn', (req, res) => {
 	getUser(req)
 		.then((user) => res.status(HTTP.OK).send({loggedIn: true, username: user.username}))
 		.catch(() => res.status(HTTP.OK).send({loggedIn: false}));
+});
+
+
+/**
+ * @memberOf manager.account
+ * @func /setEmail
+ * @desc Change a users email address
+ * @param {Object} req express request object
+ * @param {String} req.body.user_id
+ * @param {String} req.body.email
+ * @param {String} req.body.password
+ * @param {Object} res express response object
+ */
+router.post('/setEmail', async (req, res) => {
+	const { user_id, email, password } = req.body;
+
+	if (!user_id || !email || !password)
+		return res.status(HTTP.BAD_REQUEST).send({error: "Missing parameters (user_id, email, password)."});
+
+	if (!EMAIL_REGEX.test(email))
+		return res.status(HTTP.BAD_REQUEST).send({error: "Invalid email address."});
+
+	if (!email.endsWith('.ac.uk'))
+		return res.status(HTTP.BAD_REQUEST).send({error: "Email must be a valid ac.uk address."});
+
+	try {
+		const emailDbRes = await db.query('SELECT email FROM users WHERE email = $1', [email]);
+		if (emailDbRes.rowCount > 0)
+			return res.status(HTTP.BAD_REQUEST).send({error: "Email already in use."});
+
+		db.query('SELECT password_hash FROM users WHERE user_id = $1', [user_id]).then(dbRes => {
+			if (!dbRes.rowCount) {
+				res.status(HTTP.BAD_REQUEST).send({error: 'No account exists with that user_id.'});
+				return;
+			}
+			const account = dbRes.rows[0];
+
+			bcrypt.compare(password, account.password_hash).then(result => {
+				if (result) {
+
+					db.query('UPDATE users SET email = $1 WHERE user_id = $2', [email, user_id]).then(dbRes => {
+						res.send();
+					});
+				} else {
+					res.status(HTTP.UNAUTHORIZED).send({error: 'Incorrect password.'});
+					return;
+				}
+			})
+		});
+	} catch (error) {
+		console.error(error);
+		return res.status(HTTP.INTERNAL_SERVER_ERROR).send();
+	}
+});
+
+/**
+ * memberOf manager.account
+ * @func /details
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
+router.get('/details', async (req, res) => {
+	getUser(req).then(userDetails => {
+		res.status(HTTP.OK).send(userDetails);
+	}).catch(() => {
+		res.status(HTTP.UNAUTHORIZED).send({});
+	})
+});
+
+
+/**
+ * memberOf manager.account
+ * @func /searches
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
+router.get('/searches', (req, res) => {
+	getUser(req).then(account => {
+		db.query('select * from user_searches where user_id = $1 order by time DESC limit 10', [account.user_id]).then(dbRes => {
+			res.send(dbRes.rows);
+		})
+	}).catch(() => {
+		res.status(HTTP.UNAUTHORIZED).send({});
+	})
 });
 
 

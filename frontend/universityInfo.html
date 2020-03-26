@@ -7,63 +7,103 @@
 	<title>REVU</title>
 </head>
 <body>
-<header>
-	<h1>REVU</h1>
-	<label id="container-search">
-		<img src="static/img/search.png" alt="Search" draggable="false">
-		<input type="text" id="input-search" placeholder="Search reviews, degrees, universities...">
-	</label>
-	<button class="btn--positive" id="btn-writereview">Write your review</button>
-	<a href="login.html" id="profile-a-link">
-		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
-		<span id="username-profile-status">Log In</span>
-		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
-	</a>
-</header>
-<main id="university">
-	<div class="grid-layout">
-		<div id="university-name">
-					<h1> University Of Example</h1>
-		</div>
-
-		<div id="degree-overallRating">
+	<header>
+		<a href="/"><h1>REVU</h1></a>
+		<label id="container-search">
+			<img src="static/img/search.png" alt="Search" draggable="false">
+			<input type="text" id="input-search" placeholder="Search reviews, degrees, universities...">
+		</label>
+		<a href="#" id="a-writereview"><button class="btn--positive" id="btn-writereview">Write your review</button></a>
+		<a href="login.html" id="profile-a-link">
+			<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+			<span id="username-profile-status">Log In</span>
+			<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
+		</a>
+	</header>
+<main>
+	<div id="university">
+		<div class="grid-layout">
+			<div id="university-name">
+					<h1 id="uni-name"></h1>
+			</div>
+			<div id="degree-overallRating">
 					<h2> Overall Rating</h2>
-		</div>
-
-		<div id="university-info">
-			<div class="card">
-				<h3>About The University</h3>
 			</div>
-		</div>
-
-		<div id="university-rating">
-			<div class="card">
-				<h4> Average Degree Rating</h4>
-				<h4> Staff Rating</h4>
-				<h4> Facility Rating</h4>
-				<h4> University Rating</h4>
-				<h4> Accommodation Rating</h4>
-			</div>
-		</div>
-
-		<div id="university-accommodation">
-			<div class="card">
-				<h3>University Of Example Accommodation</h3>
-				<div class="view-more-buttons">
-					<button class="btn--default"> View More Information</button>
+			<div id="university-info">
+				<div class="card">
+					<h3>About The University</h3> <!-- placeholder for uni info -->
+					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+						ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+						in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+						occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+						id est laborum.</p>
 				</div>
 			</div>
-		</div>
-
-		<div id="university-review">
-			<div class="card">
-				<div class="view-more-buttons">
-					<button class="btn--default"> View More Reviews</button>
+			<div id="university-average-rating">
+				<div class="card">
+					<h4 id="avg-degree-rating"></h4>
+					<h4 id="staff-rating"></h4>
+					<h4 id="facility-rating"></h4>
+					<h4 id="university-rating"></h4>
+					<h4 id="accommodation-rating"></h4>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div class="divider"> </div>
+
+	<section id="reviews">
+		<template class="review-template" id="review-template">
+			<div class="card" id="review-box">
+				<div class="review-card">
+					<div id="review-info">
+						<h4 id="uni-id"></h4>
+						<h4 id="degree-id"></h4>
+					</div>
+				</div>
+				<div class="review-card">
+					<div id="degree-review">
+						<h4 id="degree-review-rating"></h4>
+						<p id="degree-review-review"></p>
+					</div>
+				</div>
+				<div class="review-card">
+					<div id="staff-review">
+						<h4 id="staff-review-rating"></h4>
+						<p id="staff-review-review"></p>
+					</div>
+				</div>
+				<div class="review-card">
+					<div id="facility-review">
+						<h4 id="facility-review-rating"></h4>
+						<p id="facility-review-review"></p>
+					</div>
+				</div>
+				<div class="review-card">
+					<div id="university-review">
+						<h4 id="university-review-rating"></h4>
+						<p id="university-review-review"></p>
+					</div>
+				</div>
+				<div class="review-card">
+					<div id="accommodation-review">
+						<h4 id="accommodation-review-rating"></h4>
+						<p id="accommodation-review-review"></p>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template id="no-reviews-found">
+			<h2>No reviews found</h2>
+		</template>
+
+	</section>
 </main>
 <script src="js/checklogin.js"></script>
+<script src="js/searchHandler.js"></script>
+<script src="js/universityInfo.js"></script>
 </body>
 </html>

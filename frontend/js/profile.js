@@ -22,6 +22,37 @@ async function checkAndRedirect() {
 	}
 }
 
+async function getUserReviews() {
+	const respDetails = await fetch('api/v1/account/details');
+	let reviews;
+	if (respDetails.ok) {
+		const respJson = await respDetails.json();
+		console.log(`api/v1/review/user/${respJson.user_id}`);
+		const response = await fetch(`api/v1/review/user/${respJson.user_id}`);
+
+		if (response.ok) {
+			const json = response.json();
+			reviews = json;
+		} else {
+			reviews = ['No reviews found'];
+		}
+	} else {
+		reviews = ['Unable to get account details'];
+	}
+
+
+
+	return reviews;
+}
+
+async function getUserSearches() {
+
+}
+
+function populateUserReviews(reviews) {
+	console.log(reviews);
+}
+
 async function logout() {
 	// Check that the user has a session cookie
 	if (document.cookie.split(';').filter((item) => item.trim().startsWith('session=')).length) {
@@ -42,11 +73,11 @@ function addEventListeners() {
 	handles.btnLogout.addEventListener('click', logout);
 }
 
-function onLoad() {
+async function onLoad() {
 	getHandles();
-	checkAndRedirect().then(() => {
-		addEventListeners();
-	});
+	const status = await checkAndRedirect();
+	addEventListeners();
+	getUserReviews(status).then(reviews => populateUserReviews(reviews));
 }
 
 window.addEventListener('load', onLoad);

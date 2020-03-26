@@ -8,12 +8,12 @@
 </head>
 <body>
 <header>
-	<h1>REVU</h1>
+	<a href="/"><h1>REVU</h1></a>
 	<label id="container-search">
 		<img src="static/img/search.png" alt="Search" draggable="false">
 		<input type="text" id="input-search" placeholder="Search reviews, degrees, universities...">
 	</label>
-	<button class="btn--positive" id="btn-writereview">Write your review</button>
+	<a href="#" id="a-writereview"><button class="btn--positive" id="btn-writereview">Write your review</button></a>
 	<a href="login.html" id="profile-a-link">
 		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
 		<span id="username-profile-status">Log In</span>
@@ -26,6 +26,17 @@
 		<h3>Which university are you reviewing?</h3>
 		<label for="university-dropdown">Choose a university:</label>
 		<select id="university-dropdown" name="universities"></select>
+
+		<label for="degree-dropdown">Choose a degree:</label>
+		<select id="degree-dropdown" name="degrees"></select>
+	</section>
+	<section class="card">
+		<h3>How would you rate the degree?</h3>
+		<label for="degreeRating">On a scale of 0-5 (0 is lowest)?</label>
+		<input type="range" min="0.0" max="5.0" value="2.5" step="0.1" class="slider" id="degreeRating" oninput="degreeOutput.value = degreeRating.value">
+		<output name="degreeRating-value" id="degreeOutput">2.5</output>
+		<label for="degreeReview">Describe the degree in your own words...</label>
+		<textarea class="textarea" name="degree review" maxlength="250" placeholder="maximum of 250 characters" id="degreeReview"></textarea>
 	</section>
 	<section class="card">
 		<h3>How would you rate the staff?</h3>
@@ -59,11 +70,11 @@
 		<label for="accommodationReview">Describe the accommodation in your own words...</label>
 		<textarea class="textarea" name="accommodation review" maxlength="250" placeholder="maximum of 250 characters" id="accommodationReview"></textarea>
 	</section>
-
+	<span class="error"></span>
 	<button id="submit-review" class="btn--positive">Submit Review</button>
-	<script src="js/populateUniversityDropdown.js"></script>
 </main>
 <script src="js/checklogin.js"></script>
 <script src="js/createReview.js"></script>
+<script src="js/searchHandler.js"></script>
 </body>
 </html>
