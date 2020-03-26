@@ -53,7 +53,7 @@ const createReview = async (universityID, degreeID, userID, degreeRating, degree
 
 const updateReview = async (universityID, degreeID, userID, reviewId, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview) => {
 	await db.query(
-		'UPDATE review SET degree_rating = $5, degree_rating_desc = $6, staff_rating = $7, staff_rating_desc = $8, facility_rating = $9, facility_rating_desc = $10, uni_rating = $11, uni_rating_desc = $12, accommodation_rating = $13, accommodation_rating_desc = $14 where uni_id = $1 and degree_id = $2 and user_id = $3 and review_id = $4',
+		'UPDATE review SET uni_id = $1, degree_id = $2, degree_rating = $5, degree_rating_desc = $6, staff_rating = $7, staff_rating_desc = $8, facility_rating = $9, facility_rating_desc = $10, uni_rating = $11, uni_rating_desc = $12, accommodation_rating = $13, accommodation_rating_desc = $14 where user_id = $3 and review_id = $4',
 		[
 			universityID,
 			degreeID,
@@ -224,16 +224,20 @@ router.post('/create', [AuthValidation.validSessionNeeded, routerPostCreate]);
 const routerPostUpdate = async (req, res) => {
 	const { universityId, degreeId, reviewId, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview } = req.body;
 
-
 	//--- Validate & create
 	if (validateReview(degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview)) {
 
-		const dbExists = await db.query('SELECT * from review where uni_id = $1 and degree_id = $2 and user_id = $3 and review_id = $4', [universityId, degreeId, req.account.user_id, reviewId]);
+		const dbExists = await db.query('SELECT * from review where  user_id = $1 and review_id = $2', [req.account.user_id, reviewId]);
 
 		if (dbExists.rowCount) {
-			await updateReview(universityId, degreeId, req.account.user_id, reviewId, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview);
+			const promise = updateReview(universityId, degreeId, req.account.user_id, reviewId, degreeRating, degreeReview, staffRating, staffReview, facilityRating, facilityReview, universityRating, universityReview, accommodationRating, accommodationReview);
+			promise.then(() => {
+				return res.status(HTTP.OK).send({});
+			}).catch(() => {
+				res.status(HTTP.BAD_REQUEST).send({error: "Bad uni/degree id"})
+			})
 
-			return res.status(HTTP.OK).send({});
+
 		} else {
 			res.status(HTTP.NOT_FOUND).send({});
 		}
