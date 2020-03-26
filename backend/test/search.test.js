@@ -69,6 +69,31 @@ describe('UCAS', () => {
 });
 
 
+test('Test past search is added', () => {
+	const testText = (Math.random()*10000).toString(32);
 
+	return fetch('http://localhost:3005/api/v1/account/login', {
+		method: 'POST',
+		body: JSON.stringify({email: 'testuser@myport.ac.uk', password: 'password'}),
+		headers: { 'Content-Type': 'application/json' },
+	}).then(resLoggedIn => {
+		return fetch(`http://localhost:3005/api/v1/search?text=${testText}&type=all&ucas=0&category=all&level=all&studyType=all&sandwich=all`, {
+			method: 'GET',
+			headers: {
+				cookie: resLoggedIn.headers.get('set-cookie'),
+			},
+		}).then(() => {
+			return fetch(`http://localhost:3005/api/v1/account/searches`, {
+				method: 'GET',
+				headers: {
+					cookie: resLoggedIn.headers.get('set-cookie'),
+				},
+			}).then(async res => {
+				const json = await res.json();
+				expect(json[0].text).toBe(testText);
+			})
+		})
+	});
+});
 
 
