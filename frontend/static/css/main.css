@@ -205,6 +205,15 @@ input[type=number]:focus {
 	padding: 0.5em 2em;
 
 	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+	-webkit-transition: .2s;
+	transition: all .2s;
+}
+
+.btn--default:hover {
+	background: var(--colour-border-button-default);
+	color: var(--colour-font-button-positive);
+	-webkit-transition: .2s;
+	transition: all .2s;
 }
 
 .btn--negative {
@@ -574,6 +583,19 @@ body > header a {
 	cursor: pointer;
 }
 
+#profile .card-stack {
+	row-gap: 1em;
+}
+
+#profile .card-stack li {
+	transition: background 0.3s linear;
+}
+
+#profile .card-stack li:hover {
+	background: rgba(0, 0, 0, 0.1);
+	transition: background 0.3s linear;
+}
+
 /* University info styling */
 
 #reviews {
@@ -745,6 +767,20 @@ body > header a {
 		grid-template-columns: auto;
 	}
 
+	#results {
+		display: grid;
+		grid-template-columns: auto auto;
+		grid-auto-rows: auto auto auto;
+
+		grid-template-areas: "info info"
+							 "label select"
+							 "results results";
+	}
+
+	#results label {
+		justify-self: start;
+	}
+
 	.header-header-left-right {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -756,6 +792,20 @@ body > header a {
 
 	.header-header-left-right > #left, .header-header-left-right > #right {
 		padding: 1em 0;
+	}
+
+	.filters-search {
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto auto;
+
+		grid-row-gap: 1em;
+
+		margin: 1em 0;
+	}
+
+	.filters-search > .card {
+		margin: 0 1em;
 	}
 
 	#profile {
