@@ -307,7 +307,7 @@ body > header a {
 #create-review-form {
 	width: 80%;
 	margin: auto;
-	padding: 10px 10px 10px 10px;	/* TODO: px should not be used for padding */
+	padding: 0.625em 0.625em 0.625em 0.625em;
 	border-radius: 33px;
 	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
 	rgba(158, 158, 158, 0.5) 6px 6px 6px;
@@ -316,8 +316,9 @@ body > header a {
 #create-review-form fieldset {
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
-	padding: 10px 0px 10px 0px;	/* TODO: px should not be used for padding */
+	padding: 0.625em 0em 0.625em 0em;
 	margin: auto;
+	border: none;
 }
 
 #create-review-form div legend {
@@ -327,7 +328,7 @@ body > header a {
 	color: var(--colour-font-heading);
 	font-weight: bold;
 	text-align: left;
-	padding: 10px 10px 10px 10px;/* TODO: px should not be used for padding */
+	padding: 0.625em 0.625em 0.625em 0.625em;
 	margin:auto;
 	border: none;
 }
