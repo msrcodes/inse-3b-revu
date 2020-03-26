@@ -205,6 +205,15 @@ input[type=number]:focus {
 	padding: 0.5em 2em;
 
 	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+	-webkit-transition: .2s;
+	transition: all .2s;
+}
+
+.btn--default:hover {
+	background: var(--colour-border-button-default);
+	color: var(--colour-font-button-positive);
+	-webkit-transition: .2s;
+	transition: all .2s;
 }
 
 .btn--negative {
@@ -572,6 +581,19 @@ body > header a {
 
 #search-container li {
 	cursor: pointer;
+}
+
+#profile .card-stack {
+	row-gap: 1em;
+}
+
+#profile .card-stack li {
+	transition: background 0.3s linear;
+}
+
+#profile .card-stack li:hover {
+	background: rgba(0, 0, 0, 0.1);
+	transition: background 0.3s linear;
 }
 
 /* University info styling */
