@@ -45,12 +45,17 @@ function sort(results) {
 function filter(results) {
 	const showUniversities = elems.showUniversities.checked;
 	const showDegrees = elems.showDegrees.checked;
+	const minUCAS = elems.ucasMin.value;
+	const maxUCAS = elems.ucasMax.value;
 
 	let filtered = [];
 
 	for (let result of results) {
 		if (result.degree_name != null) { // if it is a degree...
 			if (showDegrees) {
+				if (result.requirements_ucas < minUCAS || result.requirements_ucas > maxUCAS)
+					continue; // if out of UCAS bounds, skip
+
 				filtered.push(result);
 			}
 		} else { // if it is a university...
@@ -128,6 +133,22 @@ function addEventListeners() {
 	elems.sort.addEventListener('change', refresh);
 	elems.showUniversities.addEventListener('change', refresh);
 	elems.showDegrees.addEventListener('change', refresh);
+
+	elems.ucasMin.addEventListener('change', () => {
+		if (elems.ucasMin.value > elems.ucasMax.value) {
+			elems.ucasMax.value = elems.ucasMin.value;
+		}
+
+		populate();
+	});
+
+	elems.ucasMax.addEventListener('change', () => {
+		if (elems.ucasMin.value > elems.ucasMax.value) {
+			elems.ucasMax.value = elems.ucasMin.value;
+		}
+
+		populate();
+	});
 }
 
 function getElems() {
@@ -136,6 +157,8 @@ function getElems() {
 
 	elems.showUniversities = document.querySelector("#show-universities");
 	elems.showDegrees = document.querySelector("#show-degrees");
+	elems.ucasMin = document.querySelector("#ucas-min");
+	elems.ucasMax = document.querySelector("#ucas-max");
 }
 
 function onLoad() {
