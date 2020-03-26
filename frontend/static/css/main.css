@@ -56,6 +56,143 @@ main {
 	margin: 5vmin 5vmin;
 }
 
+legend {
+	font-family: var(--font-family-heading);
+	color: var(--colour-font-heading);
+	font-weight: bold;
+	margin-left: 1em;
+}
+
+fieldset {
+	display: inline-grid;
+	grid-template-rows: auto auto auto auto auto;
+	grid-template-columns: 1fr 1fr;
+	width: 100%;
+	border-radius: 10px;
+}
+
+fieldset label, fieldset input[type=checkbox] {
+	cursor: pointer;
+}
+
+fieldset label {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto;
+
+	align-items: center;
+
+	padding: 0 1em 0.5em;
+}
+
+fieldset label input, .checkbox-custom {
+	justify-self: end;
+}
+
+input[type=checkbox] {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+input[type=number] {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	border: 2px solid var(--colour-font-body);
+	padding: 0.5em;
+	text-align: center;
+	font-weight: bold;
+	font-family: var(--font-family-body);
+	color: var(--colour-font-button-default);
+	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+
+	transition: all 0.3s ease-out;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+}
+
+input[type=number]:focus {
+	outline: none;
+	border: 2px solid var(--colour-border-button-default);
+}
+
+#results select {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	border: 2px solid var(--colour-font-body);
+	font-family: var(--font-family-body);
+}
+
+#results select:focus {
+	outline: none;
+	border: 2px solid var(--colour-border-button-default);
+}
+
+.checkbox-custom {
+	height: 24px;
+	width: 24px;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	border: 2px solid var(--colour-font-body);
+
+	transition: all 0.3s ease-out;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+
+	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+}
+
+.checkbox-custom:hover {
+	border: 2px solid var(--colour-border-button-default);
+}
+
+.checkbox-custom:after {
+	position: absolute;
+	content: "";
+	left: 12px;
+	top: 12px;
+	height: 0;
+	width: 0;
+	border-radius: 5px;
+	border: solid maroon;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(0deg) scale(0);
+	-ms-transform: rotate(0deg) scale(0);
+	transform: rotate(0deg) scale(0);
+	opacity: 1;
+
+	transition: all 0.3s ease-out;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+}
+
+.checkbox-label input:checked ~ .checkbox-custom {
+	background-color: var(--colour-fill-button-positive);
+	border-radius: 5px;
+	-webkit-transform: rotate(0deg) scale(1);
+	-ms-transform: rotate(0deg) scale(1);
+	transform: rotate(0deg) scale(1);
+	opacity: 1;
+}
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+	-webkit-transform: rotate(45deg) scale(1);
+	-ms-transform: rotate(45deg) scale(1);
+	transform: rotate(45deg) scale(1);
+	opacity: 1;
+	left: 8px;
+	top: 3px;
+	width: 6px;
+	height: 12px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	background-color: transparent;
+	border-radius: 0;
+}
+
 .btn--default {
 	background: var(--colour-fill-button-default);
 	border: 3px solid var(--colour-border-button-default);

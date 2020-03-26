@@ -24,13 +24,27 @@
 		<h2>Filters</h2>
 		<fieldset>
 			<legend>Show</legend>
-			<label for="show-universities">Universities</label><input type="checkbox" id="show-universities" checked>
-			<label for="show-degrees">Degrees</label><input type="checkbox" id="show-degrees" checked>
+			<label class="checkbox-label">
+				<span>Universities</span>
+				<input type="checkbox" id="show-universities" checked>
+				<span class="checkbox-custom"></span>
+			</label>
+			<label class="checkbox-label">
+				<span>Degrees</span>
+				<input type="checkbox" id="show-degrees" checked>
+				<span class="checkbox-custom"></span>
+			</label>
 		</fieldset>
 		<fieldset>
 			<legend>UCAS Points</legend>
-			<label for="ucas-min">UCAS Min</label><input type="number" id="ucas-min" value="0" step="1" min="0" max="999">
-			<label for="ucas-max">UCAS Max</label><input type="number" id="ucas-max" value="200" step="1" min="0" max="999">
+			<label>
+				<span>UCAS Min</span>
+				<input type="number" id="ucas-min" value="0" step="1" min="0" max="999">
+			</label>
+			<label>
+				<span>UCAS Max</span>
+				<input type="number" id="ucas-max" value="200" step="1" min="0" max="999">
+			</label>
 		</fieldset>
 	</nav>
 	<section class="card" id="results">
