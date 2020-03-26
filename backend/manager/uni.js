@@ -15,7 +15,7 @@ const router = new express.Router();
  * @param res {Object} express response object
  */
 router.get('/uniNames', (req, res) => {
-	db.query('SELECT uni_name from university').then(dbRes => {
+	db.query('SELECT uni_name, uni_id from university').then(dbRes => {
 		res.send(dbRes.rows)
 	}).catch(() => {
 		res.status(500).send();
