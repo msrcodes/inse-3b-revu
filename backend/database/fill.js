@@ -87,4 +87,44 @@ const fillReviews = async () => {
   console.log(`Created ${totalReviews} reviews in ${timeTaken}ms`);
 };
 
-fillReviews();
+const fillUniDegree = async () => {
+  let total = 0;
+  let startTime = Date.now();
+
+  //--- Get degree IDs
+  const degrees = await db.query('SELECT * FROM degree');
+  const degreeIDs = [];
+  for (const degree of degrees.rows)
+    degreeIDs.push(degree.degree_id);
+
+  //--- Get uni IDs
+  const universities = await db.query('SELECT * FROM university');
+  const uniIDs = [];
+  for (const uni of universities.rows)
+    uniIDs.push(uni.uni_id);
+    
+  for (const uniID of uniIDs) {
+    for (const degreeID of degreeIDs) {
+      await db.query(
+        'INSERT INTO uni_degree (uni_id, degree_id, requirements_ucas, requirements_grades, degree_category, degree_level, degree_type, degree_sandwich) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+        [
+          uniID,
+          degreeID,
+          getRandomInt(80, 132),
+          selectRandomArray(['A', 'B', 'C', 'D', 'E']) + selectRandomArray(['A', 'B', 'C', 'D', 'E']) + selectRandomArray(['A', 'B', 'C', 'D', 'E']),
+          selectRandomArray(['technology']),
+          selectRandomArray(['undergraduate', 'postgraduate']),
+          selectRandomArray(['full', 'part']),
+          selectRandomArray([true, false])
+        ]
+      );
+    }
+  }
+
+  //--- Finish
+  let timeTaken = Date.now() - startTime;
+  console.log(`Created ${total} uni degrees in ${timeTaken}ms`);
+};
+
+// fillReviews();
+fillUniDegree();
