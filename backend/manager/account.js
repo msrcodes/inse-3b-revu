@@ -27,7 +27,7 @@ function getUser(req) {
 	return new Promise((resolve, reject) => {
 		const token = req.cookies.session;
 
-		db.query('SELECT * FROM users INNER JOIN user_session us ON users.email = us.email WHERE token = $1', [token]).then(dbRes => {
+		db.query('SELECT user_id, u.email, username FROM users as u INNER JOIN user_session us ON u.email = us.email WHERE token = $1', [token]).then(dbRes => {
 			if (dbRes.rowCount) {
 				resolve(dbRes.rows[0]);
 			}
@@ -228,6 +228,20 @@ router.post('/setEmail', async (req, res) => {
 		console.error(error);
 		return res.status(HTTP.INTERNAL_SERVER_ERROR).send();
 	}
+});
+
+/**
+ * memberOf manager.account
+ * @func /details
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
+router.get('/details', async (req, res) => {
+	getUser(req).then(userDetails => {
+		res.status(HTTP.OK).send(userDetails);
+	}).catch(() => {
+		res.status(HTTP.UNAUTHORIZED).send({});
+	})
 });
 
 
