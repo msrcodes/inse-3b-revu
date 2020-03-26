@@ -74,7 +74,7 @@ function cacheSearchTerm(query, results) {
  * @return {Object} searchResults object
  */
 async function checkCacheForSearchTerm(query) {
-	return new Promise(async (resolve, reject)=> {
+	return new Promise(async (resolve, reject) => {
 		const id = getCacheId(query);
 
 		const results = cache[id];

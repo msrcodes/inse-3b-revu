@@ -1,6 +1,6 @@
 'use strict';
 
-const elems= {};
+const elems = {};
 
 function getUniID() {
 	const url = window.location.search; //get url contents
@@ -60,8 +60,8 @@ async function getReviews() {
 			clone.querySelector("#accommodation-review-review").textContent = review.accommodation_rating_desc;
 
 			elems.container.append(clone);
+		}
 	}
-}
 }
 
 function getElems() {

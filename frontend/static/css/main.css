@@ -1,25 +1,27 @@
 /* Import fonts from the Google Fonts API */
-@import url(https://fonts.googleapis.com/css?family=Montserrat); 	/* Logo font */
-@import url(https://fonts.googleapis.com/css?family=Noto+Sans); 	/* Body font */
-@import url(https://fonts.googleapis.com/css?family=Roboto);		/* Button font */
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+/* Logo font */
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+/* Body font */
+@import url(https://fonts.googleapis.com/css?family=Roboto); /* Button font */
 
 :root {
 	--colour-fill-header: #FFFFFF;
 	--colour-fill-body: #EEEEEE;
 
-	--font-family-heading: "Noto Sans", serif;	/* Font family for all h1, h2, h3... h6 elements */
-	--font-family-logo: "Montserrat", serif;	/* Font family for logo element */
+	--font-family-heading: "Noto Sans", serif; /* Font family for all h1, h2, h3... h6 elements */
+	--font-family-logo: "Montserrat", serif; /* Font family for logo element */
 	--font-family-body: "Noto Sans", sans-serif; /* Font family for all body text elements */
-	--font-family-button: "Roboto", sans-serif;	/* Font family for button elements */
+	--font-family-button: "Roboto", sans-serif; /* Font family for button elements */
 
 	--colour-font-logo: #A6AEB0;
-	--colour-font-heading: #161922;	/* Font colour for all h1, h2, h3... h6 elements */
+	--colour-font-heading: #161922; /* Font colour for all h1, h2, h3... h6 elements */
 	--colour-font-body: #A3A5A8; /* Font colour for all body text elements */
 
-	--colour-border-button-positive: #2ECC71;	/* Colour for all "positive" interaction buttons */
-	--colour-fill-button-positive: #2ECC71;	/* Colour for all "positive" interaction buttons */
-	--colour-border-button-positive-hover: #27AE60;	/* Colour for all "positive" interaction buttons */
-	--colour-fill-button-positive-hover: #27AE60;	/* Colour for all "positive" interaction buttons */
+	--colour-border-button-positive: #2ECC71; /* Colour for all "positive" interaction buttons */
+	--colour-fill-button-positive: #2ECC71; /* Colour for all "positive" interaction buttons */
+	--colour-border-button-positive-hover: #27AE60; /* Colour for all "positive" interaction buttons */
+	--colour-fill-button-positive-hover: #27AE60; /* Colour for all "positive" interaction buttons */
 
 	--colour-font-button-positive: #FFFFFF;
 
@@ -231,18 +233,18 @@ input[type=number]:focus {
 }
 
 .btn--positive {
-	 background: var(--colour-fill-button-positive);
-	 border: 3px solid var(--colour-border-button-positive);
-	 color: var(--colour-font-button-positive);
-	 font-weight: bolder;
-	 font-size: 100%;
-	 text-transform: uppercase;
-	 border-radius: 13px;
-	 cursor: pointer;
-	 padding: 1em 3em;
+	background: var(--colour-fill-button-positive);
+	border: 3px solid var(--colour-border-button-positive);
+	color: var(--colour-font-button-positive);
+	font-weight: bolder;
+	font-size: 100%;
+	text-transform: uppercase;
+	border-radius: 13px;
+	cursor: pointer;
+	padding: 1em 3em;
 
-	 box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
- }
+	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+}
 
 .btn--positive:hover {
 	background: var(--colour-fill-button-positive-hover);
@@ -287,7 +289,7 @@ input[type=number]:focus {
 	cursor: pointer;
 }
 
-.textarea {	/* TODO: generify, does this need to be a class? */
+.textarea { /* TODO: generify, does this need to be a class? */
 	width: 100%;
 	height: 150px;
 	padding: 20px 10px 20px 10px;
@@ -299,14 +301,14 @@ input[type=number]:focus {
 	resize: none;
 	font-family: --font-family-body, sans-serif;
 }
+
 /* Grid page layouts */
 
 .header-header-left-right {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto 1fr;
-	grid-template-areas: "header header"
-						 "left right";
+	grid-template-areas: "header header" "left right";
 }
 
 .header-header-left-right > header {
@@ -506,7 +508,7 @@ body > header a {
 	font-weight: bold;
 	text-align: left;
 	padding: 0.625em 0.625em 0.625em 0.625em;
-	margin:auto;
+	margin: auto;
 	border: none;
 }
 
@@ -516,9 +518,7 @@ body > header a {
 
 /* Degree info styling */
 #degree {
-	grid-template-areas:
-		"name overallRating"
-		"entryRequirements rating";
+	grid-template-areas: "name overallRating" "entryRequirements rating";
 }
 
 #degree-name {
@@ -542,8 +542,7 @@ body > header a {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto auto;
-	grid-template-areas: "header header"
-	"reviews searches";
+	grid-template-areas: "header header" "reviews searches";
 
 	grid-column-gap: 3em;
 	grid-row-gap: 1em;
@@ -628,14 +627,12 @@ body > header a {
 }
 
 .review-card {
-	 width: 90%;
+	width: 90%;
 }
 
 #university {
 
-	grid-template-areas:
-		"name overallRating"
-		"info rating";
+	grid-template-areas: "name overallRating" "info rating";
 
 }
 
@@ -648,7 +645,7 @@ body > header a {
 }
 
 #university-average-rating {
-	padding:0 2em;
+	padding: 0 2em;
 }
 
 /* Search result page styling */
@@ -665,8 +662,7 @@ body > header a {
 	grid-template-columns: auto auto auto;
 	grid-auto-rows: auto auto;
 
-	grid-template-areas: "info label select"
-						 "results results results";
+	grid-template-areas: "info label select" "results results results";
 
 	align-items: center;
 }
@@ -743,8 +739,7 @@ body > header a {
 		display: grid;
 		grid-template-columns: auto auto auto;
 		grid-template-rows: auto auto;
-		grid-template-areas: "logo button profile"
-		"search search search";
+		grid-template-areas: "logo button profile" "search search search";
 
 		background: var(--colour-fill-header);
 	}
@@ -770,9 +765,7 @@ body > header a {
 		grid-template-columns: auto auto;
 		grid-auto-rows: auto auto auto;
 
-		grid-template-areas: "info info"
-							 "label select"
-							 "results results";
+		grid-template-areas: "info info" "label select" "results results";
 	}
 
 	#results label {
@@ -783,9 +776,7 @@ body > header a {
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 1fr 1fr;
-		grid-template-areas: "header"
-							 "left"
-							 "right";
+		grid-template-areas: "header" "left" "right";
 	}
 
 	.header-header-left-right > #left, .header-header-left-right > #right {
@@ -809,9 +800,7 @@ body > header a {
 	#profile {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 1fr 1fr;
-		grid-template-areas: "header"
-		"reviews"
-		"searches";
+		grid-template-areas: "header" "reviews" "searches";
 		grid-row-gap: 1em;
 	}
 
@@ -837,9 +826,7 @@ body > header a {
 		display: grid;
 		grid-template-columns: auto auto;
 		grid-template-rows: auto auto auto;
-		grid-template-areas: "logo profile"
-		"button button"
-		"search search";
+		grid-template-areas: "logo profile" "button button" "search search";
 
 		background: var(--colour-fill-header);
 	}

@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="static/css/main.css">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="static/css/main.css" rel="stylesheet">
 	<title>REVU</title>
 </head>
 <body>
 <header>
 	<a href="/"><h1>REVU</h1></a>
 	<label id="container-search">
-		<img src="static/img/search.png" alt="Search" draggable="false">
-		<input type="text" id="input-search" placeholder="Search reviews, degrees, universities...">
-		<a href="#" aria-label="Press to search" id="search-button">&gt;</a>
+		<img alt="Search" draggable="false" src="static/img/search.png">
+		<input id="input-search" placeholder="Search reviews, degrees, universities..." type="text">
+		<a aria-label="Press to search" href="#" id="search-button">&gt;</a>
 	</label>
-	<a href="#" id="a-writereview"><button class="btn--positive" id="btn-writereview">Write your review</button></a>
+	<a href="#" id="a-writereview">
+		<button class="btn--positive" id="btn-writereview">Write your review</button>
+	</a>
 	<a href="login.html" id="profile-a-link">
-		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+		<img alt="Profile icon" draggable="false" id="img-profile-status-icon" src="static/img/default-user.png">
 		<span id="username-profile-status">Log In</span>
 	</a>
 </header>
@@ -27,12 +29,12 @@
 			<legend>Show</legend>
 			<label class="checkbox-label">
 				<span>Universities</span>
-				<input type="checkbox" id="show-universities" checked>
+				<input checked id="show-universities" type="checkbox">
 				<span class="checkbox-custom"></span>
 			</label>
 			<label class="checkbox-label">
 				<span>Degrees</span>
-				<input type="checkbox" id="show-degrees" checked>
+				<input checked id="show-degrees" type="checkbox">
 				<span class="checkbox-custom"></span>
 			</label>
 		</fieldset>
@@ -40,18 +42,18 @@
 			<legend>UCAS Points</legend>
 			<label>
 				<span>UCAS Min</span>
-				<input type="number" id="ucas-min" value="0" step="1" min="0" max="999">
+				<input id="ucas-min" max="999" min="0" step="1" type="number" value="0">
 			</label>
 			<label>
 				<span>UCAS Max</span>
-				<input type="number" id="ucas-max" value="200" step="1" min="0" max="999">
+				<input id="ucas-max" max="999" min="0" step="1" type="number" value="200">
 			</label>
 		</fieldset>
 	</nav>
 	<section class="card" id="results">
 		<h2 id="info">No results found</h2>
 		<label for="sort">Sort By</label>
-		<select name="sort" id="sort">
+		<select id="sort" name="sort">
 			<option value="alpha_desc">Alphabetical (A -> Z)</option>
 			<option value="alpha_asc">Alphabetical (Z -> A)</option>
 			<option value="req_asc">Entry Requirements (Low to High)</option>

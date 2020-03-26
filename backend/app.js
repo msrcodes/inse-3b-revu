@@ -19,7 +19,7 @@ app.use('/static', express.static(path.join(__dirname, '../frontend/static')), e
 app.use('/api/v1', apiRouter, errorNotFound);
 
 // Serve rest of frontend
-app.use(express.static(path.join(__dirname, '../frontend'), { extensions: ['html'] }));
+app.use(express.static(path.join(__dirname, '../frontend'), {extensions: ['html']}));
 
 //--- Serve jsdoc route if app is in development environment
 if (process.env.NODE_ENV === 'development')
