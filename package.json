@@ -15,7 +15,8 @@
 	"scripts": {
 		"start": "cross-env NODE_ENV=production node backend/app.js",
 		"dev": "cross-env NODE_ENV=development nodemon node backend/app.js",
-		"setup": "createdb revu; psql < database_structure.sql; cp backend/config/defaultconfig.json backend/config/config.json; echo 'You must put a valid postmark api key in config'",
+		"fill-db": "node backend/database/fill.js",
+		"setup": "createdb revu; psql < database_structure.sql; cp backend/config/defaultconfig.json backend/config/config.json; echo 'You must put a valid postmark api key in config'; npm run fill-db",
 		"test": "jest"
 	},
 	"private": true,
