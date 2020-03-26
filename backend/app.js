@@ -21,6 +21,9 @@ app.use('/api/v1', apiRouter, errorNotFound);
 // Serve rest of frontend
 app.use(express.static(path.join(__dirname, '../frontend'), {extensions: ['html']}));
 
+// 404 for all other pages
+app.use('', errorNotFound);
+
 //--- Serve jsdoc route if app is in development environment
 if (process.env.NODE_ENV === 'development')
 	app.use('/doc', express.static(path.join(__dirname, '../out')));

@@ -58,6 +58,10 @@ main {
 	margin: 5vmin 5vmin;
 }
 
+main > p {
+	padding: 1em 0;
+}
+
 legend {
 	font-family: var(--font-family-heading);
 	color: var(--colour-font-heading);
