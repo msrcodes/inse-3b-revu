@@ -5,11 +5,25 @@ function get() {
 }
 
 function compareByName(a, b) {
-	if (a.uni_name < b.uni_name) {
+	let aName;
+	if (a.degree_name != null) {
+		aName = a.degree_name;
+	} else {
+		aName = a.uni_name;
+	}
+
+	let bName;
+	if (b.degree_name != null) {
+		bName = b.degree_name;
+	} else {
+		bName = b.uni_name;
+	}
+
+	if (aName < bName) {
 		return -1;
 	}
 
-	if (a.uni_name > b.uni_name) {
+	if (aName > bName) {
 		return 1;
 	}
 
@@ -44,9 +58,14 @@ function populate() {
 	// populate info
 	if (results.length === 1) {
 		elems.info.textContent = `${results.length} result found`;
+	} else if (results.length >= 100) {
+		elems.info.textContent = `${results.length} results found, showing 100`;
 	} else {
 		elems.info.textContent = `${results.length} results found`;
 	}
+
+	// display first 100 results
+	results = results.splice(0, 100);
 
 	// add li elems
 	const template = document.querySelector("#li-template");
@@ -54,12 +73,22 @@ function populate() {
 
 	for (const result of results) {
 		const clone = template.content.cloneNode(true);
-		clone.querySelector(".result-main").textContent = result.uni_name;
-		clone.querySelector(".result-sub").textContent = "";
-		clone.querySelector(".result-rating").textContent = ""; // TODO
-		clone.querySelector(".btn--default").addEventListener('click', () => window.location = `/universityInfo?uniId=${result.uni_id}`);
 
-		container.append(clone);
+		if (result.degree_name != null) { // if it is a degree...
+			clone.querySelector(".result-main").textContent = result.degree_name;
+			clone.querySelector(".result-sub").textContent = result.uni_name;
+			clone.querySelector(".result-rating").textContent = ""; // TODO
+			clone.querySelector(".btn--default").addEventListener('click', () => window.location = `/degreeInfo?degreeId=${result.degree_id}`);
+
+			container.append(clone);
+		} else { // if it is a university...
+			clone.querySelector(".result-main").textContent = result.uni_name;
+			clone.querySelector(".result-sub").textContent = "";
+			clone.querySelector(".result-rating").textContent = ""; // TODO
+			clone.querySelector(".btn--default").addEventListener('click', () => window.location = `/universityInfo?uniId=${result.uni_id}`);
+
+			container.append(clone);
+		}
 	}
 }
 
