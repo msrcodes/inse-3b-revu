@@ -42,6 +42,27 @@ function sort(results) {
 	return results;
 }
 
+function filter(results) {
+	const showUniversities = elems.showUniversities.checked;
+	const showDegrees = elems.showDegrees.checked;
+
+	let filtered = [];
+
+	for (let result of results) {
+		if (result.degree_name != null) { // if it is a degree...
+			if (showDegrees) {
+				filtered.push(result);
+			}
+		} else { // if it is a university...
+			if (showUniversities) {
+				filtered.push(result);
+			}
+		}
+	}
+
+	return filtered;
+}
+
 function populate() {
 	let results = get();
 
@@ -51,6 +72,9 @@ function populate() {
 
 	// get JS object
 	results = JSON.parse(results);
+
+	// filter
+	results = filter(results);
 
 	// sort
 	results = sort(results);
@@ -92,19 +116,26 @@ function populate() {
 	}
 }
 
+function refresh() {
+	const container = document.querySelector("#results-container");
+
+	container.innerHTML = "";
+
+	populate();
+}
+
 function addEventListeners() {
-	elems.sort.addEventListener('change', () => {
-		const container = document.querySelector("#results-container");
-
-		container.innerHTML = "";
-
-		populate();
-	});
+	elems.sort.addEventListener('change', refresh);
+	elems.showUniversities.addEventListener('change', refresh);
+	elems.showDegrees.addEventListener('change', refresh);
 }
 
 function getElems() {
 	elems.info = document.querySelector("#info");
 	elems.sort = document.querySelector("#sort");
+
+	elems.showUniversities = document.querySelector("#show-universities");
+	elems.showDegrees = document.querySelector("#show-degrees");
 }
 
 function onLoad() {
