@@ -41,35 +41,31 @@ async function getAverageReviews() {
 
 async function getReviews() {
 	const response = await fetch('/api/v1/review/university/' + getUniID());
-	if (!response.ok) {
-		console.error("No reviews found");
-		//Uni not found error
+	if (response.ok) {
+		const data = await response.json();
+		const template = document.querySelector("#review-template");
+
+		for (const review of data) {
+			const clone = template.content.cloneNode(true);
+			clone.querySelector("#uni-id").textContent = elems.uniName.textContent; // gets uni name from page
+
+			const response = await fetch('/api/v1/degree/' + review.degree_id); //get degree name
+			const data = await response.json();
+
+			clone.querySelector("#degree-id").textContent = data.degree_name;
+			clone.querySelector("#degree-review-rating").textContent = "Average Degree Rating: " + review.degree_rating;
+			clone.querySelector("#degree-review-review").textContent = review.degree_rating_desc;
+			clone.querySelector("#staff-review-rating").textContent = "Staff Rating: " + review.staff_rating;
+			clone.querySelector("#staff-review-review").textContent = review.staff_rating_desc;
+			clone.querySelector("#facility-review-rating").textContent = "Facility Rating: " + review.facility_rating;
+			clone.querySelector("#facility-review-review").textContent = review.facility_rating_desc;
+			clone.querySelector("#university-review-rating").textContent = "University rating: " + review.uni_rating;
+			clone.querySelector("#university-review-review").textContent = review.uni_rating_desc;
+			clone.querySelector("#accommodation-review-rating").textContent = "Accommodation rating: " + review.accommodation_rating;
+			clone.querySelector("#accommodation-review-review").textContent = review.accommodation_rating_desc;
+
+			elems.container.append(clone);
 	}
-	const data = await response.json();
-
-	console.log(data.uni_id);
-	if (!data.ok) {
-		console.error(response.statusText);
-		const clone = elems.templateFail.content.cloneNode(true);
-		elems.container.append(clone);
-		return;
-	}
-
-	for (const reviews of data) {
-		const clone = elem.template.content.cloneNode(true);
-
-		elems.reviewUniId.textContent = data.uni_id;
-		elems.reviewDegreeId.textContent = data.degree_id
-		elems.reviewAvgDegreeRating.textContent = "Degree rating: " + data.degree_rating;
-		elems.reviewDegreeReview.textContent = data.degree_rating_desc;
-		elems.reviewSatffRating.textContent = "Staff rating: " + data.staff_rating;
-		elems.reviewStaffReview.textContent = data.staff_rating_desc;
-		elems.reviewFacilityRating.textContent = "Facility rating: " + data.facility_rating;
-		elems.reviewFacilityReview.textContent = data.facility_rating_desc;
-		elems.reviewUniversityRating.textContent = "University rating: " + data.university_rating;
-		elems.reviewUniversityReview.textContent = data.university_rating_desc;
-		elems.reviewAccommodationRating.textContent = "Accommodation rating: " + data.accommodation_rating;
-		elems.reviewAccommodationReview.textContent = data.accommodation_rating_desc;
 }
 }
 
@@ -80,25 +76,11 @@ function getElems() {
 	elems.facilityRating = document.querySelector("#facility-rating");
 	elems.universityRating = document.querySelector("#university-rating");
 	elems.accommodationRating = document.querySelector("#accommodation-rating");
-
-	elems.template = document.querySelector("#review-template");
-	elems.templateFail = document.querySelector('#no-reviews-found');
 	elems.container = document.querySelector('#reviews');
-	elems.loadMoreReviewsButton = document.querySelector("load-more-reviews");
 
 
-	elems.reviewUniId = document.querySelector("uni-id");
-	elems.reviewDegreeId = document.querySelector("degree-id");
-	elems.reviewAvgDegreeRating = document.querySelector("degree-review-rating");
-	elems.reviewDegreeReview = document.querySelector("degree-review-review");
-	elems.reviewSatffRating = document.querySelector("staff-review-rating");
-	elems.reviewStaffReview = document.querySelector("staff-review-review");
-	elems.reviewFacilityRating = document.querySelector("facility-review-rating");
-	elems.reviewFacilityReview = document.querySelector("facility-review-review");
-	elems.reviewUniversityRating = document.querySelector("university-review-rating");
-	elems.reviewUniversityReview = document.querySelector("university-review-review");
-	elems.reviewAccommodationRating = document.querySelector("accommodation-review-rating");
-	elems.reviewAccommodationReview = document.querySelector("accommodation-review-rating");
+
+	elems.templateFail = document.querySelector('#no-reviews-found'); //might removed idk
 
 
 }
