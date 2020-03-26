@@ -27,7 +27,6 @@ async function getUserReviews() {
 	let reviews;
 	if (respDetails.ok) {
 		const respJson = await respDetails.json();
-		console.log(`api/v1/review/user/${respJson.user_id}`);
 		const response = await fetch(`api/v1/review/user/${respJson.user_id}`);
 
 		if (response.ok) {
@@ -49,8 +48,41 @@ async function getUserSearches() {
 
 }
 
-function populateUserReviews(reviews) {
-	console.log(reviews);
+async function populateUserReviews(reviews) {
+	const template = document.querySelector("#review-profile-display");
+	const container = document.querySelector("#review-container");
+
+	for (const review of reviews) {
+		const clone = template.content.cloneNode(true);
+
+		const nameResponse = await fetch(`api/v1/uni/${review.uni_id}`);
+		if (nameResponse.ok) {
+			const json = await nameResponse.json();
+
+			clone.querySelector(".uni-name").textContent = json.uni_name;
+		} else {
+			clone.querySelector(".uni-name").textContent = "Unknown University";
+		}
+
+		const degreeResponse = await fetch(`api/v1/degree/${review.degree_id}`);
+		if (degreeResponse.ok) {
+			const json = await degreeResponse.json();
+
+			clone.querySelector(".degree-name").textContent = json.degree_name;
+		} else {
+			clone.querySelector(".degree-name").textContent = "Unknown Degree";
+		}
+
+		const rating = (Number(review.degree_rating) + Number(review.staff_rating) + Number(review.facility_rating) + Number(review.uni_rating) + Number(review.accommodation_rating)) / 5;
+
+		clone.querySelector(".rating").textContent = `Your Rating: ${rating.toFixed(1)}`;
+
+		clone.querySelector(".edit").href = `/editReview?review_id=${review.review_id}`;
+
+		// TODO: delete?
+
+		container.appendChild(clone);
+	}
 }
 
 async function logout() {
