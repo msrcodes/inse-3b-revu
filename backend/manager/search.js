@@ -207,7 +207,7 @@ router.get('/', [AuthValidation.validSessionOptional, async (req, res) => {
 
 		res.send(results);
 		cacheSearchTerm(query, results);
-		if (req.account.user_id) {
+		if (req.account && req.account.user_id) {
 			db.query('INSERT INTO user_searches (user_id, text, time) VALUES ($1, $2, now())', [req.account.user_id, query.text]);
 		}
 	});
