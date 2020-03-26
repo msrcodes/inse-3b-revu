@@ -364,17 +364,25 @@ input[type=number]:focus {
 
 .grid-layout {
 	display: grid;
-	grid-template-rows: 0fr 2fr 1fr;
+	grid-template-rows: 0 2fr 1fr;
 	grid-template-columns: 1fr 1fr;
+	column-gap: 1em;
+	row-gap: 1em;
+	padding-bottom: 1em;
+}
+
+.grid-layout h2 {
+	align-self: end;
 }
 
 #university > .grid-layout {
-	grid-template-rows: 0fr 2fr 0.25fr;
+	grid-template-rows: auto 2fr;
 }
 
 #degree > .grid-layout {
-	grid-template-rows: 0fr 2fr 0.25fr;
+	grid-template-rows: auto 2fr;
 }
+
 /* Header styling */
 
 body > header {
@@ -602,10 +610,9 @@ body > header a {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto;
-	grid-column-gap: 5%;
-	grid-row-gap: 2.5%;
-	margin-right: 2.5%;
-	margin-left: 2.5%;
+	grid-column-gap: 1em;
+	grid-row-gap: 1em;
+	padding-top: 1em;
 }
 
 .review-template {
@@ -614,13 +621,14 @@ body > header a {
 }
 
 #review-box {
-	display: inline-grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr;
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: auto;
+	grid-auto-rows: auto;
 }
 
 .review-card {
- width: 90%;
+	 width: 90%;
 }
 
 #university {
@@ -629,10 +637,6 @@ body > header a {
 		"name overallRating"
 		"info rating";
 
-}
-
-#university-name {
-	padding:0 2em;
 }
 
 #degree-overallRating {
@@ -647,12 +651,6 @@ body > header a {
 	padding:0 2em;
 }
 
-.divider {
-	border-bottom: 1px solid #707070;
-	padding: 0 2em;
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
 /* Search result page styling */
 .filters-search {
 	display: grid;
