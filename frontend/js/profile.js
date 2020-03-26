@@ -39,13 +39,58 @@ async function getUserReviews() {
 		reviews = ['Unable to get account details'];
 	}
 
-
-
 	return reviews;
 }
 
 async function getUserSearches() {
+	const respSearches = await fetch('api/v1/account/searches');
+	let searches;
+	if (respSearches.ok) {
+		searches = await respSearches.json();
+	} else {
+		searches = [];
+	}
+	return searches;
+}
 
+async function doSearchFromProfile(text) {
+	const query = {
+		text: text,
+		type: 'all',
+		ucas: 0,
+		category: 'all',
+		level: 'all',
+		studyType: 'all',
+		sandwich: 'all',
+	};
+
+	const response = await fetch(`api/v1/search?text=${query.text}&type=${query.type}&ucas=${query.ucas}&category=${query.category}&level=${query.level}&studyType=${query.studyType}&sandwich=${query.sandwich}`);
+
+	if (response.ok) {
+		const json = await response.json();
+
+		sessionStorage.setItem('searchText', query.text);
+		sessionStorage.setItem('results', JSON.stringify(json));
+
+		window.location = '/searchResults';
+	} else {
+		console.error(response.statusText);
+	}
+}
+
+async function populateUserSearches(searches) {
+	const searchContainer = document.querySelector("#search-container");
+
+	for (const search of searches) {
+		const elem = document.createElement("li");
+		elem.appendChild(document.createTextNode(search.text));
+
+		elem.classList.add("card");
+
+		elem.addEventListener('click', () => doSearchFromProfile(search.text));
+
+		searchContainer.appendChild(elem);
+	}
 }
 
 async function populateUserReviews(reviews) {
@@ -110,6 +155,7 @@ async function onLoad() {
 	const status = await checkAndRedirect();
 	addEventListeners();
 	getUserReviews(status).then(reviews => populateUserReviews(reviews));
+	getUserSearches().then(searches => populateUserSearches(searches));
 }
 
 window.addEventListener('load', onLoad);

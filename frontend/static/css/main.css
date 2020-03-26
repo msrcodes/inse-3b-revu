@@ -108,6 +108,7 @@ main {
 	border-radius: 33px;
 	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
 	rgba(158, 158, 158, 0.5) 6px 6px 6px;
+	list-style: none;
 }
 
 .slider {
@@ -430,6 +431,10 @@ body > header a {
 
 #profile-reviews h3, #profile-searches h3 {
 	padding-bottom: 1em;
+}
+
+#search-container li {
+	cursor: pointer;
 }
 
 /* University info styling */
