@@ -448,8 +448,16 @@ body > header a {
 	grid-area: search;
 
 	display: grid;
-	grid-template-columns: 1.5em auto;
+	grid-template-columns: 1.5em auto fit-content(1em);
 	grid-template-rows: auto;
+
+	margin-right: 1em;
+}
+
+#container-search a {
+	color: var(--colour-font-heading);
+	font-weight: bold;
+	text-decoration: none;
 }
 
 #container-search img {
