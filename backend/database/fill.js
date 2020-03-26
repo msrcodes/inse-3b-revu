@@ -80,6 +80,7 @@ const fillReviews = async () => {
     );
 
     totalReviews++;
+    console.log(totalReviews);
   }
 
   //--- Finish
@@ -118,6 +119,9 @@ const fillUniDegree = async () => {
           selectRandomArray([true, false])
         ]
       );
+
+      total++;
+      console.log(total);
     }
   }
 
