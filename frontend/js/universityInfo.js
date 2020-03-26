@@ -28,7 +28,7 @@ async function getAverageReviews() {
 		elems.avgDegreeRating.textContent = `Average degree rating: ${Number(data.avg_degree_rating).toFixed(1)}`;
 		elems.staffRating.textContent = `Staff rating: ${Number(data.avg_staff_rating).toFixed(1)}`;
 		elems.facilityRating.textContent = `Facilities rating: ${Number(data.avg_facility_rating).toFixed(1)}`;
-		elems.universityRating.textContent = `University rating: ${Number(data.avg_uni_rating).toFixed(1)}`;
+		elems.universityRating.textContent = `University experience rating: ${Number(data.avg_uni_rating).toFixed(1)}`;
 		elems.accommodationRating.textContent = `Accommodation rating: ${Number(data.avg_accommodation_rating).toFixed(1)}`;
 	} else {
 		console.error((response.statusText));
