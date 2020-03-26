@@ -27,11 +27,11 @@ async function getAverageReviews() {
 	const response = await fetch('/api/v1/review/university/'+getUniID()+'/average');
 	if (response.ok) {
 		const data = await response.json();
-		elems.avgDegreeRating.textContent = "Average degree rating : " + Math.round(data.avg_degree_rating);
-		elems.staffRating.textContent = "Staff rating : " + Math.round(data.avg_staff_rating);
-		elems.facilityRating.textContent = "Facilities rating : " + Math.round(data.avg_facility_rating);
-		elems.universityRating.textContent = "University rating : " + Math.round(data.avg_uni_rating);
-		elems.accommodationRating.textContent = "Accommodation rating : " + Math.round(data.avg_accommodation_rating)
+		elems.avgDegreeRating.textContent = "Average degree rating : " + (parseFloat(data.avg_degree_rating).toFixed(1));
+		elems.staffRating.textContent = "Staff rating : " + (parseFloat(data.avg_staff_rating).toFixed(1));
+		elems.facilityRating.textContent = "Facilities rating : " + (parseFloat(data.avg_facility_rating).toFixed(1));
+		elems.universityRating.textContent = "University rating : " + (parseFloat(data.avg_uni_rating).toFixed(1));
+		elems.accommodationRating.textContent = "Accommodation rating : " + (parseFloat(data.avg_accommodation_rating).toFixed(1));
 	}
 	else
 	{
