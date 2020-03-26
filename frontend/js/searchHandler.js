@@ -46,7 +46,7 @@ function populateSearchBar() {
 }
 
 function addSearchEventListeners() {
-	searchElems.searchBar.addEventListener('keypress', (event) => {
+	searchElems.searchBar.addEventListener('keydown', (event) => {
 		if (searchElems.searchBar.value !== "" && event.code === 'Enter') {
 			doSearch();
 		}
