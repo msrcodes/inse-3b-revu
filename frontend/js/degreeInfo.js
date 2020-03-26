@@ -30,7 +30,6 @@ async function getAverageReviews() {
 		const data = await response.json();
 		elems.staffRating.textContent = "Staff rating : " + (parseFloat(data.avg_staff_rating).toFixed(1));
 		elems.facilityRating.textContent = "Facilities rating : " + (parseFloat(data.avg_facility_rating).toFixed(1));
-		elems.universityRating.textContent = "University rating : " + (parseFloat(data.avg_uni_rating).toFixed(1));
 		elems.accommodationRating.textContent = "Accommodation rating : " + (parseFloat(data.avg_accommodation_rating).toFixed(1));
 	}
 	else
@@ -77,7 +76,6 @@ function getElems() {
 	elems.degreeName = document.querySelector("#degree-name-text");
 	elems.staffRating = document.querySelector("#staff-rating");
 	elems.facilityRating = document.querySelector("#facility-rating");
-	elems.universityRating = document.querySelector("#university-rating");
 	elems.accommodationRating = document.querySelector("#accommodation-rating");
 
 	elems.template = document.querySelector("#review-template");
