@@ -70,19 +70,33 @@ main {
 	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
 }
 
-.btn--positive {
-	background: var(--colour-fill-button-positive);
-	border: 3px solid var(--colour-border-button-positive);
-	color: var(--colour-font-button-positive);
+.btn--negative {
+	background: var(--colour-fill-button-negative);
+	border: 3px solid var(--colour-border-button-negative);
+	color: var(--colour-font-button-default);
 	font-weight: bolder;
 	font-size: 100%;
 	text-transform: uppercase;
 	border-radius: 13px;
 	cursor: pointer;
-	padding: 1em 3em;
+	padding: 0.5em 2em;
 
 	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
 }
+
+.btn--positive {
+	 background: var(--colour-fill-button-positive);
+	 border: 3px solid var(--colour-border-button-positive);
+	 color: var(--colour-font-button-positive);
+	 font-weight: bolder;
+	 font-size: 100%;
+	 text-transform: uppercase;
+	 border-radius: 13px;
+	 cursor: pointer;
+	 padding: 1em 3em;
+
+	 box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+ }
 
 .btn--positive:hover {
 	background: var(--colour-fill-button-positive-hover);

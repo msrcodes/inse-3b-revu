@@ -129,6 +129,22 @@ router.get('/degree/:ID', async (req, res) => {
   return res.status(HTTP.OK).send(reviews.rows);
 });
 
+/**
+ * @memberOf manager.review
+ * @function /:id
+ * @param req {Object} express request object
+ * @param res {Object} express response object
+ */
+router.get('/:id', async (req, res) => {
+	const id = Number(req.params.id);
+	const dbRes = await db.query('select * from review where review.review_id = $1', [id]);
+	if (dbRes.rowCount) {
+		return res.send(dbRes.rows[0]);
+	} else {
+		return res.status(HTTP.NOT_FOUND).send({});
+	}
+});
+
 router.get('/degree/:ID/average', async (req, res) => {
   req.params.ID = Number(req.params.ID);
   const data = await db.query('SELECT AVG(degree_rating) AS avg_degree_rating, AVG(staff_rating) AS avg_staff_rating, AVG(facility_rating) AS avg_facility_rating, AVG(uni_rating) AS avg_uni_rating, AVG(accommodation_rating) AS avg_accommodation_rating FROM review WHERE degree_id = $1', [req.params.ID]);
@@ -190,8 +206,9 @@ router.post('/create', [AuthValidation.validSessionNeeded, routerPostCreate]);
  * @function /update
  * @param req {Object} express request object
  * @param req.body {Object} json request body
- * @param req.body.universityID {Number}
- * @param req.body.degreeID {Number}
+ * @param req.body.universityId {Number}
+ * @param req.body.degreeId {Number}
+ * @param req.body.reviewId {Number}
  * @param req.body.degreeRating {Number}
  * @param req.body.degreeReview {String}
  * @param req.body.staffRating {Number}
