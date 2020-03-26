@@ -30,6 +30,30 @@ function compareByName(a, b) {
 	return 0;
 }
 
+function compareByUCAS(a, b) {
+	// If neither result is a degree
+	if (a.degree_name == null && b.degree_name == null)
+		return 0;
+
+	// If a is not a degree and b is a degree
+	if (a.degree_name == null && b.degree_name != null)
+		return -1;
+
+	// If a is a degree and b is not a degree
+	if (a.degree_name != null && b.degree_name == null)
+		return 1;
+
+	if (a.requirements_ucas < b.requirements_ucas) {
+		return -1;
+	}
+
+	if (a.requirements_ucas > b.requirements_ucas) {
+		return 1;
+	}
+
+	return 0;
+}
+
 function sort(results) {
 	const val = elems.sort.value;
 
@@ -37,13 +61,17 @@ function sort(results) {
 		return results.sort(compareByName);
 	} else if (val === "alpha_asc") {
 		return results.sort(compareByName).reverse();
+	} else if (val === "req_desc") {
+		return results.sort(compareByUCAS);
+	} else if (val === "req_asc") {
+		return results.sort(compareByUCAS).reverse();
 	}
 
 	return results;
 }
 
 function filter(results) {
-	const showUniversities = elems.showUniversities.checked;
+	const showUniversities = elems.showUniversities.checked && elems.sort.value !== "req_asc" && elems.sort.value !== "req_desc";
 	const showDegrees = elems.showDegrees.checked;
 	const minUCAS = elems.ucasMin.value;
 	const maxUCAS = elems.ucasMax.value;
