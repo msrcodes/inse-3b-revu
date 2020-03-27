@@ -5,8 +5,9 @@ Read the documentation: [GitHub pages](https://mikaelsrozee.github.io/inse-3b-re
 
 
 ## Dependencies
-* PostgreSQL
-* Python to install bcrypt
+* [PostgreSQL](https://www.postgresql.org/)
+* [Python](https://www.python.org/) (to install bcrypt)
+* [NodeJS](https://nodejs.org/)
 
 
 ## Install through npm
