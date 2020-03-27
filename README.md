@@ -22,9 +22,9 @@ The domain name is localhost:3000 if you're running this locally and the port is
 `npm start`
 
 ## GitHub usernames -> UP numbers
-mikaelsrozee -> 889658
-dig -> 885013
-ashleycma -> 890481
-frontside3mmett -> 870699
-Nathan-Chapman -> 892655
-HarryJLFoster -> 855232
+- mikaelsrozee -> 889658
+- dig -> 885013
+- ashleycma -> 890481
+- frontside3mmett -> 870699
+- Nathan-Chapman -> 892655
+- HarryJLFoster -> 855232
