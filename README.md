@@ -14,11 +14,17 @@ Read the documentation: [GitHub pages](https://mikaelsrozee.github.io/inse-3b-re
 
 `npm run setup`
 
-
-
 Then you must add a valid postmark api key and set the from email and domain name this is in the config file /backend/config/config.json
 
 The domain name is localhost:3000 if you're running this locally and the port is 3000
 
 ## Run
 `npm start`
+
+## GitHub usernames -> UP numbers
+mikaelsrozee -> 889658
+dig -> 885013
+ashleycma -> 890481
+frontside3mmett -> 870699
+Nathan-Chapman -> 892655
+HarryJLFoster -> 855232
