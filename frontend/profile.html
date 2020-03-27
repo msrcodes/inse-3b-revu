@@ -2,52 +2,61 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="static/css/main.css">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="static/css/main.css" rel="stylesheet">
 	<title>REVU</title>
 </head>
 <body>
 <header>
-	<h1>REVU</h1>
+	<a href="/"><h1>REVU</h1></a>
 	<label id="container-search">
-		<img src="static/img/search.png" alt="Search" draggable="false">
-		<input type="text" id="input-search" placeholder="Search reviews, degrees, universities...">
+		<img alt="Search" draggable="false" src="static/img/search.png">
+		<input id="input-search" placeholder="Search reviews, degrees, universities..." type="text">
+		<a aria-label="Press to search" href="#" id="search-button">&gt;</a>
 	</label>
-	<button class="btn--positive" id="btn-writereview">Write your review</button>
+	<a href="#" id="a-writereview">
+		<button class="btn--positive" id="btn-writereview">Write your review</button>
+	</a>
 	<a href="login.html" id="profile-a-link">
-		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+		<img alt="Profile icon" draggable="false" id="img-profile-status-icon" src="static/img/default-user.png">
 		<span id="username-profile-status">Log In</span>
-		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
 	</a>
 </header>
-	<main id="profile">
-		<div id="profile-header">
-			<div class="page-header-content">
-				<img src="static/img/default-user.png" alt="Profile icon" id="profile-header-icon" draggable="false">
-				<div id="profile-header-info-section">
-					<h2 id="profile-header-info-username">Adam User</h2>
-					<p id="profile-header-info-university">University of Example</p>
+<main id="profile">
+	<div id="profile-header">
+		<div id="profile-header-content">
+			<img alt="Profile icon" draggable="false" id="profile-header-icon" src="static/img/default-user.png">
+			<h2 id="profile-header-info-username"></h2>
+		</div>
+		<div id="profile-header-buttons">
+			<button class="btn--default" id="btn-logout">Logout</button>
+		</div>
+	</div>
+	<div id="profile-reviews">
+		<h3>Your Reviews</h3>
+		<div class="card-stack" id="review-container">
+			<template id="review-profile-display">
+				<div class="card">
+					<h4 class="uni-name"></h4>
+					<h4 class="degree-name"></h4>
+					<h4 class="rating"></h4>
+					<a class="edit" href="#">
+						<button class="btn--default">Edit</button>
+					</a>
+					<!--						<a href="#" class="delete"><button class="btn&#45;&#45;negative">Delete</button></a>-->
 				</div>
-			</div>
-			<div id="profile-header-buttons">
-				<button class="btn--default">Edit account</button>
-				<button class="btn--default" id="btn-logout">Logout</button>
-			</div>
+			</template>
 		</div>
-		<div id="profile-reviews">
-			<h3>Your Reviews</h3>
-			<div class="card">
+	</div>
+	<div id="profile-searches">
+		<h3>Your Past Searches</h3>
+		<ul class="card-stack" id="search-container">
 
-			</div>
-		</div>
-		<div id="profile-searches">
-			<h3>Your Past Searches</h3>
-			<div class="card">
-
-			</div>
-		</div>
-	</main>
-	<script src="js/checklogin.js"></script>
-	<script src="js/profile.js"></script>
+		</ul>
+	</div>
+</main>
+<script src="js/checklogin.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/searchHandler.js"></script>
 </body>
 </html>

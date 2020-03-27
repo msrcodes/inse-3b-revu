@@ -1,25 +1,27 @@
 /* Import fonts from the Google Fonts API */
-@import url(https://fonts.googleapis.com/css?family=Montserrat); 	/* Logo font */
-@import url(https://fonts.googleapis.com/css?family=Noto+Sans); 	/* Body font */
-@import url(https://fonts.googleapis.com/css?family=Roboto);		/* Button font */
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+/* Logo font */
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+/* Body font */
+@import url(https://fonts.googleapis.com/css?family=Roboto); /* Button font */
 
 :root {
 	--colour-fill-header: #FFFFFF;
 	--colour-fill-body: #EEEEEE;
 
-	--font-family-heading: "Noto Sans", serif;	/* Font family for all h1, h2, h3... h6 elements */
-	--font-family-logo: "Montserrat", serif;	/* Font family for logo element */
+	--font-family-heading: "Noto Sans", serif; /* Font family for all h1, h2, h3... h6 elements */
+	--font-family-logo: "Montserrat", serif; /* Font family for logo element */
 	--font-family-body: "Noto Sans", sans-serif; /* Font family for all body text elements */
-	--font-family-button: "Roboto", sans-serif;	/* Font family for button elements */
+	--font-family-button: "Roboto", sans-serif; /* Font family for button elements */
 
 	--colour-font-logo: #A6AEB0;
-	--colour-font-heading: #161922;	/* Font colour for all h1, h2, h3... h6 elements */
+	--colour-font-heading: #161922; /* Font colour for all h1, h2, h3... h6 elements */
 	--colour-font-body: #A3A5A8; /* Font colour for all body text elements */
 
-	--colour-border-button-positive: #2ECC71;	/* Colour for all "positive" interaction buttons */
-	--colour-fill-button-positive: #2ECC71;	/* Colour for all "positive" interaction buttons */
-	--colour-border-button-positive-hover: #27AE60;	/* Colour for all "positive" interaction buttons */
-	--colour-fill-button-positive-hover: #27AE60;	/* Colour for all "positive" interaction buttons */
+	--colour-border-button-positive: #2ECC71; /* Colour for all "positive" interaction buttons */
+	--colour-fill-button-positive: #2ECC71; /* Colour for all "positive" interaction buttons */
+	--colour-border-button-positive-hover: #27AE60; /* Colour for all "positive" interaction buttons */
+	--colour-fill-button-positive-hover: #27AE60; /* Colour for all "positive" interaction buttons */
 
 	--colour-font-button-positive: #FFFFFF;
 
@@ -53,12 +55,176 @@ button {
 }
 
 main {
-	margin: 5vh 5vw;
+	margin: 5vmin 5vmin;
+}
+
+main > p {
+	padding: 1em 0;
+}
+
+legend {
+	font-family: var(--font-family-heading);
+	color: var(--colour-font-heading);
+	font-weight: bold;
+	margin-left: 1em;
+}
+
+fieldset {
+	display: inline-grid;
+	grid-template-rows: auto auto auto auto auto;
+	grid-template-columns: 1fr 1fr;
+	width: 100%;
+	border-radius: 10px;
+}
+
+fieldset label, fieldset input[type=checkbox] {
+	cursor: pointer;
+}
+
+fieldset label {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto;
+
+	align-items: center;
+
+	padding: 0 1em 0.5em;
+}
+
+fieldset label input, .checkbox-custom {
+	justify-self: end;
+}
+
+input[type=checkbox] {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+input[type=number] {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	border: 2px solid var(--colour-font-body);
+	padding: 0.5em;
+	text-align: center;
+	font-weight: bold;
+	font-family: var(--font-family-body);
+	color: var(--colour-font-button-default);
+	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+
+	transition: all 0.3s ease-out;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+}
+
+input[type=number]:focus {
+	outline: none;
+	border: 2px solid var(--colour-border-button-default);
+}
+
+#results select {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	border: 2px solid var(--colour-font-body);
+	font-family: var(--font-family-body);
+}
+
+#results select:focus {
+	outline: none;
+	border: 2px solid var(--colour-border-button-default);
+}
+
+.checkbox-custom {
+	height: 24px;
+	width: 24px;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	border: 2px solid var(--colour-font-body);
+
+	transition: all 0.3s ease-out;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+
+	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+}
+
+.checkbox-custom:hover {
+	border: 2px solid var(--colour-border-button-default);
+}
+
+.checkbox-custom:after {
+	position: absolute;
+	content: "";
+	left: 12px;
+	top: 12px;
+	height: 0;
+	width: 0;
+	border-radius: 5px;
+	border: solid maroon;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(0deg) scale(0);
+	-ms-transform: rotate(0deg) scale(0);
+	transform: rotate(0deg) scale(0);
+	opacity: 1;
+
+	transition: all 0.3s ease-out;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+}
+
+.checkbox-label input:checked ~ .checkbox-custom {
+	background-color: var(--colour-fill-button-positive);
+	border-radius: 5px;
+	-webkit-transform: rotate(0deg) scale(1);
+	-ms-transform: rotate(0deg) scale(1);
+	transform: rotate(0deg) scale(1);
+	opacity: 1;
+}
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+	-webkit-transform: rotate(45deg) scale(1);
+	-ms-transform: rotate(45deg) scale(1);
+	transform: rotate(45deg) scale(1);
+	opacity: 1;
+	left: 8px;
+	top: 3px;
+	width: 6px;
+	height: 12px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	background-color: transparent;
+	border-radius: 0;
 }
 
 .btn--default {
 	background: var(--colour-fill-button-default);
 	border: 3px solid var(--colour-border-button-default);
+	color: var(--colour-font-button-default);
+	font-weight: bolder;
+	font-size: 100%;
+	text-transform: uppercase;
+	border-radius: 13px;
+	cursor: pointer;
+	padding: 0.5em 2em;
+
+	box-shadow: rgba(0, 0, 0, 0.13) 0 3px 6px;
+	-webkit-transition: .2s;
+	transition: all .2s;
+}
+
+.btn--default:hover {
+	background: var(--colour-border-button-default);
+	color: var(--colour-font-button-positive);
+	-webkit-transition: .2s;
+	transition: all .2s;
+}
+
+.btn--negative {
+	background: var(--colour-fill-button-negative);
+	border: 3px solid var(--colour-border-button-negative);
 	color: var(--colour-font-button-default);
 	font-weight: bolder;
 	font-size: 100%;
@@ -89,12 +255,12 @@ main {
 	border: 3px solid var(--colour-border-button-positive-hover);
 }
 
-.card {
-	width: 100%;
+.card, .review-card {
 	padding: 1em;
 	border-radius: 33px;
 	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
 	rgba(158, 158, 158, 0.5) 6px 6px 6px;
+	list-style: none;
 }
 
 .slider {
@@ -127,7 +293,7 @@ main {
 	cursor: pointer;
 }
 
-.textarea {	/* TODO: generify, does this need to be a class? */
+.textarea { /* TODO: generify, does this need to be a class? */
 	width: 100%;
 	height: 150px;
 	padding: 20px 10px 20px 10px;
@@ -140,19 +306,13 @@ main {
 	font-family: --font-family-body, sans-serif;
 }
 
-.view-more-buttons { /* TODO: could this be achieved in a better way?*/
-	display: flex;  /* Im not sure if these are even needed, I added them as they're in the ui mockups */
-	justify-content: center;
-}
-
 /* Grid page layouts */
 
 .header-header-left-right {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto 1fr;
-	grid-template-areas: "header header"
-						 "left right";
+	grid-template-areas: "header header" "left right";
 }
 
 .header-header-left-right > header {
@@ -196,6 +356,11 @@ main {
 	font-family: var(--font-family-body);
 }
 
+.icon-form > .error {
+	grid-column: span 2;
+	color: #E74C3C;
+}
+
 .card-stack {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -205,15 +370,29 @@ main {
 
 .grid-layout {
 	display: grid;
-	grid-template-rows: 0fr 2fr 1fr;
+	grid-template-rows: 0 2fr 1fr;
 	grid-template-columns: 1fr 1fr;
+	column-gap: 1em;
+	row-gap: 1em;
+	padding-bottom: 1em;
 }
+
+.grid-layout h2 {
+	align-self: end;
+}
+
+#university > .grid-layout {
+	grid-template-rows: auto 2fr;
+}
+
+#degree > .grid-layout {
+	grid-template-rows: auto 2fr;
+}
+
 /* Header styling */
 
 body > header {
 	display: grid;
-
-	width: 100vw;
 
 	grid-template-columns: auto 1fr auto auto;
 	grid-template-rows: auto;
@@ -226,7 +405,7 @@ body > header > * {
 	align-self: center;
 }
 
-body > header > h1 {
+body > header h1 {
 	grid-area: logo;
 
 	font-family: var(--font-family-logo);
@@ -236,15 +415,21 @@ body > header > h1 {
 	padding: 0.5em 1em;
 }
 
-#btn-writereview {
+body > header a {
+	text-decoration: none;
+}
+
+#a-writereview {
 	grid-area: button;
+
+	justify-self: center;
 }
 
 #profile-a-link {
 	grid-area: profile;
 
 	display: grid;
-	grid-template-columns: 3.5em auto auto;
+	grid-template-columns: 3.5em auto;
 	grid-template-rows: auto;
 	padding: 0.5em 1em;
 
@@ -269,8 +454,16 @@ body > header > h1 {
 	grid-area: search;
 
 	display: grid;
-	grid-template-columns: 1.5em auto;
+	grid-template-columns: 1.5em auto fit-content(1em);
 	grid-template-rows: auto;
+
+	margin-right: 1em;
+}
+
+#container-search a {
+	color: var(--colour-font-heading);
+	font-weight: bold;
+	text-decoration: none;
 }
 
 #container-search img {
@@ -297,7 +490,7 @@ body > header > h1 {
 #create-review-form {
 	width: 80%;
 	margin: auto;
-	padding: 10px 10px 10px 10px;	/* TODO: px should not be used for padding */
+	padding: 0.625em 0.625em 0.625em 0.625em;
 	border-radius: 33px;
 	box-shadow: rgba(255, 255, 255, 0.5) -6px -6px 6px,
 	rgba(158, 158, 158, 0.5) 6px 6px 6px;
@@ -306,8 +499,9 @@ body > header > h1 {
 #create-review-form fieldset {
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
-	padding: 10px 0px 10px 0px;	/* TODO: px should not be used for padding */
+	padding: 0.625em 0em 0.625em 0em;
 	margin: auto;
+	border: none;
 }
 
 #create-review-form div legend {
@@ -317,8 +511,8 @@ body > header > h1 {
 	color: var(--colour-font-heading);
 	font-weight: bold;
 	text-align: left;
-	padding: 10px 10px 10px 10px;/* TODO: px should not be used for padding */
-	margin:auto;
+	padding: 0.625em 0.625em 0.625em 0.625em;
+	margin: auto;
 	border: none;
 }
 
@@ -328,119 +522,125 @@ body > header > h1 {
 
 /* Degree info styling */
 #degree {
-	grid-template-areas:
-		"name overallRating"
-		"entryRequirements rating"
-		"about review";
+	grid-template-areas: "name overallRating" "entryRequirements rating";
 }
 
 #degree-name {
 	padding: 0 2em;
-}
-
-#degree-name {
-	padding-bottom: 0em;
-}
-
-#degree-university-name {
-	font-family: var(--font-family-body);
-	opacity: 60%;
-	padding-top: 0em;
-	padding-bottom: 0em;
 }
 
 #degree-overallRating {
 	padding: 0 2em;
 }
 
-#degree-entryRequirements{
+#degree-info {
 	padding: 0 2em;
-}
-
-#degree-rating {
-	padding: 0em 2em;
 }
 
 #degree-about {
 	padding: 0 2em;
 }
 
-#degree-review {
-	padding: 0 2em;
-}
-
 /* Profile styling */
-
 #profile {
 	display: grid;
-	grid-template-rows: 1fr 4fr;
 	grid-template-columns: 1fr 1fr;
-	grid-template-areas: "header header"
-	"reviews searches";
+	grid-template-rows: auto auto;
+	grid-template-areas: "header header" "reviews searches";
+
+	grid-column-gap: 3em;
+	grid-row-gap: 1em;
 }
 
 #profile-header {
 	grid-area: header;
 
 	display: grid;
+	grid-template-rows: auto;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr;
 
-	padding-bottom: 1em;
-	margin-bottom: 1em;
-	border-bottom: 1px solid #707070;
+	align-items: center;
 }
 
-#profile-header h2 {
-	padding: 0;
-}
+#profile-header-content {
+	justify-self: left;
 
-#profile-header-icon {
-	margin: auto;
-}
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: auto auto;
 
-#profile-header-info-section {
-	display: flex;
-	flex-direction: column;
-	margin: auto 1em;
+	column-gap: 1em;
+
+	align-items: center;
 }
 
 #profile-header-buttons {
-	margin: auto;
+	justify-self: right;
 }
 
 #profile-reviews {
 	grid-area: reviews;
-	padding: 0 2em;
 }
 
 #profile-searches {
 	grid-area: searches;
-	padding: 0 2em;
+}
+
+#profile-reviews h3, #profile-searches h3 {
+	padding-bottom: 1em;
+}
+
+#search-container li {
+	cursor: pointer;
+}
+
+#profile .card-stack {
+	row-gap: 1em;
+}
+
+#profile .card-stack li {
+	transition: background 0.3s linear;
+}
+
+#profile .card-stack li:hover {
+	background: rgba(0, 0, 0, 0.1);
+	transition: background 0.3s linear;
 }
 
 /* University info styling */
 
-#university {
-	grid-template-areas:
-		"name overallRating"
-		"info rating"
-		"accommodation review";
+#reviews {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto;
+	grid-column-gap: 1em;
+	grid-row-gap: 1em;
+	padding-top: 1em;
 }
 
-#university-name {
-	padding:0 2em;
-}
-
-#degree-overallRating {
+.review-template {
+	width: 90%;
 	padding: 0 2em;
 }
 
-#university-rating {
-	padding:0 2em;
+#review-box {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: auto;
+	grid-auto-rows: auto;
 }
 
-#university-accommodation {
+.review-card {
+	width: 90%;
+}
+
+#university {
+
+	grid-template-areas: "name overallRating" "info rating";
+
+}
+
+#degree-overallRating {
 	padding: 0 2em;
 }
 
@@ -448,12 +648,92 @@ body > header > h1 {
 	padding: 0 2em;
 }
 
-#university-name {
+#university-average-rating {
 	padding: 0 2em;
 }
 
-#university-review {
-	padding:0 2em;
+/* Search result page styling */
+.filters-search {
+	display: grid;
+	grid-template-columns: 2fr 9fr;
+	grid-template-rows: auto;
+
+	grid-column-gap: 4em;
+}
+
+#results {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-auto-rows: auto auto;
+
+	grid-template-areas: "info label select" "results results results";
+
+	align-items: center;
+}
+
+#results h2 {
+	grid-area: info;
+}
+
+#results label {
+	grid-area: label;
+	color: var(--colour-font-heading);
+	font-weight: bold;
+	justify-self: end;
+	margin-right: 1em;
+}
+
+#results select {
+	grid-area: select;
+}
+
+#results-container {
+	grid-area: results;
+	height: 73vh;
+
+	list-style: none;
+
+	margin-top: 1em;
+
+	display: grid;
+	grid-auto-columns: 100%;
+	grid-auto-rows: 2em;
+
+	row-gap: 2em;
+
+	overflow-y: scroll;
+}
+
+#results-container li {
+	display: grid;
+	grid-template-columns: auto auto auto 5em;
+	grid-template-rows: auto;
+
+	align-items: center; /* vertical center */
+
+	padding: 0.7em 0;
+
+	margin-right: 0.5em;
+	height: 100%;
+
+	border-bottom: 1px solid darkgrey;
+	border-collapse: collapse;
+
+	transition: background 0.2s linear;
+}
+
+#results-container li:hover {
+	background: rgba(0, 0, 0, 0.3);
+	transition: background 0.05s linear;
+}
+
+#results-container li button {
+	padding: 0.5em 0;
+}
+
+.result-main {
+	color: var(--colour-font-heading);
+	font-weight: bold;
 }
 
 /* Media queries */
@@ -463,8 +743,7 @@ body > header > h1 {
 		display: grid;
 		grid-template-columns: auto auto auto;
 		grid-template-rows: auto auto;
-		grid-template-areas: "logo button profile"
-		"search search search";
+		grid-template-areas: "logo button profile" "search search search";
 
 		background: var(--colour-fill-header);
 	}
@@ -482,20 +761,67 @@ body > header > h1 {
 	}
 
 	#profile-a-link {
+		grid-template-columns: auto;
+	}
+
+	#results {
+		display: grid;
 		grid-template-columns: auto auto;
+		grid-auto-rows: auto auto auto;
+
+		grid-template-areas: "info info" "label select" "results results";
+	}
+
+	#results label {
+		justify-self: start;
 	}
 
 	.header-header-left-right {
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 1fr 1fr;
-		grid-template-areas: "header"
-							 "left"
-							 "right";
+		grid-template-areas: "header" "left" "right";
 	}
 
 	.header-header-left-right > #left, .header-header-left-right > #right {
 		padding: 1em 0;
+	}
+
+	.filters-search {
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto auto;
+
+		grid-row-gap: 1em;
+
+		margin: 1em 0;
+	}
+
+	.filters-search > .card {
+		margin: 0 1em;
+	}
+
+	#profile {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr 1fr;
+		grid-template-areas: "header" "reviews" "searches";
+		grid-row-gap: 1em;
+	}
+
+	#profile-header {
+		display: grid;
+		grid-template-rows: auto auto;
+		grid-template-columns: 1fr;
+
+		row-gap: 1em;
+	}
+
+	#profile-header-icon {
+		width: 5em;
+	}
+
+	#profile-header-content, #profile-header-buttons {
+		justify-self: center;
 	}
 }
 
@@ -504,14 +830,22 @@ body > header > h1 {
 		display: grid;
 		grid-template-columns: auto auto;
 		grid-template-rows: auto auto auto;
-		grid-template-areas: "logo profile"
-		"button button"
-		"search search";
+		grid-template-areas: "logo profile" "button button" "search search";
 
 		background: var(--colour-fill-header);
 	}
 
-	#btn-writereview {
+	#a-writereview {
 		margin: 0 1em;
+	}
+}
+
+@media screen and (max-width: 355px) {
+	#profile-header-buttons {
+		display: grid;
+		grid-template-rows: auto;
+		grid-template-columns: 1fr 1fr;
+
+		column-gap: 1em;
 	}
 }

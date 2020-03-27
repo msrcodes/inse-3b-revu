@@ -2,62 +2,91 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="static/css/main.css">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="static/css/main.css" rel="stylesheet">
 	<title>REVU</title>
 </head>
 <body>
 <header>
-	<h1>REVU</h1>
+	<a href="/"><h1>REVU</h1></a>
 	<label id="container-search">
-		<img src="static/img/search.png" alt="Search" draggable="false">
-		<input type="text" id="input-search" placeholder="Search reviews, degrees, universities...">
+		<img alt="Search" draggable="false" src="static/img/search.png">
+		<input id="input-search" placeholder="Search reviews, degrees, universities..." type="text">
+		<a aria-label="Press to search" href="#" id="search-button">&gt;</a>
 	</label>
-	<button class="btn--positive" id="btn-writereview">Write your review</button>
+	<a href="#" id="a-writereview">
+		<button class="btn--positive" id="btn-writereview">Write your review</button>
+	</a>
 	<a href="login.html" id="profile-a-link">
-		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+		<img alt="Profile icon" draggable="false" id="img-profile-status-icon" src="static/img/default-user.png">
 		<span id="username-profile-status">Log In</span>
-		<img src="static/img/chevron.png" alt="View more options" id="img-profile-status-chevron" draggable="false">
 	</a>
 </header>
-<main id="create-review">
-	<form id="create-review-form">
-		<fieldset id="review-form-header">
-			<legend>Choose a University to review:</legend>
-			<select id="university-dropdown" name="universities"></select>
-		</fieldset>
-		<fieldset id ="staff-rating-review">
-			<legend>Staff rating:</legend>
-			<input type="range" min="0.0" max="5.0" value="2.5" step="0.1" class="slider" id="staffRating" oninput="staffOutput.value = staffRating.value">
-			<output name="staffRating-value" id="staffOutput">2.5</output>
-			<legend>Staff review:</legend>
-			<textarea class="textarea" name="staff review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
-		</fieldset>
-		<fieldset id="facility-rating-review">
-			<legend>Facility rating:</legend>
-			<input type="range" min="0.0" max="5.0" value="2.5" step="0.1" class="slider" id="facilityRating" oninput="facilityOutput.value = facilityRating.value">
-			<output name="facilityRating-value" id="facilityOutput">2.5</output>
-			<legend>Facility review:</legend>
-			<textarea class="textarea" name="facility review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
-		</fieldset>
-		<fieldset id="university-rating-review">
-			<legend>University rating:</legend>
-			<input type="range" min="0.0" max="5.0" value="2.5" step="0.1" class="slider" id="universityRating" oninput="universityOutput.value = universityRating.value">
-			<output name="universityRating-value" id="universityOutput">2.5</output>
-			<legend>University review:</legend>
-			<textarea class="textarea" name="university review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
-		</fieldset>
-		<fieldset id="accommodation-rating-review">
-			<legend>Accommodation rating:</legend>
-			<input type="range" min="0.0" max="5.0" value="2.5" step="0.1" class="slider" id="accommodationRating" oninput="accommodationOutput.value = accommodationRating.value">
-			<output name="accommodationRating-value" id="accommodationOutput">2.5</output>
-			<legend>Accommodation review:</legend>
-			<textarea class="textarea" name="accommodation review" maxlength="250" placeholder="maximum of 250 characters"></textarea>
-		</fieldset>
-		<input type="submit" id="submit-review" value="Submit review" class="btn--positive">
-	</form>
-	<script src="js/populateUniversityDropdown.js"></script>
+<main class="card-stack">
+	<h2>Update us on your story...</h2>
+	<section class="card">
+		<h3>Which university are you reviewing?</h3>
+		<label for="university-dropdown">Choose a university:</label>
+		<select id="university-dropdown" name="universities"></select>
+
+		<label for="degree-dropdown">Choose a degree:</label>
+		<select id="degree-dropdown" name="degrees"></select>
+	</section>
+	<section class="card">
+		<h3>How would you rate the degree?</h3>
+		<label for="degreeRating">On a scale of 0-5 (0 is lowest)?</label>
+		<input class="slider" id="degreeRating" max="5.0" min="0.0" oninput="degreeOutput.value = degreeRating.value" step="0.1" type="range"
+			   value="2.5">
+		<output id="degreeOutput" name="degreeRating-value">2.5</output>
+		<label for="degreeReview">Describe the degree in your own words...</label>
+		<textarea class="textarea" id="degreeReview" maxlength="250" name="degree review"
+				  placeholder="maximum of 250 characters"></textarea>
+	</section>
+	<section class="card">
+		<h3>How would you rate the staff?</h3>
+		<label for="staffRating">On a scale of 0-5 (0 is lowest)?</label>
+		<input class="slider" id="staffRating" max="5.0" min="0.0" oninput="staffOutput.value = staffRating.value" step="0.1" type="range"
+			   value="2.5">
+		<output id="staffOutput" name="staffRating-value">2.5</output>
+		<label for="staffReview">Describe the staff in your own words...</label>
+		<textarea class="textarea" id="staffReview" maxlength="250" name="staff review"
+				  placeholder="maximum of 250 characters"></textarea>
+	</section>
+	<section class="card">
+		<h3>How would you rate the facilities?</h3>
+		<label for="facilityRating">On a scale of 0-5 (0 is lowest)?</label>
+		<input class="slider" id="facilityRating" max="5.0" min="0.0" oninput="facilityOutput.value = facilityRating.value" step="0.1" type="range"
+			   value="2.5">
+		<output id="facilityOutput" name="facilityRating-value">2.5</output>
+		<label for="facilityReview">Describe the facilities in your own words...</label>
+		<textarea class="textarea" id="facilityReview" maxlength="250" name="facility review"
+				  placeholder="maximum of 250 characters"></textarea>
+	</section>
+	<section class="card">
+		<h3>How would you rate the overall university experience?</h3>
+		<label for="universityRating">On a scale of 0-5 (0 is lowest)?</label>
+		<input class="slider" id="universityRating" max="5.0" min="0.0" oninput="universityOutput.value = universityRating.value" step="0.1" type="range"
+			   value="2.5">
+		<output id="universityOutput" name="universityRating-value">2.5</output>
+		<label for="universityReview">Describe the university experience in your own words...</label>
+		<textarea class="textarea" id="universityReview" maxlength="250" name="university review"
+				  placeholder="maximum of 250 characters"></textarea>
+	</section>
+	<section class="card">
+		<h3>How would you rate the accommodation?</h3>
+		<label for="accommodationRating">On a scale of 0-5 (0 is lowest)?</label>
+		<input class="slider" id="accommodationRating" max="5.0" min="0.0" oninput="accommodationOutput.value = accommodationRating.value" step="0.1" type="range"
+			   value="2.5">
+		<output id="accommodationOutput" name="accommodationRating-value">2.5</output>
+		<label for="accommodationReview">Describe the accommodation in your own words...</label>
+		<textarea class="textarea" id="accommodationReview" maxlength="250" name="accommodation review"
+				  placeholder="maximum of 250 characters"></textarea>
+	</section>
+	<span class="error"></span>
+	<button class="btn--positive" id="submit-review">Update Review</button>
 </main>
 <script src="js/checklogin.js"></script>
+<script src="js/editReview.js"></script>
+<script src="js/searchHandler.js"></script>
 </body>
 </html>
