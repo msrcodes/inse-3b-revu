@@ -14,11 +14,15 @@ Read the documentation: [GitHub pages](https://mikaelsrozee.github.io/inse-3b-re
 
 `npm run setup`
 
+You must the edit the config file (/backend/config/config.json) to fill in postmarkAPIKey, domain and fromEmail
 
+You can get a postmarkAPIKey from [postmark](https://postmarkapp.com), you must then set up a server and put the email address of that server into the fromEmail option
 
-Then you must add a valid postmark api key and set the from email and domain name this is in the config file /backend/config/config.json
-
-The domain name is localhost:3000 if you're running this locally and the port is 3000
+The domain should be localhost:3000 if running locally, or your domain name and port if running with a domain name
 
 ## Run
 `npm start`
+
+
+## Test
+To test all backend js run `npm test`
