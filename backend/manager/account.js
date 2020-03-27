@@ -9,7 +9,8 @@ const express = require('express'),
 	HTTP = require('http-status-codes'),
 	uuidGen = require('uuid'),
 	db = require('../database/db.js'),
-	mailer = require('../service/mailer.js');
+	mailer = require('../service/mailer.js'),
+	config = require('../config/config.json');
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
@@ -75,8 +76,8 @@ router.post('/register', async (req, res) => {
 		const insertDbRes = await db.query('INSERT INTO users (username, email, password_hash, verification_token) VALUES ($1, $2, $3, $4)', [username, email, passwordHash, uuid]);
 		if (insertDbRes.rowCount) {
 			mailer.sendMail(email, "Verify email for REVU",
-				`<a href='https://revu.aitken.io/api/v1/account/verify/${uuid}'>Verify your account</a>`,
-				`https://revu.aitken.io/api/v1/account/verify/${uuid}`);
+				`<a href='http://${config.domain}/api/v1/account/verify/${uuid}'>Verify your account</a>`,
+				`http://${config.domain}/api/v1/account/verify/${uuid}`);
 
 			return res.status(HTTP.OK).send();
 		}
