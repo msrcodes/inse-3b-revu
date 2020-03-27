@@ -23,6 +23,17 @@ The domain should be localhost:3000 if running locally, or your domain name and 
 ## Run
 `npm start`
 
-
 ## Test
 To test all backend js run `npm test`
+
+
+## GitHub usernames -> UP numbers
+- mikaelsrozee -> 889658
+- dig -> 885013
+- ashleycma -> 890481
+- frontside3mmett -> 870699
+- Nathan-Chapman -> 892655
+- HarryJLFoster -> 855232
+
+
+
