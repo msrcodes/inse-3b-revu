@@ -2,43 +2,48 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="static/css/main.css">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="static/css/main.css" rel="stylesheet">
 	<title>REVU</title>
 </head>
 <body>
 <header>
 	<a href="/"><h1>REVU</h1></a>
 	<label id="container-search">
-		<img src="static/img/search.png" alt="Search" draggable="false">
-		<input type="text" id="input-search" placeholder="Search reviews, degrees, universities...">
+		<img alt="Search" draggable="false" src="static/img/search.png">
+		<input id="input-search" placeholder="Search reviews, degrees, universities..." type="text">
+		<a aria-label="Press to search" href="#" id="search-button">&gt;</a>
 	</label>
-	<a href="#" id="a-writereview"><button class="btn--positive" id="btn-writereview">Write your review</button></a>
+	<a href="#" id="a-writereview">
+		<button class="btn--positive" id="btn-writereview">Write your review</button>
+	</a>
 	<a href="login.html" id="profile-a-link">
-		<img src="static/img/default-user.png" alt="Profile icon" id="img-profile-status-icon" draggable="false">
+		<img alt="Profile icon" draggable="false" id="img-profile-status-icon" src="static/img/default-user.png">
 		<span id="username-profile-status">Log In</span>
 	</a>
 </header>
 <main class="header-header-left-right">
 	<header>
-		<img src="static/img/default-user.png" alt="Profile icon" draggable="false">
+		<img alt="Profile icon" draggable="false" src="static/img/default-user.png">
 		<h2>Log In</h2>
 	</header>
 	<section id="left">
 		<div class="icon-form">
 			<span class="error"></span>
-			<label for="email"><img src="static/img/mail.svg" alt="Email"></label>
-			<input type="text" id="email" placeholder=" University Email (*.ac.uk)">
-			<label for="password"><img src="static/img/lock.svg" alt="Password"></label>
-			<input type="password" id="password" placeholder=" Password">
+			<label for="email"><img alt="Email" src="static/img/mail.svg"></label>
+			<input id="email" placeholder=" University Email (*.ac.uk)" type="text">
+			<label for="password"><img alt="Password" src="static/img/lock.svg"></label>
+			<input id="password" placeholder=" Password" type="password">
 			<button class="btn--default" id="btn-log-in">Login</button>
 			<aside>Don't have an account? <a href="signUp">Click here to sign up!</a></aside>
 		</div>
 	</section>
 	<section id="right">
 		<h3>Welcome to RevU</h3>
-		<p>We aim to be transparent about our systems, ensuring that you know that reviews are made by students, for students.</p>
-		<p>How do we rank universities? Our rankings are generated entirely from your rankings - we do not interfere with any metrics.</p>
+		<p>We aim to be transparent about our systems, ensuring that you know that reviews are made by students, for
+			students.</p>
+		<p>How do we rank universities? Our rankings are generated entirely from your rankings - we do not interfere
+			with any metrics.</p>
 		<p>In short, this website is for U, by U.</p>
 	</section>
 </main>

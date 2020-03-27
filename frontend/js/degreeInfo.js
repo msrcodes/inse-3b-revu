@@ -1,6 +1,6 @@
 'use strict';
 
-const elems= {};
+const elems = {};
 
 function getDegreeID() {
 	const url = window.location.search; // get url contents
@@ -36,7 +36,7 @@ async function getAverageReviews() {
 
 async function getReviews() {
 	const response = await fetch(`/api/v1/review/degree/${getDegreeID()}`);
-	if(response.ok) {
+	if (response.ok) {
 		const data = await response.json();
 		const template = document.querySelector("#review-template");
 

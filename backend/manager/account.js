@@ -51,7 +51,7 @@ function getUser(req) {
  * @param {Object} res express response object
  */
 router.post('/register', async (req, res) => {
-	const { username, email, password, repeatPassword } = req.body;
+	const {username, email, password, repeatPassword} = req.body;
 
 	if (!username || !email || !password || !repeatPassword)
 		return res.status(HTTP.BAD_REQUEST).send({error: "Missing parameters (username, email, password, repeatPassword)."});
@@ -99,7 +99,7 @@ router.post('/register', async (req, res) => {
  * @param {Object} res express response object
  */
 router.get('/verify/:token', async (req, res) => {
-	const { token } = req.params;
+	const {token} = req.params;
 
 	try {
 		let emailDbRes = await db.query('SELECT email FROM users WHERE verification_token = $1', [token]);
@@ -126,7 +126,7 @@ router.get('/verify/:token', async (req, res) => {
  * @param {Object} res express response object
  */
 router.post('/login', (req, res) => {
-	const { email, password } = req.body;
+	const {email, password} = req.body;
 
 	getUser(req).then(() => {
 		res.status(HTTP.BAD_REQUEST).send('already logged in');
@@ -156,7 +156,7 @@ router.post('/login', (req, res) => {
 					});
 				} else {
 					res.status(HTTP.UNAUTHORIZED).send({error: 'Incorrect email or password.'});
-					return;
+
 				}
 			})
 
@@ -190,7 +190,7 @@ router.get('/loggedIn', (req, res) => {
  * @param {Object} res express response object
  */
 router.post('/setEmail', async (req, res) => {
-	const { user_id, email, password } = req.body;
+	const {user_id, email, password} = req.body;
 
 	if (!user_id || !email || !password)
 		return res.status(HTTP.BAD_REQUEST).send({error: "Missing parameters (user_id, email, password)."});
@@ -221,7 +221,7 @@ router.post('/setEmail', async (req, res) => {
 					});
 				} else {
 					res.status(HTTP.UNAUTHORIZED).send({error: 'Incorrect password.'});
-					return;
+
 				}
 			})
 		});

@@ -33,6 +33,7 @@ async function doSearch() {
 
 function getSearchElems() {
 	searchElems.searchBar = document.querySelector("#input-search");
+	searchElems.searchButton = document.querySelector("#search-button");
 }
 
 function populateSearchBar() {
@@ -46,9 +47,15 @@ function populateSearchBar() {
 }
 
 function addSearchEventListeners() {
-	searchElems.searchBar.addEventListener('keypress', (event) => {
+	searchElems.searchBar.addEventListener('keydown', async (event) => {
 		if (searchElems.searchBar.value !== "" && event.code === 'Enter') {
-			doSearch();
+			await doSearch();
+		}
+	});
+
+	searchElems.searchButton.addEventListener('click', async () => {
+		if (searchElems.searchBar.value !== "") {
+			await doSearch();
 		}
 	});
 }

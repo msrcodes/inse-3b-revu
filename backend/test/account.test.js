@@ -5,7 +5,7 @@ describe('test login', function () {
 		return fetch('http://localhost:3005/api/v1/account/login', {
 			method: 'POST',
 			body: JSON.stringify({email: 'testuser@myport.ac.uk', password: 'notcorrect'}),
-			headers: { 'Content-Type': 'application/json' },
+			headers: {'Content-Type': 'application/json'},
 		}).then(res => {
 			expect(res.status).toBe(401);
 		})
@@ -16,7 +16,7 @@ describe('test login', function () {
 		return fetch('http://localhost:3005/api/v1/account/login', {
 			method: 'POST',
 			body: JSON.stringify({email: 'nonexistant@myport.ac.uk', password: 'doesntmatter'}),
-			headers: { 'Content-Type': 'application/json' },
+			headers: {'Content-Type': 'application/json'},
 		}).then(res => {
 			expect(res.status).toBe(400);
 		})
@@ -27,7 +27,7 @@ describe('test login', function () {
 		return fetch('http://localhost:3005/api/v1/account/login', {
 			method: 'POST',
 			body: JSON.stringify({password: 'doesntmatter'}),
-			headers: { 'Content-Type': 'application/json' },
+			headers: {'Content-Type': 'application/json'},
 		}).then(res => {
 			expect(res.status).toBe(400);
 		})
@@ -38,7 +38,7 @@ describe('test login', function () {
 		return fetch('http://localhost:3005/api/v1/account/login', {
 			method: 'POST',
 			body: JSON.stringify({email: 'doesntmatter'}),
-			headers: { 'Content-Type': 'application/json' },
+			headers: {'Content-Type': 'application/json'},
 		}).then(res => {
 			expect(res.status).toBe(400);
 		})
@@ -49,7 +49,7 @@ describe('test login', function () {
 		return fetch('http://localhost:3005/api/v1/account/login', {
 			method: 'POST',
 			body: JSON.stringify({email: 'testuser@myport.ac.uk', password: 'password'}),
-			headers: { 'Content-Type': 'application/json' },
+			headers: {'Content-Type': 'application/json'},
 		}).then(res => {
 
 			if (res.ok) {
@@ -82,7 +82,7 @@ describe('validate /loggedIn', () => {
 		return fetch('http://localhost:3005/api/v1/account/login', {
 			method: 'POST',
 			body: JSON.stringify({email: 'testuser@myport.ac.uk', password: 'password'}),
-			headers: { 'Content-Type': 'application/json' },
+			headers: {'Content-Type': 'application/json'},
 		}).then(res => {
 
 			return fetch('http://localhost:3005/api/v1/account/loggedIn', {

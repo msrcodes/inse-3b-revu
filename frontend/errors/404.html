@@ -2,12 +2,31 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>REVU: Not found</title>
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="../static/css/main.css" rel="stylesheet">
+	<title>REVU</title>
 </head>
 <body>
-	<h1>Error 404</h1>
-	<h2>Not found</h2>
-	<a href="/">Return to home</a>
+<header>
+	<a href="/"><h1>REVU</h1></a>
+	<label id="container-search">
+		<img alt="Search" draggable="false" src="../static/img/search.png">
+		<input id="input-search" placeholder="Search reviews, degrees, universities..." type="text">
+		<a aria-label="Press to search" href="#" id="search-button">&gt;</a>
+	</label>
+	<a href="#" id="a-writereview">
+		<button class="btn--positive" id="btn-writereview">Write your review</button>
+	</a>
+	<a href="/login" id="profile-a-link">
+		<img alt="Profile icon" draggable="false" id="img-profile-status-icon" src="../static/img/default-user.png">
+		<span id="username-profile-status">Log In</span>
+	</a>
+</header>
+<main>
+	<h2>Whoops! Page not found.</h2>
+	<p>Head back to the <a href="/">homepage</a> and try again.</p>
+</main>
+<script src="../js/checklogin.js"></script>
+<script src="../js/searchHandler.js"></script>
 </body>
 </html>
