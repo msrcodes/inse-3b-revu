@@ -5,7 +5,7 @@
 		"bcrypt": "^5.0.0",
 		"cookie-parser": "^1.1.0",
 		"cross-env": "^7.0.1",
-		"express": "^4.17.1",
+		"express": "^4.17.3",
 		"fast-lorem-ipsum": "^1.2.0",
 		"http-status-codes": "^1.4.0",
 		"jsdoc": "^3.6.3",
